@@ -7,7 +7,11 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import lol.pbu.z4j.model.*;
+import lol.pbu.z4j.model.UserSegment;
+import lol.pbu.z4j.model.response.SectionsResponse;
+import lol.pbu.z4j.model.response.TopicsResponse;
+import lol.pbu.z4j.model.response.UserSegmentResponse;
+import lol.pbu.z4j.model.response.UserSegmentsResponse;
 
 import static io.micronaut.http.HttpHeaders.ACCEPT;
 import static io.micronaut.http.HttpHeaders.CONTENT_TYPE;
@@ -33,7 +37,7 @@ public interface UserSegmentsClient {
     @Post("/api/v2/help_center/user_segments")
     @Header(name = CONTENT_TYPE, value = APPLICATION_JSON)
     HttpResponse<@Valid UserSegmentResponse> createUserSegment(
-            @JsonProperty("user_segment") @Body @NotNull UserSegmentObject userSegment
+            @JsonProperty("user_segment") @Body @NotNull UserSegment userSegment
     );
 
     /**
@@ -107,6 +111,6 @@ public interface UserSegmentsClient {
     @Header(name = CONTENT_TYPE, value = APPLICATION_JSON)
     HttpResponse<@Valid UserSegmentResponse> updateUserSegment(
             @NotNull Long userSegmentID,
-            @JsonProperty("user_segment") @Body @NotNull @Valid UserSegmentObject userSegment
+            @JsonProperty("user_segment") @Body @NotNull @Valid UserSegment userSegment
     );
 }

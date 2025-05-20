@@ -4,7 +4,7 @@ package lol.pbu.z4j.client
 import io.micronaut.http.HttpStatus
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
-import lol.pbu.z4j.model.UserSegmentObject
+import lol.pbu.z4j.model.UserSegment
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -37,7 +37,7 @@ class UserSegmentsClientSpec extends Specification {
 
     def "can create user segments and delete them for #userSegmentString"() {
         when: "create user segment for #userSegmentString and named #userSegmentName"
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String)
+        def userSegment = new UserSegment(userSegmentString as String, userSegmentName as String)
         def createResponse = userSegmentsClient.createUserSegment(userSegment)
 
         then: "received expected 201 response"
@@ -61,7 +61,7 @@ class UserSegmentsClientSpec extends Specification {
 
     def "can create user segments and update them for #userSegmentString"() {
         when: "create user segment for #userSegmentString and named #userSegmentName"
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String)
+        def userSegment = new UserSegment(userSegmentString as String, userSegmentName as String)
         def createResponse = userSegmentsClient.createUserSegment(userSegment)
 
         then: "received expected 201 response"
@@ -71,7 +71,7 @@ class UserSegmentsClientSpec extends Specification {
         Long id = createResponse.body().userSegment.id
 
         when: "update user segment with id #id and name #updatedUserSegmentName"
-        def updatedUserSegment = new UserSegmentObject(userSegmentString as String, updatedUserSegmentName as String)
+        def updatedUserSegment = new UserSegment(userSegmentString as String, updatedUserSegmentName as String)
         def updateResponse = userSegmentsClient.updateUserSegment(id, updatedUserSegment)
 
         then: "received expected 200 response"
@@ -88,7 +88,7 @@ class UserSegmentsClientSpec extends Specification {
 
     def "can create user segments and show them for #userSegmentString"() {
         when: "create user segment for #userSegmentString and named #userSegmentName"
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String)
+        def userSegment = new UserSegment(userSegmentString as String, userSegmentName as String)
         def createResponse = userSegmentsClient.createUserSegment(userSegment)
 
         then: "received expected 201 response"
