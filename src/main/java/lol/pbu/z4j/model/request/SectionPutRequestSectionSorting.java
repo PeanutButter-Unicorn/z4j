@@ -19,9 +19,7 @@ import java.util.stream.Collectors;
 @Serdeable
 public enum SectionPutRequestSectionSorting {
 
-    @JsonProperty("manual")
     MANUAL("manual"),
-    @JsonProperty("title")
     TITLE("title"),
     @JsonProperty("creation_desc")
     CREATION_DESC("creation_desc"),

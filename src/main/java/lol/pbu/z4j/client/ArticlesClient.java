@@ -2,13 +2,7 @@ package lol.pbu.z4j.client;
 
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Delete;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.PathVariable;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
-import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -23,7 +17,7 @@ import reactor.core.publisher.Mono;
  * @author Jonathan Zollinger
  * @since 0.0.2
  */
-@Client("${micronaut.http.services.zendesk.url}")
+@Client("${micronaut.http.services.zendesk.url}/api/v2")
 public interface ArticlesClient {
 
     /**
@@ -34,7 +28,7 @@ public interface ArticlesClient {
      * @return Default success response (status code 204)
      * @see <a href="https://support.zendesk.com/hc/en-us/articles/235721587">Viewing and restoring archived articles</a>
      */
-    @Delete("/api/v2/help_center/{locale}/articles/{article_id}")
+    @Delete("/help_center/{locale}/articles/{article_id}")
     Mono<HttpResponse<Void>> archiveArticle(
             @PathVariable("locale") @NotNull String locale,
             @PathVariable("article_id") @NotNull Integer articleId
@@ -53,7 +47,7 @@ public interface ArticlesClient {
      * Create Unassociated Attachment
      * </a>
      */
-    @Post("/api/v2/help_center/{locale}/articles/{article_id}/bulk_attachments")
+    @Post("/help_center/{locale}/articles/{article_id}/bulk_attachments")
     Mono<@NotNull String> bulkAttachmentsArticles(
             @PathVariable("locale") @NotNull String locale,
             @PathVariable("article_id") @NotNull Integer articleId
@@ -67,7 +61,7 @@ public interface ArticlesClient {
      * @param articleRequest The article to create
      * @return OK Response (status code 201)
      */
-    @Post("/api/v2/help_center/{locale}/sections/{section_id}/articles")
+    @Post("/help_center/{locale}/sections/{section_id}/articles")
     Mono<HttpResponse<@Valid ArticleResponse>> createArticle(
             @NotNull String locale,
             @PathVariable("section_id") @NotNull Integer sectionId,
@@ -85,7 +79,7 @@ public interface ArticlesClient {
      * @param labelNames Only articles that have all the labels are returned.
      * @return OK Response (status code 200)
      */
-    @Get("/api/v2/help_center/{locale}/articles")
+    @Get("/help_center/{locale}/articles")
     Mono<@Valid ArticlesResponse> listArticles(
             @NotNull String locale,
             @QueryValue("sort_by") @Nullable ListArticlesSortByParameter sortBy,

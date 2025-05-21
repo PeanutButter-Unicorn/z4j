@@ -1,10 +1,9 @@
 package lol.pbu.z4j.model.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.util.Objects;
 
@@ -15,45 +14,12 @@ import java.util.Objects;
  * @since 0.0.1
  */
 @Serdeable
-@JsonPropertyOrder(SectionPutRequest.JSON_PROPERTY_SECTION)
+@Data
 public class SectionPutRequest {
-
-    public static final String JSON_PROPERTY_SECTION = "section";
 
     @NotNull
     @Valid
-    @JsonProperty(JSON_PROPERTY_SECTION)
     private SectionPutRequestSection section;
-
-    public SectionPutRequest(SectionPutRequestSection section) {
-        this.section = section;
-    }
-
-    /**
-     * @return the section property value
-     */
-    public SectionPutRequestSection getSection() {
-        return section;
-    }
-
-    /**
-     * Set the section property value
-     *
-     * @param section property value to set
-     */
-    public void setSection(SectionPutRequestSection section) {
-        this.section = section;
-    }
-
-    /**
-     * Set section in a chainable fashion.
-     *
-     * @return The same instance of SectionPutRequest for chaining.
-     */
-    public SectionPutRequest section(SectionPutRequestSection section) {
-        this.section = section;
-        return this;
-    }
 
     @Override
     public boolean equals(Object o) {

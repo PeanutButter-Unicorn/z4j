@@ -2,11 +2,11 @@ package lol.pbu.z4j.model.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.validation.Valid;
 import lol.pbu.z4j.model.ArticleAttachment;
+import lombok.Data;
 
 import java.util.Objects;
 
@@ -17,43 +17,14 @@ import java.util.Objects;
  * @since 0.0.1
  */
 @Serdeable
-@JsonPropertyOrder(ArticleAttachmentResponse.JSON_PROPERTY_ARTICLE_ATTACHMENT)
+@Data
 public class ArticleAttachmentResponse {
-
-    public static final String JSON_PROPERTY_ARTICLE_ATTACHMENT = "article_attachment";
 
     @Nullable
     @Valid
-    @JsonProperty(JSON_PROPERTY_ARTICLE_ATTACHMENT)
+    @JsonProperty("article_attachment")
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
     private ArticleAttachment articleAttachment;
-
-    /**
-     * @return the articleAttachment property value
-     */
-    public ArticleAttachment getArticleAttachment() {
-        return articleAttachment;
-    }
-
-    /**
-     * Set the articleAttachment property value
-     *
-     * @param articleAttachment property value to set
-     */
-    public void setArticleAttachment(ArticleAttachment articleAttachment) {
-        this.articleAttachment = articleAttachment;
-    }
-
-    /**
-     * Set articleAttachment in a chainable fashion.
-     *
-     * @return The same instance of ArticleAttachmentResponse for chaining.
-     */
-    public ArticleAttachmentResponse articleAttachment(ArticleAttachment articleAttachment) {
-        this.articleAttachment = articleAttachment;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

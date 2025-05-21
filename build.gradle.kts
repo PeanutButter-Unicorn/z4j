@@ -15,6 +15,8 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok")
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-http-client")
