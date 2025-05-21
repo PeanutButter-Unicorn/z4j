@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.validation.Valid;
-import lol.pbu.z4j.model.RequestUserImageUploadResponseUpload;
+import lol.pbu.z4j.model.request.RequestUserImageUploadResponseUpload;
 
 import java.util.Objects;
 

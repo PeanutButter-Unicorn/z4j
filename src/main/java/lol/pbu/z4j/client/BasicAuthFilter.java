@@ -18,8 +18,8 @@ import static java.util.Base64.getEncoder;
  * @since 0.0.1
  */
 @ClientFilter("/**")
-@Requires(property = "micronaut.http.services.z4j.email")
-@Requires(property = "micronaut.http.services.z4j.token")
+@Requires(property = "micronaut.http.services.zendesk.email")
+@Requires(property = "micronaut.http.services.zendesk.token")
 public class BasicAuthFilter {
 
     private final String email;
@@ -31,10 +31,10 @@ public class BasicAuthFilter {
      * Constructor which pulls data from properties file or environment variables
      *
      * @param email user or admin email address
-     * @param token api token generated from z4j
+     * @param token api token generated from zendesk
      */
-    public BasicAuthFilter(@Property(name = "micronaut.http.services.z4j.email") String email,
-                           @Property(name = "micronaut.http.services.z4j.token") String token){
+    public BasicAuthFilter(@Property(name = "micronaut.http.services.zendesk.email") String email,
+                           @Property(name = "micronaut.http.services.zendesk.token") String token){
         this.email = email;
         this.token = token;
     }

@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: zendesk4j
+    name: z4j
   http:
     services:
       zendesk:
