@@ -17,7 +17,10 @@ subprojects {
     apply(plugin = "io.micronaut.aot")
     apply(plugin = "io.micronaut.openapi")
 
+    val markdownDoclet: Configuration by configurations.creating
+
     dependencies {
+        markdownDoclet("org.jdrupes.mdoclet:doclet:4.1.0")
         annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
         implementation("io.micronaut.reactor:micronaut-reactor-http-client")
         implementation("io.micronaut:micronaut-http-client")
@@ -33,5 +36,26 @@ subprojects {
     }
     java {
         sourceCompatibility = JavaVersion.toVersion("17") // graalvm-ce
+    }
+
+    tasks.named<Javadoc>("javadoc") {
+        options.docletpath = markdownDoclet.files.toList()
+        options.doclet = "org.jdrupes.mdoclet.MDoclet"
+        options.quiet()
+        (options as? CoreJavadocOptions)?.addStringOption("Xdoclint:-html") // Safe cast
+
+        options.jFlags = listOf(
+            "--add-exports=jdk.compiler/com.sun.tools.doclint=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED",
+            "--add-exports=jdk.javadoc/jdk.javadoc.internal.tool=ALL-UNNAMED",
+            "--add-exports=jdk.javadoc/jdk.javadoc.internal.doclets.toolkit=ALL-UNNAMED",
+            "--add-opens=jdk.javadoc/jdk.javadoc.internal.doclets.toolkit.resources.releases=ALL-UNNAMED"
+        )
+    }
+    tasks.named("build") {
+        dependsOn(tasks.named("javadoc"))
     }
 }

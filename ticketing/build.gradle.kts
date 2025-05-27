@@ -1,14 +1,6 @@
 version = project.properties["z4jTicketingVersion"]!!
 group = "lol.pbu.z4j"
 
-sourceSets {
-    test {
-        resources {
-            srcDirs("../src/main/resources", "src/main/resources")
-        }
-    }
-}
-
 micronaut {
     openapi {
         client(file("src/main/resources/ticketing.yaml")) {

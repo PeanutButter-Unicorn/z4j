@@ -1,12 +1,8 @@
 version = project.properties["z4jHelpCenterVersion"]!!
 group = "lol.pbu.z4j"
 
-sourceSets {
-    test {
-        resources {
-            srcDirs("../src/main/resources", "src/main/resources")
-        }
-    }
+dependencies {
+    implementation(project(":ticketing"))
 }
 
 micronaut {
