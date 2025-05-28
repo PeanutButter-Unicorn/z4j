@@ -16,6 +16,8 @@ micronaut {
             modelPackageName.set("lol.pbu.z4j.ticket.model")
             useReactive.set(false)
             useAuth.set(false)
+            clientId.set("micronaut.http.services.zendesk.url")
+            apiNameSuffix.set("Client")
         }
     }
     runtime("netty")
