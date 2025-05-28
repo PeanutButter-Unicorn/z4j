@@ -17887,7 +17887,7 @@ components:
         action:
           type: string
           description: 'The action to perform on the attribute values. One of the following: "upsert", "update", "delete"'
-          readOnly: true
+#          readOnly: true
         attributes:
           type: object
           description: The attribute values to update. See [Attribute Values](#attribute-values)
@@ -18022,7 +18022,7 @@ components:
         attachments:
           type: array
           description: A collection of attachments (image or file) associated with the event
-          readOnly: true
+#          readOnly: true
         author:
           type: object
           description: Object that describes the user who created the event
@@ -22124,7 +22124,7 @@ components:
         assignee_id:
           type: integer
           description: The id of agent assigned to at the time of rating
-          readOnly: true
+#          readOnly: true
         comment:
           type: string
           description: The comment received with this rating, if available
@@ -22132,15 +22132,15 @@ components:
           type: string
           format: date-time
           description: The time the satisfaction rating got created
-          readOnly: true
+#          readOnly: true
         group_id:
           type: integer
           description: The id of group assigned to at the time of rating
-          readOnly: true
+#          readOnly: true
         id:
           type: integer
           description: Automatically assigned upon creation
-          readOnly: true
+#          readOnly: true
         reason:
           type: string
           description: The reason for a bad rating given by the requester in a follow-up question. Satisfaction reasons must be [enabled](https://support.zendesk.com/hc/en-us/articles/223152967)
@@ -22153,23 +22153,23 @@ components:
         requester_id:
           type: integer
           description: The id of ticket requester submitting the rating
-          readOnly: true
+#          readOnly: true
         score:
           type: string
           description: The rating "offered", "unoffered", "good" or "bad"
         ticket_id:
           type: integer
           description: The id of ticket being rated
-          readOnly: true
+#          readOnly: true
         updated_at:
           type: string
           format: date-time
           description: The time the satisfaction rating got updated
-          readOnly: true
+#          readOnly: true
         url:
           type: string
           description: The API url of this rating
-          readOnly: true
+#          readOnly: true
       example:
         assignee_id: 135
         created_at: "2011-07-20T22:55:29Z"
