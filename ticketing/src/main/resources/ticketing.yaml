@@ -27030,7 +27030,7 @@ components:
       description: |
         Filters the email notifications by ticket, comment, or notification id.
       schema:
-        type: integer
+        type: string
         enum:
           - ticket_id
           - comment_id
