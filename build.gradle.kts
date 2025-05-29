@@ -12,6 +12,8 @@ group = "lol.pbu"
 allprojects { repositories { mavenCentral() } }
 
 dependencies {
+    implementation(project(":helpcenter"))
+    implementation(project(":ticketing"))
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-http-client")

@@ -1,14 +1,6 @@
 version = project.properties["z4jTicketingVersion"]!!
 group = "lol.pbu.z4j"
 
-sourceSets {
-    main {
-        resources {
-            srcDir(project.parent!!.file("src/main/resources"))
-        }
-    }
-}
-
 micronaut {
     openapi {
         client(file("src/main/resources/ticketing.yaml")) {
@@ -18,6 +10,7 @@ micronaut {
             useAuth.set(false)
             clientId.set("micronaut.http.services.zendesk.url")
             apiNameSuffix.set("Client")
+            alwaysUseGenerateHttpResponse.set(true)
         }
     }
     runtime("netty")

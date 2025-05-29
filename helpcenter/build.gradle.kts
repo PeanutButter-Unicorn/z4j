@@ -5,23 +5,16 @@ dependencies {
     implementation(project(":ticketing"))
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDir(project.parent!!.file("src/main/resources"))
-        }
-    }
-}
-
 micronaut {
     openapi {
         client(file("src/main/resources/helpcenter.yaml")) {
-            apiPackageName.set("lol.pbu.z4j.ticket.client")
-            modelPackageName.set("lol.pbu.z4j.ticket.model")
+            apiPackageName.set("lol.pbu.z4j.helpcenter.client")
+            modelPackageName.set("lol.pbu.z4j.helpcenter.model")
             useReactive.set(false)
             useAuth.set(false)
             clientId.set("micronaut.http.services.zendesk.url")
             apiNameSuffix.set("Client")
+            alwaysUseGenerateHttpResponse.set(true)
         }
     }
     runtime("netty")
