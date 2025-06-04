@@ -1,38 +1,22 @@
 version = project.properties["z4jHelpCenterVersion"]!!
 group = "lol.pbu.z4j"
 
-dependencies {
-    implementation(project(":ticketing"))
-}
-
 micronaut {
     openapi {
+        version = "6.16.0"
         client(file("src/main/resources/helpcenter.yaml")) {
             apiPackageName.set("lol.pbu.z4j.helpcenter.client")
             modelPackageName.set("lol.pbu.z4j.helpcenter.model")
             useReactive.set(false)
             useAuth.set(false)
+            lombok.set(true)
             clientId.set("micronaut.http.services.zendesk.url")
             apiNameSuffix.set("Client")
             alwaysUseGenerateHttpResponse.set(true)
         }
     }
-    runtime("netty")
-    testRuntime("spock2")
     processing {
         incremental(true)
         annotations("lol.pbu.*")
-    }
-    aot {
-        // Please review carefully the optimizations enabled below
-        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
-        optimizeServiceLoading = false
-        convertYamlToJava = false
-        precomputeOperations = true
-        cacheEnvironment = true
-        optimizeClassLoading = true
-        deduceEnvironment = true
-        optimizeNetty = true
-        replaceLogbackXml = true
     }
 }
