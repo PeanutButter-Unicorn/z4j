@@ -1,0 +1,7 @@
+micronaut:
+  http:
+    services:
+      zendesk:
+        url: http://localhost:8080
+      z4j:
+        url: http://localhost:8080
