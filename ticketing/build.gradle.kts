@@ -10,6 +10,9 @@ micronaut {
             useReactive.set(false)
             useAuth.set(false)
             lombok.set(true)
+            clientId.set("micronaut.http.services.zendesk.url")
+            apiNameSuffix.set("Client")
+            alwaysUseGenerateHttpResponse.set(true)
         }
     }
     processing {

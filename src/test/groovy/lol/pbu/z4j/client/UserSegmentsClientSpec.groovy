@@ -3,7 +3,8 @@ package lol.pbu.z4j.client
 import io.micronaut.http.HttpStatus
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
-import lol.pbu.z4j.model.UserSegmentObject
+import lol.pbu.z4j.helpcenter.client.UserSegmentsClient
+import lol.pbu.z4j.helpcenter.model.UserSegmentObject
 import spock.lang.Shared
 import spock.lang.Specification
 
