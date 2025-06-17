@@ -22,7 +22,7 @@ tags:
   - name: X Channel
   - name: Organizations
   - name: Triggers
-  - name: Object Triggers
+  - name:  Triggers
   - name: Custom Roles
   - name: Incremental Export
   - name: Account Settings
@@ -71,9 +71,9 @@ tags:
   - name: AssigneeFieldAssignableAgents
   - name: Custom Ticket Statuses
   - name: Locales
-  - name: Custom Objects
-  - name: Custom Object Fields
-  - name: Custom Object Records
+  - name: Custom s
+  - name: Custom  Fields
+  - name: Custom  Records
   - name: Essentials Card
   - name: Omnichannel Routing Queues
   - name: Deletion Schedules
@@ -603,7 +603,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApprovalWorkflowInstanceObject'
+                $ref: '#/components/schemas/ApprovalWorkflowInstance'
               examples:
                 default:
                   $ref: '#/components/examples/ApprovalWorkflowInstanceCreateResponseExample'
@@ -640,7 +640,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApprovalRequestObject'
+                $ref: '#/components/schemas/ApprovalRequest'
               examples:
                 default:
                   $ref: '#/components/examples/ApprovalRequestResponseExample'
@@ -665,7 +665,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApprovalRequestObject'
+                $ref: '#/components/schemas/ApprovalRequest'
               examples:
                 default:
                   $ref: '#/components/examples/ApprovalRequestResponseExample'
@@ -711,7 +711,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApprovalRequestObject'
+                $ref: '#/components/schemas/ApprovalRequest'
               examples:
                 default:
                   $ref: '#/components/examples/ApprovalRequestResponseExample'
@@ -972,7 +972,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagsByObjectIdResponse'
+                $ref: '#/components/schemas/TagsByIdResponse'
               examples:
                 default:
                   $ref: '#/components/examples/TagsAutocompleteResponseExample'
@@ -1581,7 +1581,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HostMappingObject'
+                $ref: '#/components/schemas/HostMapping'
               examples:
                 default:
                   $ref: '#/components/examples/HostMappingResponseValidExample'
@@ -1610,7 +1610,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HostMappingObject'
+                $ref: '#/components/schemas/HostMapping'
               examples:
                 default:
                   $ref: '#/components/examples/HostMappingResponseValidExample'
@@ -2003,10 +2003,10 @@ paths:
                   $ref: '#/components/examples/TicketCommentsRedactionInAgentWorkspaceResponseExample'
   /api/v2/custom_objects:
     get:
-      operationId: ListCustomObjects
+      operationId: ListCustoms
       tags:
-        - Custom Objects
-      summary: List Custom Objects
+        - Custom s
+      summary: List Custom s
       description: |-
         Lists all undeleted custom objects for the account
         #### Allowed For
@@ -2017,15 +2017,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectsResponse'
+                $ref: '#/components/schemas/CustomsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectsResponseExample'
+                  $ref: '#/components/examples/CustomsResponseExample'
     post:
-      operationId: CreateCustomObject
+      operationId: CreateCustom
       tags:
-        - Custom Objects
-      summary: Create Custom Object
+        - Custom s
+      summary: Create Custom 
       description: |
         Creates an object describing all the properties required to create a custom object record
         #### Allowed For
@@ -2034,47 +2034,47 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomObjectsCreateRequest'
+              $ref: '#/components/schemas/CustomsCreateRequest'
             examples:
               default:
-                $ref: '#/components/examples/CustomObjectsCreateRequestExample'
+                $ref: '#/components/examples/CustomsCreateRequestExample'
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectResponse'
+                $ref: '#/components/schemas/CustomResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectsCreateResponseExample'
+                  $ref: '#/components/examples/CustomsCreateResponseExample'
   /api/v2/custom_objects/{custom_object_key}:
     get:
-      operationId: ShowCustomObject
+      operationId: ShowCustom
       tags:
-        - Custom Objects
-      summary: Show Custom Object
+        - Custom s
+      summary: Show Custom 
       description: |
         Returns an object with the specified key
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       responses:
         "200":
-          description: Custom Object
+          description: Custom 
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectResponse'
+                $ref: '#/components/schemas/CustomResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectsCreateResponseExample'
+                  $ref: '#/components/examples/CustomsCreateResponseExample'
     patch:
-      operationId: UpdateCustomObject
+      operationId: UpdateCustom
       tags:
-        - Custom Objects
-      summary: Update Custom Object
+        - Custom s
+      summary: Update Custom 
       description: |-
         Updates an individual custom object. The updating rules are as follows:
         * Takes a `custom_object` object that specifies the properties to update
@@ -2082,37 +2082,37 @@ paths:
         #### Allowed For
         * Admins
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       responses:
         "200":
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectResponse'
+                $ref: '#/components/schemas/CustomResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectsCreateResponseExample'
+                  $ref: '#/components/examples/CustomsCreateResponseExample'
     delete:
-      operationId: DeleteCustomObject
+      operationId: DeleteCustom
       tags:
-        - Custom Objects
-      summary: Delete Custom Object
+        - Custom s
+      summary: Delete Custom 
       description: |-
         Permanently deletes the custom object with the specified key
         #### Allowed For
         * Admins
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       responses:
         "204":
           description: No content response
   /api/v2/custom_objects/{custom_object_key}/fields:
     get:
-      operationId: ListCustomObjectFields
+      operationId: ListCustomFields
       tags:
-        - Custom Object Fields
-      summary: List Custom Object Fields
+        - Custom  Fields
+      summary: List Custom  Fields
       description: |-
         Lists all undeleted custom fields for the specified object.
 
@@ -2125,7 +2125,7 @@ paths:
 
         See [Pagination](developer.zendesk.com/api-reference/introduction/pagination/).
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
         - $ref: '#/components/parameters/IncludeStandardFields'
       responses:
         "200":
@@ -2133,15 +2133,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectFieldsResponse'
+                $ref: '#/components/schemas/CustomFieldsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectFieldsResponseExample'
+                  $ref: '#/components/examples/CustomFieldsResponseExample'
     post:
-      operationId: CreateCustomObjectField
+      operationId: CreateCustomField
       tags:
-        - Custom Object Fields
-      summary: Create Custom Object Field
+        - Custom  Fields
+      summary: Create Custom  Field
       description: |
         Creates any of the following custom field types:
 
@@ -2162,53 +2162,53 @@ paths:
 
         * Admins
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomObjectFieldsCreateRequest'
+              $ref: '#/components/schemas/CustomFieldsCreateRequest'
             examples:
               default:
-                $ref: '#/components/examples/CustomObjectFieldsCreateRequestExample'
+                $ref: '#/components/examples/CustomFieldsCreateRequestExample'
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectFieldResponse'
+                $ref: '#/components/schemas/CustomFieldResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectFieldCreateResponseExample'
+                  $ref: '#/components/examples/CustomFieldCreateResponseExample'
   /api/v2/custom_objects/{custom_object_key}/fields/{custom_object_field_key_or_id}:
     get:
-      operationId: ShowCustomObjectField
+      operationId: ShowCustomField
       tags:
-        - Custom Object Fields
-      summary: Show Custom Object Field
+        - Custom  Fields
+      summary: Show Custom  Field
       description: |
         Returns a custom field for a specific object using a provided key or id of the field.
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectFieldKeyOrId'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomFieldKeyOrId'
       responses:
         "200":
-          description: Custom Object Field
+          description: Custom  Field
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectFieldResponse'
+                $ref: '#/components/schemas/CustomFieldResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectFieldCreateResponseExample'
+                  $ref: '#/components/examples/CustomFieldCreateResponseExample'
     patch:
-      operationId: UpdateCustomObjectField
+      operationId: UpdateCustomField
       tags:
-        - Custom Object Fields
-      summary: Update Custom Object Field
+        - Custom  Fields
+      summary: Update Custom  Field
       description: |-
         Updates individual custom object fields. The updating rules are as follows:
         * Takes a `custom_object_field` object that specifies the properties to update
@@ -2223,46 +2223,46 @@ paths:
         #### Allowed For
         * Admins
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectFieldKeyOrId'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomFieldKeyOrId'
       responses:
         "200":
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectFieldResponse'
+                $ref: '#/components/schemas/CustomFieldResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectFieldCreateResponseExample'
+                  $ref: '#/components/examples/CustomFieldCreateResponseExample'
     delete:
-      operationId: DeleteCustomObjectField
+      operationId: DeleteCustomField
       tags:
-        - Custom Object Fields
-      summary: Delete Custom Object Field
+        - Custom  Fields
+      summary: Delete Custom  Field
       description: |-
         Deletes a field with the specified key. Note: You can't delete standard fields.
         #### Allowed For
         * Admins
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectFieldKeyOrId'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomFieldKeyOrId'
       responses:
         "204":
           description: No content response
   /api/v2/custom_objects/{custom_object_key}/fields/reorder:
     put:
-      operationId: ReorderCustomObjectFields
+      operationId: ReorderCustomFields
       tags:
-        - Custom Object Fields
-      summary: Reorder Custom Fields of an Object
+        - Custom  Fields
+      summary: Reorder Custom Fields of an 
       description: |
         Sets a preferred order of custom fields for a specific object by providing field ids in the desired order.
         #### Allowed For
 
         * Admins
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       responses:
         "200":
           description: Reordered
@@ -2275,10 +2275,10 @@ paths:
               example: ""
   /api/v2/custom_objects/{custom_object_key}/jobs:
     post:
-      operationId: CustomObjectRecordBulkJobs
+      operationId: CustomRecordBulkJobs
       tags:
-        - Custom Object Records
-      summary: Custom Object Record Bulk Jobs
+        - Custom  Records
+      summary: Custom  Record Bulk Jobs
       description: |
         Queues a background job to perform bulk actions on up to 100 custom object records per single request.
         Takes a `job` object with two nested fields:
@@ -2305,53 +2305,53 @@ paths:
         #### Response ###
         This endpoint returns a `job_status` [JSON object](developer.zendesk.com/api-reference/ticketing/ticket-management/job_statuses/#json-format) and queues a background job to do the work. Use the [Show Job Status](developer.zendesk.com/api-reference/ticketing/ticket-management/job_statuses/#show-job-status) endpoint to check for the job's completion. Only a certain number of jobs can be queued or running at the same time. See [Job limit](developer.zendesk.com/api-reference/introduction/rate-limits/#job-limit) for more information.
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomObjectRecordsBulkCreateRequest'
+              $ref: '#/components/schemas/CustomRecordsBulkCreateRequest'
             examples:
               default:
-                $ref: '#/components/examples/CustomObjectRecordsBulkCreateRequestExample'
+                $ref: '#/components/examples/CustomRecordsBulkCreateRequestExample'
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordsJobsResponse'
+                $ref: '#/components/schemas/CustomRecordsJobsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsJobsResponseExample'
+                  $ref: '#/components/examples/CustomRecordsJobsResponseExample'
   /api/v2/custom_objects/{custom_object_key}/limits/field_limit:
     get:
-      operationId: CustomObjectFieldsLimit
+      operationId: CustomFieldsLimit
       tags:
-        - Custom Object Fields
-      summary: Custom Object Fields Limit
+        - Custom  Fields
+      summary: Custom  Fields Limit
       description: |-
         List the current count and the limit for a custom object's fields
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       responses:
         "200":
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectLimitsResponse'
+                $ref: '#/components/schemas/CustomLimitsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectFieldsLimitResponseExample'
+                  $ref: '#/components/examples/CustomFieldsLimitResponseExample'
   /api/v2/custom_objects/{custom_object_key}/records:
     get:
-      operationId: ListCustomObjectRecords
+      operationId: ListCustomRecords
       tags:
-        - Custom Object Records
-      summary: List Custom Object Records
+        - Custom  Records
+      summary: List Custom  Records
       description: |-
         Lists all undeleted custom object records for the specified object
 
@@ -2361,7 +2361,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
         - name: filter[ids]
           in: query
           description: Optional comma-separated list of ids to filter records by. If one or more ids are specified, only matching records are returned. The ids must be unique and are case sensitive.
@@ -2416,114 +2416,114 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordsResponse'
+                $ref: '#/components/schemas/CustomRecordsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsIndexResponseExample'
+                  $ref: '#/components/examples/CustomRecordsIndexResponseExample'
     post:
-      operationId: CreateCustomObjectRecord
+      operationId: CreateCustomRecord
       tags:
-        - Custom Object Records
-      summary: Create Custom Object Record
+        - Custom  Records
+      summary: Create Custom  Record
       description: |
         Creates a custom object record according to all the properties described by a custom object definition. If `autoincrement_enabled` is true, record names aren't allowed in the request body because they are generated automatically. If `is_unique` is true, record names must be unique.
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomObjectRecordsCreateRequest'
+              $ref: '#/components/schemas/CustomRecordsCreateRequest'
             examples:
               default:
-                $ref: '#/components/examples/CustomObjectRecordsCreateRequestExample'
+                $ref: '#/components/examples/CustomRecordsCreateRequestExample'
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordResponse'
+                $ref: '#/components/schemas/CustomRecordResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsCreateResponseExample'
+                  $ref: '#/components/examples/CustomRecordsCreateResponseExample'
     patch:
-      operationId: UpsertCustomObjectRecordByExternalIdOrName
+      operationId: UpsertCustomRecordByExternalIdOrName
       tags:
-        - Custom Object Records
-      summary: Set Custom Object Record by External Id Or Name
+        - Custom  Records
+      summary: Set Custom  Record by External Id Or Name
       description: |
         If a record exists for the given external id or name, updates it. Only the specified attributes are updated. Otherwise, creates a new record with the provided external id, name and other attributes. The `is_unqiue` property on the custom object's name field must be enabled in order to update or create by name. External id and name cannot be used together in the same request.
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectRecordExternalId'
-        - $ref: '#/components/parameters/CustomObjectRecordName'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomRecordExternalId'
+        - $ref: '#/components/parameters/CustomRecordName'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomObjectRecordsUpsertRequest'
+              $ref: '#/components/schemas/CustomRecordsUpsertRequest'
             examples:
               default:
-                $ref: '#/components/examples/CustomObjectRecordsUpsertRequestExample'
+                $ref: '#/components/examples/CustomRecordsUpsertRequestExample'
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordResponse'
+                $ref: '#/components/schemas/CustomRecordResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsUpsertResponseExample'
+                  $ref: '#/components/examples/CustomRecordsUpsertResponseExample'
     delete:
-      operationId: DeleteCustomObjectRecordByExternalIdOrName
+      operationId: DeleteCustomRecordByExternalIdOrName
       tags:
-        - Custom Object Records
-      summary: Delete Custom Object Record by External Id Or Name
+        - Custom  Records
+      summary: Delete Custom  Record by External Id Or Name
       description: |
         Deletes a record with the specified external id or name. The `is_unique` property on the custom object's name field must be enabled in order to delete by name. External id and name cannot be used together in the same request.
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectRecordExternalId'
-        - $ref: '#/components/parameters/CustomObjectRecordName'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomRecordExternalId'
+        - $ref: '#/components/parameters/CustomRecordName'
       responses:
         "204":
           description: No content response
   /api/v2/custom_objects/{custom_object_key}/records/{custom_object_record_id}:
     get:
-      operationId: ShowCustomObjectRecord
+      operationId: ShowCustomRecord
       tags:
-        - Custom Object Records
-      summary: Show Custom Object Record
+        - Custom  Records
+      summary: Show Custom  Record
       description: |
         Returns a custom record for a specific object using a provided id.
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectRecordId'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomRecordId'
       responses:
         "200":
-          description: Custom Object Record
+          description: Custom  Record
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordResponse'
+                $ref: '#/components/schemas/CustomRecordResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsCreateResponseExample'
+                  $ref: '#/components/examples/CustomRecordsCreateResponseExample'
     patch:
-      operationId: UpdateCustomObjectRecord
+      operationId: UpdateCustomRecord
       tags:
-        - Custom Object Records
-      summary: Update Custom Object Record
+        - Custom  Records
+      summary: Update Custom  Record
       description: |-
         Updates an individual custom object record. The updating rules are as follows:
         * Takes a `custom_object_record` object that specifies the properties to update
@@ -2531,39 +2531,39 @@ paths:
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectRecordId'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomRecordId'
       responses:
         "200":
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordResponse'
+                $ref: '#/components/schemas/CustomRecordResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsCreateResponseExample'
+                  $ref: '#/components/examples/CustomRecordsCreateResponseExample'
     delete:
-      operationId: DeleteCustomObjectRecord
+      operationId: DeleteCustomRecord
       tags:
-        - Custom Object Records
-      summary: Delete Custom Object Record
+        - Custom  Records
+      summary: Delete Custom  Record
       description: |-
         Deletes a record with the specified id
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
-        - $ref: '#/components/parameters/CustomObjectRecordId'
+        - $ref: '#/components/parameters/CustomKey'
+        - $ref: '#/components/parameters/CustomRecordId'
       responses:
         "204":
           description: No content response
   /api/v2/custom_objects/{custom_object_key}/records/autocomplete:
     get:
-      operationId: AutocompleteCustomObjectRecordSearch
+      operationId: AutocompleteCustomRecordSearch
       tags:
-        - Custom Object Records
-      summary: Autocomplete Custom Object Record Search
+        - Custom  Records
+      summary: Autocomplete Custom  Record Search
       description: |-
         Retrieves an array of custom object records that have a field value that matches the value specified in the `name` parameter.
 
@@ -2574,7 +2574,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
         - name: name
           in: query
           description: Part of a name of the record you are searching for
@@ -2637,22 +2637,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordsResponse'
+                $ref: '#/components/schemas/CustomRecordsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsAutocompleteResponseExample'
+                  $ref: '#/components/examples/CustomRecordsAutocompleteResponseExample'
   /api/v2/custom_objects/{custom_object_key}/records/count:
     get:
-      operationId: CountCustomObjectRecords
+      operationId: CountCustomRecords
       tags:
-        - Custom Object Records
-      summary: Count Custom Object Records
+        - Custom  Records
+      summary: Count Custom  Records
       description: |-
         Returns a total count of records for a specific custom object as well as the time the count was refreshed.
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
       responses:
         "200":
           description: Success response
@@ -2682,10 +2682,10 @@ paths:
                       value: 7
   /api/v2/custom_objects/{custom_object_key}/records/search:
     get:
-      operationId: SearchCustomObjectRecords
+      operationId: SearchCustomRecords
       tags:
-        - Custom Object Records
-      summary: Search Custom Object Records
+        - Custom  Records
+      summary: Search Custom  Records
       description: |-
         Returns an array of custom object records that meet the search criteria
 
@@ -2696,7 +2696,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
         - name: query
           in: query
           description: |
@@ -2741,15 +2741,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordsResponse'
+                $ref: '#/components/schemas/CustomRecordsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsSearchResponseExample'
+                  $ref: '#/components/examples/CustomRecordsSearchResponseExample'
     post:
-      operationId: FilteredSearchCustomObjectRecords
+      operationId: FilteredSearchCustomRecords
       tags:
-        - Custom Object Records
-      summary: Filtered Search of Custom Object Records
+        - Custom  Records
+      summary: Filtered Search of Custom  Records
       description: |-
         Returns an array of custom object records that meet the search and filter criteria.
 
@@ -2786,7 +2786,7 @@ paths:
         }
         ```
 
-        #### Comparison Object
+        #### Comparison 
 
         A comparison object defines a condition a record must meet to be considered a match. The condition is based on an attribute value or object type.
 
@@ -2808,7 +2808,7 @@ paths:
         * Agents
         * End users (when an admin [configures](https://support.zendesk.com/hc/en-us/articles/6034260247066) the custom object to be accessible to end users)
       parameters:
-        - $ref: '#/components/parameters/CustomObjectKey'
+        - $ref: '#/components/parameters/CustomKey'
         - name: query
           in: query
           description: |
@@ -2852,29 +2852,29 @@ paths:
           application/json:
             schema:
               anyOf:
-                - $ref: '#/components/schemas/CustomObjectRecordsFilteredSearchRequestBasic'
-                - $ref: '#/components/schemas/CustomObjectRecordsFilteredSearchRequestComplex'
+                - $ref: '#/components/schemas/CustomRecordsFilteredSearchRequestBasic'
+                - $ref: '#/components/schemas/CustomRecordsFilteredSearchRequestComplex'
             examples:
               default:
-                $ref: '#/components/examples/CustomObjectRecordsFilteredSearchRequestExample'
+                $ref: '#/components/examples/CustomRecordsFilteredSearchRequestExample'
       responses:
         "200":
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectRecordsResponse'
+                $ref: '#/components/schemas/CustomRecordsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsSearchResponseExample'
+                  $ref: '#/components/examples/CustomRecordsSearchResponseExample'
   /api/v2/custom_objects/{custom_object_key}/triggers:
     parameters:
-      - $ref: '#/components/parameters/CustomObjectKey'
+      - $ref: '#/components/parameters/CustomKey'
     get:
-      operationId: ListObjectTriggers
+      operationId: ListTriggers
       tags:
-        - Object Triggers
-      summary: List Object Triggers
+        -  Triggers
+      summary: List  Triggers
       description: "Lists all triggers for the specified custom object.\n\n#### Allowed For \n* Agents\n"
       parameters:
         - $ref: '#/components/parameters/TriggerActive'
@@ -2886,15 +2886,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggersResponse'
+                $ref: '#/components/schemas/TriggersResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggersResponseExample'
+                  $ref: '#/components/examples/TriggersResponseExample'
     post:
-      operationId: CreateObjectTrigger
+      operationId: CreateTrigger
       tags:
-        - Object Triggers
-      summary: Create Object Trigger
+        -  Triggers
+      summary: Create  Trigger
       description: |
         Creates a new object trigger for a specified object.
 
@@ -2907,29 +2907,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectTriggerRequest'
+              $ref: '#/components/schemas/TriggerRequest'
             examples:
               default:
-                $ref: '#/components/examples/ObjectTriggerRequestExample'
+                $ref: '#/components/examples/TriggerRequestExample'
       responses:
         "201":
           description: Created response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggerResponse'
+                $ref: '#/components/schemas/TriggerResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggerResponseExample'
+                  $ref: '#/components/examples/TriggerResponseExample'
   /api/v2/custom_objects/{custom_object_key}/triggers/{trigger_id}:
     parameters:
-      - $ref: '#/components/parameters/CustomObjectKey'
+      - $ref: '#/components/parameters/CustomKey'
       - $ref: '#/components/parameters/TriggerId'
     get:
-      operationId: GetObjectTrigger
+      operationId: GetTrigger
       tags:
-        - Object Triggers
-      summary: Show Object Trigger
+        -  Triggers
+      summary: Show  Trigger
       description: |
         Returns details of a specific object trigger.
         #### Allowed For
@@ -2941,15 +2941,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggerResponse'
+                $ref: '#/components/schemas/TriggerResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggerResponseExample'
+                  $ref: '#/components/examples/TriggerResponseExample'
     put:
-      operationId: UpdateObjectTrigger
+      operationId: UpdateTrigger
       tags:
-        - Object Triggers
-      summary: Update Object Trigger
+        -  Triggers
+      summary: Update  Trigger
       description: |
         Updates a specified object trigger.
 
@@ -2966,25 +2966,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectTriggerRequest'
+              $ref: '#/components/schemas/TriggerRequest'
             examples:
               default:
-                $ref: '#/components/examples/ObjectTriggerRequestExample'
+                $ref: '#/components/examples/TriggerRequestExample'
       responses:
         "200":
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggerResponse'
+                $ref: '#/components/schemas/TriggerResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggerResponseExample'
+                  $ref: '#/components/examples/TriggerResponseExample'
     delete:
-      operationId: DeleteObjectTrigger
+      operationId: DeleteTrigger
       tags:
-        - Object Triggers
-      summary: Delete Object Trigger
+        -  Triggers
+      summary: Delete  Trigger
       description: |
         Deletes a specified object trigger.
 
@@ -2997,14 +2997,14 @@ paths:
           description: No Content response
   /api/v2/custom_objects/{custom_object_key}/triggers/active:
     parameters:
-      - $ref: '#/components/parameters/CustomObjectKey'
+      - $ref: '#/components/parameters/CustomKey'
       - $ref: '#/components/parameters/TriggerSortBy'
       - $ref: '#/components/parameters/TriggerSortOrder'
     get:
-      operationId: ListActiveObjectTriggers
+      operationId: ListActiveTriggers
       tags:
-        - Object Triggers
-      summary: List Active Object Triggers
+        -  Triggers
+      summary: List Active  Triggers
       description: |
         Lists all active object triggers.
 
@@ -3027,18 +3027,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggersResponse'
+                $ref: '#/components/schemas/TriggersResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggersActiveResponseExample'
+                  $ref: '#/components/examples/TriggersActiveResponseExample'
   /api/v2/custom_objects/{custom_object_key}/triggers/definitions:
     parameters:
-      - $ref: '#/components/parameters/CustomObjectKey'
+      - $ref: '#/components/parameters/CustomKey'
     get:
-      operationId: ListObjectTriggersDefinitions
+      operationId: ListTriggersDefinitions
       tags:
-        - Object Triggers
-      summary: List Object Trigger Action and Condition Definitions
+        -  Triggers
+      summary: List  Trigger Action and Condition Definitions
       description: "Lists the conditions and actions of all triggers for the specified custom object.\n\n#### Allowed For \n* Agents\n"
       responses:
         "200":
@@ -3046,26 +3046,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggerDefinitionResponse'
+                $ref: '#/components/schemas/TriggerDefinitionResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggerDefinitionResponseExample'
+                  $ref: '#/components/examples/TriggerDefinitionResponseExample'
   /api/v2/custom_objects/{custom_object_key}/triggers/destroy_many:
     parameters:
-      - $ref: '#/components/parameters/CustomObjectKey'
+      - $ref: '#/components/parameters/CustomKey'
       - $ref: '#/components/parameters/TriggerIds'
     delete:
-      operationId: DeleteManyObjectTriggers
+      operationId: DeleteManyTriggers
       tags:
-        - Object Triggers
-      summary: Delete Many Object Triggers
+        -  Triggers
+      summary: Delete Many  Triggers
       description: "Deletes the object triggers corresponding to the provided comma-separated list of ids. \n\n**Note**: You can only bulk-delete triggers associated with one object at a time, specified by the `custom_object_key` in the request.\n\n#### Allowed For\n\n* Administrators\n* Agents in custom roles with the `manage_triggers` permission (Enterprise only)\n\n#### Request Parameters\n\nThe DELETE request takes an `ids` object that lists the\nobject triggers to delete. All of the specified object trigger `ids` must be associated with a single object.\n\n| Name | Description\n| ---- | -----------\n| ids  | The ids of the triggers to delete\n\n#### Example request\n\n```js\n{\n  \"ids\": \"25,23,27,22\"\n}\n```\n"
       responses:
         "204":
           description: No content response
   /api/v2/custom_objects/{custom_object_key}/triggers/search:
     parameters:
-      - $ref: '#/components/parameters/CustomObjectKey'
+      - $ref: '#/components/parameters/CustomKey'
       - $ref: '#/components/parameters/TriggerSearchQuery'
       - $ref: '#/components/parameters/TriggerSearchFilter'
       - $ref: '#/components/parameters/TriggerActive'
@@ -3074,10 +3074,10 @@ paths:
       - $ref: '#/components/parameters/TriggerSortOrder'
       - $ref: '#/components/parameters/TriggerInclude'
     get:
-      operationId: SearchObjectTriggers
+      operationId: SearchTriggers
       tags:
-        - Object Triggers
-      summary: Search Object Triggers
+        -  Triggers
+      summary: Search  Triggers
       description: |
         Returns a list of object triggers that meet your filter or search criteria.
 
@@ -3108,18 +3108,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggersResponse'
+                $ref: '#/components/schemas/TriggersResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggersSearchResponseExample'
+                  $ref: '#/components/examples/TriggersSearchResponseExample'
   /api/v2/custom_objects/{custom_object_key}/triggers/update_many:
     parameters:
-      - $ref: '#/components/parameters/CustomObjectKey'
+      - $ref: '#/components/parameters/CustomKey'
     put:
-      operationId: UpdateManyObjectTriggers
+      operationId: UpdateManyTriggers
       tags:
-        - Object Triggers
-      summary: Update Many Object Triggers
+        -  Triggers
+      summary: Update Many  Triggers
       description: |
         Updates the position or the active status of multiple object triggers. Any additional properties are ignored.
 
@@ -3159,26 +3159,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ObjectTriggerBulkUpdateRequest'
+              $ref: '#/components/schemas/TriggerBulkUpdateRequest'
             examples:
               default:
-                $ref: '#/components/examples/ObjectTriggerBulkUpdateRequestExample'
+                $ref: '#/components/examples/TriggerBulkUpdateRequestExample'
       responses:
         "200":
           description: Success response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObjectTriggersResponse'
+                $ref: '#/components/schemas/TriggersResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/ObjectTriggersResponseExample'
+                  $ref: '#/components/examples/TriggersResponseExample'
   /api/v2/custom_objects/limits/object_limit:
     get:
-      operationId: CustomObjectsLimit
+      operationId: CustomsLimit
       tags:
-        - Custom Objects
-      summary: Custom Objects Limit
+        - Custom s
+      summary: Custom s Limit
       description: |-
         List the current count and the limit for custom objects
         #### Allowed For
@@ -3189,16 +3189,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectLimitsResponse'
+                $ref: '#/components/schemas/CustomLimitsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectsLimitResponseExample'
+                  $ref: '#/components/examples/CustomsLimitResponseExample'
   /api/v2/custom_objects/limits/record_limit:
     get:
-      operationId: CustomObjectRecordsLimit
+      operationId: CustomRecordsLimit
       tags:
-        - Custom Object Records
-      summary: Custom Object Records Limit
+        - Custom  Records
+      summary: Custom  Records Limit
       description: |-
         List the current count and the limit for custom object records
         #### Allowed For
@@ -3209,10 +3209,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomObjectLimitsResponse'
+                $ref: '#/components/schemas/CustomLimitsResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/CustomObjectRecordsLimitResponseExample'
+                  $ref: '#/components/examples/CustomRecordsLimitResponseExample'
   /api/v2/custom_roles:
     get:
       operationId: ListCustomRoles
@@ -4837,7 +4837,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GroupsCountObject'
+                $ref: '#/components/schemas/GroupsCount'
               examples:
                 default:
                   $ref: '#/components/examples/GroupsCountResponseExample'
@@ -5579,7 +5579,7 @@ paths:
                 type: object
                 properties:
                   macro:
-                    $ref: '#/components/schemas/MacroObject'
+                    $ref: '#/components/schemas/Macro'
               examples:
                 default:
                   $ref: '#/components/examples/CreateMacroResponseExample'
@@ -5637,7 +5637,7 @@ paths:
                 type: object
                 properties:
                   macro:
-                    $ref: '#/components/schemas/MacroObject'
+                    $ref: '#/components/schemas/Macro'
               examples:
                 default:
                   $ref: '#/components/examples/UpdateMacroResponseExample'
@@ -11475,10 +11475,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagsByObjectIdResponse'
+                $ref: '#/components/schemas/TagsByIdResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/TagsByObjectIdResponse'
+                  $ref: '#/components/examples/TagsByIdResponse'
     post:
       operationId: SetTagsTicket
       tags:
@@ -11494,10 +11494,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagsByObjectIdResponse'
+                $ref: '#/components/schemas/TagsByIdResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/TagsByObjectIdResponse'
+                  $ref: '#/components/examples/TagsByIdResponse'
     put:
       operationId: PutTagsTicket
       tags:
@@ -11544,10 +11544,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagsByObjectIdResponse'
+                $ref: '#/components/schemas/TagsByIdResponse'
               examples:
                 default:
-                  $ref: '#/components/examples/TagsByObjectIdResponse'
+                  $ref: '#/components/examples/TagsByIdResponse'
     delete:
       operationId: DeleteTagsTicket
       tags:
@@ -11761,7 +11761,7 @@ paths:
         - name: page
           in: query
           description: Pagination parameters
-          style: deepObject
+          style: deep
           explode: true
           schema:
             type: object
@@ -15113,7 +15113,7 @@ paths:
                 type: object
                 properties:
                   workspace:
-                    $ref: '#/components/schemas/WorkspaceObject'
+                    $ref: '#/components/schemas/Workspace'
               examples:
                 default:
                   value:
@@ -15175,7 +15175,7 @@ paths:
                 type: object
                 properties:
                   workspace:
-                    $ref: '#/components/schemas/WorkspaceObject'
+                    $ref: '#/components/schemas/Workspace'
               examples:
                 default:
                   value:
@@ -15257,7 +15257,7 @@ paths:
                 type: object
                 properties:
                   workspace:
-                    $ref: '#/components/schemas/WorkspaceObject'
+                    $ref: '#/components/schemas/Workspace'
               examples:
                 default:
                   value:
@@ -15503,13 +15503,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OAuthTokenForGrantTypesObject'
+                $ref: '#/components/schemas/OAuthTokenForGrantTypes'
               examples:
                 default:
                   $ref: '#/components/examples/OAuthTokenForGrantTypesResponseExample'
 components:
   schemas:
-    AccountSettingsActiveFeaturesObject:
+    AccountSettingsActiveFeatures:
       type: object
       description: The active features for an account. See [Active Features](#active-features)
       properties:
@@ -15593,7 +15593,7 @@ components:
           type: boolean
         voice:
           type: boolean
-    AccountSettingsAgentObject:
+    AccountSettingsAgent:
       type: object
       description: Configuration for the agent workspace. See [Agents](#agents)
       properties:
@@ -15609,7 +15609,7 @@ components:
           type: boolean
         unified_agent_statuses:
           type: boolean
-    AccountSettingsApiObject:
+    AccountSettingsApi:
       type: object
       description: API configuration options. See [API](#api)
       properties:
@@ -15619,7 +15619,7 @@ components:
           type: string
         api_token_access:
           type: string
-    AccountSettingsAppsObject:
+    AccountSettingsApps:
       type: object
       description: Apps configuration options. See [Apps](#apps)
       properties:
@@ -15629,13 +15629,13 @@ components:
           type: boolean
         use:
           type: boolean
-    AccountSettingsBillingObject:
+    AccountSettingsBilling:
       type: object
       description: Billing configuration options. See [Billing](#billing)
       properties:
         backend:
           type: string
-    AccountSettingsBrandingObject:
+    AccountSettingsBranding:
       type: object
       description: Branding settings. See [Branding](#branding)
       properties:
@@ -15653,7 +15653,7 @@ components:
           type: string
         text_color:
           type: string
-    AccountSettingsBrandsObject:
+    AccountSettingsBrands:
       type: object
       description: Brand settings. See [Brands](#brands)
       properties:
@@ -15661,7 +15661,7 @@ components:
           type: integer
         require_brand_on_new_tickets:
           type: boolean
-    AccountSettingsCdnObject:
+    AccountSettingsCdn:
       type: object
       description: CDN settings
       properties:
@@ -15678,7 +15678,7 @@ components:
                 type: string
               url:
                 type: string
-    AccountSettingsChatObject:
+    AccountSettingsChat:
       type: object
       description: Zendesk Chat settings. See [Chat](#chat)
       properties:
@@ -15692,7 +15692,7 @@ components:
           type: integer
         welcome_message:
           type: string
-    AccountSettingsCrossSellObject:
+    AccountSettingsCrossSell:
       type: object
       description: Cross Sell settings
       properties:
@@ -15701,7 +15701,7 @@ components:
         xsell_source:
           type: string
           nullable: true
-    AccountSettingsEmailObject:
+    AccountSettingsEmail:
       type: object
       description: Email settings
       properties:
@@ -15735,7 +15735,7 @@ components:
           type: boolean
         send_gmail_messages_via_gmail:
           type: boolean
-    AccountSettingsGoogleAppsObject:
+    AccountSettingsGoogleApps:
       type: object
       description: Google Apps configuration. See [G Suite](#g-suite)
       properties:
@@ -15743,19 +15743,19 @@ components:
           type: boolean
         has_google_apps_admin:
           type: boolean
-    AccountSettingsGroupObject:
+    AccountSettingsGroup:
       type: object
       description: Group configuration
       properties:
         check_group_name_uniqueness:
           type: boolean
-    AccountSettingsLimitsObject:
+    AccountSettingsLimits:
       type: object
       description: Account limits configuration. See [Limits](#limits)
       properties:
         attachment_size:
           type: integer
-    AccountSettingsLocalizationObject:
+    AccountSettingsLocalization:
       type: object
       description: Internationalization configuration settings. See [Localization](#localization)
       properties:
@@ -15763,7 +15763,7 @@ components:
           type: array
           items:
             type: integer
-    AccountSettingsLotusObject:
+    AccountSettingsLotus:
       type: object
       description: Support UI settings. See [Lotus](#lotus)
       properties:
@@ -15773,69 +15773,69 @@ components:
           type: boolean
         reporting:
           type: boolean
-    AccountSettingsMetricsObject:
+    AccountSettingsMetrics:
       type: object
       description: Account metrics settings. See [Metrics](#metrics)
       properties:
         account_size:
           type: string
-    AccountSettingsObject:
+    AccountSettings:
       type: object
       properties:
         active_features:
-          $ref: '#/components/schemas/AccountSettingsActiveFeaturesObject'
+          $ref: '#/components/schemas/AccountSettingsActiveFeatures'
         agents:
-          $ref: '#/components/schemas/AccountSettingsAgentObject'
+          $ref: '#/components/schemas/AccountSettingsAgent'
         api:
-          $ref: '#/components/schemas/AccountSettingsApiObject'
+          $ref: '#/components/schemas/AccountSettingsApi'
         apps:
-          $ref: '#/components/schemas/AccountSettingsAppsObject'
+          $ref: '#/components/schemas/AccountSettingsApps'
         billing:
-          $ref: '#/components/schemas/AccountSettingsBillingObject'
+          $ref: '#/components/schemas/AccountSettingsBilling'
         branding:
-          $ref: '#/components/schemas/AccountSettingsBrandingObject'
+          $ref: '#/components/schemas/AccountSettingsBranding'
         brands:
-          $ref: '#/components/schemas/AccountSettingsBrandsObject'
+          $ref: '#/components/schemas/AccountSettingsBrands'
         cdn:
-          $ref: '#/components/schemas/AccountSettingsCdnObject'
+          $ref: '#/components/schemas/AccountSettingsCdn'
         chat:
-          $ref: '#/components/schemas/AccountSettingsChatObject'
+          $ref: '#/components/schemas/AccountSettingsChat'
         cross_sell:
-          $ref: '#/components/schemas/AccountSettingsCrossSellObject'
+          $ref: '#/components/schemas/AccountSettingsCrossSell'
         email:
-          $ref: '#/components/schemas/AccountSettingsEmailObject'
+          $ref: '#/components/schemas/AccountSettingsEmail'
         google_apps:
-          $ref: '#/components/schemas/AccountSettingsGoogleAppsObject'
+          $ref: '#/components/schemas/AccountSettingsGoogleApps'
         groups:
-          $ref: '#/components/schemas/AccountSettingsGroupObject'
+          $ref: '#/components/schemas/AccountSettingsGroup'
         limits:
-          $ref: '#/components/schemas/AccountSettingsLimitsObject'
+          $ref: '#/components/schemas/AccountSettingsLimits'
         localization:
-          $ref: '#/components/schemas/AccountSettingsLocalizationObject'
+          $ref: '#/components/schemas/AccountSettingsLocalization'
         lotus:
-          $ref: '#/components/schemas/AccountSettingsLotusObject'
+          $ref: '#/components/schemas/AccountSettingsLotus'
         metrics:
-          $ref: '#/components/schemas/AccountSettingsMetricsObject'
+          $ref: '#/components/schemas/AccountSettingsMetrics'
         onboarding:
-          $ref: '#/components/schemas/AccountSettingsOnboardingObject'
+          $ref: '#/components/schemas/AccountSettingsOnboarding'
         routing:
-          $ref: '#/components/schemas/AccountSettingsRoutingObject'
+          $ref: '#/components/schemas/AccountSettingsRouting'
         rule:
-          $ref: '#/components/schemas/AccountSettingsRuleObject'
+          $ref: '#/components/schemas/AccountSettingsRule'
         side_conversations:
-          $ref: '#/components/schemas/AccountSettingsSideConversationsObject'
+          $ref: '#/components/schemas/AccountSettingsSideConversations'
         statistics:
-          $ref: '#/components/schemas/AccountSettingsStatisticsObject'
+          $ref: '#/components/schemas/AccountSettingsStatistics'
         ticket_form:
-          $ref: '#/components/schemas/AccountSettingsTicketFormObject'
+          $ref: '#/components/schemas/AccountSettingsTicketForm'
         tickets:
-          $ref: '#/components/schemas/AccountSettingsTicketObject'
+          $ref: '#/components/schemas/AccountSettingsTicket'
         twitter:
-          $ref: '#/components/schemas/AccountSettingsTwitterObject'
+          $ref: '#/components/schemas/AccountSettingsTwitter'
         user:
-          $ref: '#/components/schemas/AccountSettingsUserObject'
+          $ref: '#/components/schemas/AccountSettingsUser'
         voice:
-          $ref: '#/components/schemas/AccountSettingsVoiceObject'
+          $ref: '#/components/schemas/AccountSettingsVoice'
       example:
         active_features:
           agent_forwarding: false
@@ -16020,7 +16020,7 @@ components:
           outbound_enabled: true
           recordings_public: true
           uk_mobile_forwarding: true
-    AccountSettingsOnboardingObject:
+    AccountSettingsOnboarding:
       type: object
       description: Onboarding settings
       properties:
@@ -16036,7 +16036,7 @@ components:
       type: object
       properties:
         settings:
-          $ref: '#/components/schemas/AccountSettingsObject'
+          $ref: '#/components/schemas/AccountSettings'
       example:
         settings:
           active_features:
@@ -16219,7 +16219,7 @@ components:
             outbound_enabled: true
             recordings_public: true
             uk_mobile_forwarding: true
-    AccountSettingsRoutingObject:
+    AccountSettingsRouting:
       type: object
       description: Configuration for routing. See [Routing](#routing)
       properties:
@@ -16237,7 +16237,7 @@ components:
           type: integer
         reassignment_talk_timeout:
           type: integer
-    AccountSettingsRuleObject:
+    AccountSettingsRule:
       type: object
       description: Rules settings for triggers, macros, views, and automations. See [Rules](#rules)
       properties:
@@ -16252,7 +16252,7 @@ components:
             additionalProperties: true
         using_skill_based_routing:
           type: boolean
-    AccountSettingsSideConversationsObject:
+    AccountSettingsSideConversations:
       type: object
       description: Side conversations settings
       properties:
@@ -16266,7 +16266,7 @@ components:
           type: boolean
         tickets_channel:
           type: boolean
-    AccountSettingsStatisticsObject:
+    AccountSettingsStatistics:
       type: object
       description: Account statistics settings. See [Statistics](#statistics)
       properties:
@@ -16276,7 +16276,7 @@ components:
           type: boolean
         search:
           type: boolean
-    AccountSettingsTicketFormObject:
+    AccountSettingsTicketForm:
       type: object
       description: Ticket form settings. See [Ticket Form](#ticket-form)
       properties:
@@ -16284,7 +16284,7 @@ components:
           type: string
         ticket_forms_instructions:
           type: string
-    AccountSettingsTicketObject:
+    AccountSettingsTicket:
       type: object
       description: Ticket settings. See [Tickets](#tickets)
       properties:
@@ -16348,13 +16348,13 @@ components:
           type: boolean
         using_skill_based_routing:
           type: boolean
-    AccountSettingsTwitterObject:
+    AccountSettingsTwitter:
       type: object
       description: X (formerly Twitter) settings. See [X](#x-formerly-twitter)
       properties:
         shorten_url:
           type: string
-    AccountSettingsUserObject:
+    AccountSettingsUser:
       type: object
       description: User settings. See [Users](#users)
       properties:
@@ -16372,7 +16372,7 @@ components:
           type: boolean
         time_zone_selection:
           type: boolean
-    AccountSettingsVoiceObject:
+    AccountSettingsVoice:
       type: object
       description: Zendesk Talk settings. See [Voice](#voice)
       properties:
@@ -16396,7 +16396,7 @@ components:
           type: boolean
         uk_mobile_forwarding:
           type: boolean
-    ActionObject:
+    Action:
       type: object
       properties:
         field:
@@ -16405,13 +16405,13 @@ components:
         value:
           type: string
           description: The new value of the field
-    ActionsObject:
+    Actions:
       type: object
       properties:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/ActionObject'
+            $ref: '#/components/schemas/Action'
     ActivitiesCountResponse:
       type: object
       properties:
@@ -16429,7 +16429,7 @@ components:
         activities:
           type: array
           items:
-            $ref: '#/components/schemas/ActivityObject'
+            $ref: '#/components/schemas/Activity'
           readOnly: true
         actors:
           type: array
@@ -16687,7 +16687,7 @@ components:
               skittles: "2018-09-14T00:00:00+00:00"
               user_field_1: "101"
             verified: true
-    ActivityObject:
+    Activity:
       title: Ticket Activities
       type: object
       properties:
@@ -16695,7 +16695,7 @@ components:
           type: object
           description: The full user record of the user responsible for the ticket activity. See [Users](developer.zendesk.com/api-reference/ticketing/users/users/)
           allOf:
-            - $ref: '#/components/schemas/UserObject'
+            - $ref: '#/components/schemas/User'
           readOnly: true
         actor_id:
           type: integer
@@ -16735,7 +16735,7 @@ components:
           type: object
           description: The full user record of the agent making the request. See [Users](developer.zendesk.com/api-reference/ticketing/users/users/)
           allOf:
-            - $ref: '#/components/schemas/UserObject'
+            - $ref: '#/components/schemas/User'
           readOnly: true
         user_id:
           type: integer
@@ -16766,7 +16766,7 @@ components:
       type: object
       properties:
         activity:
-          $ref: '#/components/schemas/ActivityObject'
+          $ref: '#/components/schemas/Activity'
       example:
         activity:
           actor:
@@ -16930,8 +16930,8 @@ components:
         status:
           type: string
           description: Status of the decision
-    ApprovalRequestObject:
-      title: ApprovalRequestObject
+    ApprovalRequest:
+      title: ApprovalRequest
       type: object
       properties:
         approval_request:
@@ -17079,13 +17079,13 @@ components:
         ticket_id:
           type: integer
           description: Ticket id associated with the approval workflow instance
-    ApprovalWorkflowInstanceObject:
+    ApprovalWorkflowInstance:
       title: ApprovalWorkflowInstance
       type: object
       properties:
         custom_object_record:
-          $ref: '#/components/schemas/CustomObjectRecord'
-    AssigneeFieldAssignableAgentObject:
+          $ref: '#/components/schemas/CustomRecord'
+    AssigneeFieldAssignableAgent:
       title: AssigneeFieldAssignableAgents
       type: object
       properties:
@@ -17109,7 +17109,7 @@ components:
         agents:
           type: array
           items:
-            $ref: '#/components/schemas/AssigneeFieldAssignableAgentObject'
+            $ref: '#/components/schemas/AssigneeFieldAssignableAgent'
         count:
           type: integer
           description: Number of agents listed in `agents` property.
@@ -17135,7 +17135,7 @@ components:
         count: 3
         next_page: null
         previous_page: null
-    AssigneeFieldAssignableGroupObject:
+    AssigneeFieldAssignableGroup:
       title: AssigneeFieldAssignableGroups
       type: object
       properties:
@@ -17161,14 +17161,14 @@ components:
         agents:
           type: array
           items:
-            $ref: '#/components/schemas/AssigneeFieldAssignableSearchAgentObject'
+            $ref: '#/components/schemas/AssigneeFieldAssignableSearchAgent'
         count:
           type: integer
           description: Number of agents + groups listed from search result.
         groups:
           type: array
           items:
-            $ref: '#/components/schemas/AssigneeFieldAssignableSearchGroupObject'
+            $ref: '#/components/schemas/AssigneeFieldAssignableSearchGroup'
       example:
         agents:
           - group: Tech
@@ -17189,7 +17189,7 @@ components:
         groups:
           type: array
           items:
-            $ref: '#/components/schemas/AssigneeFieldAssignableGroupObject'
+            $ref: '#/components/schemas/AssigneeFieldAssignableGroup'
         next_page:
           type: string
           nullable: true
@@ -17212,7 +17212,7 @@ components:
             name: Group for customer inquiries
         next_page: null
         previous_page: null
-    AssigneeFieldAssignableSearchAgentObject:
+    AssigneeFieldAssignableSearchAgent:
       type: object
       properties:
         group:
@@ -17237,7 +17237,7 @@ components:
         id: 6473829100
         name: Joe Smith
         photo_url: https://z3n-example.zendesk.com/system/photos/900005192023/my_profile.png
-    AssigneeFieldAssignableSearchGroupObject:
+    AssigneeFieldAssignableSearchGroup:
       type: object
       properties:
         id:
@@ -17249,7 +17249,7 @@ components:
       example:
         id: 9182736455
         name: Engineering
-    AttachmentBaseObject:
+    AttachmentBase:
       type: object
       properties:
         content_type:
@@ -17306,11 +17306,11 @@ components:
           type: string
           description: The width of the image file in pixels. If width is unknown, returns null
           readOnly: true
-    AttachmentObject:
+    Attachment:
       type: object
       description: A file represented as an [Attachment](developer.zendesk.com/api-reference/ticketing/tickets/ticket-attachments/) object
       allOf:
-        - $ref: '#/components/schemas/AttachmentBaseObject'
+        - $ref: '#/components/schemas/AttachmentBase'
         - $ref: '#/components/schemas/AttachmentThumbnails'
       example:
         content_type: image/png
@@ -17328,7 +17328,7 @@ components:
       type: object
       properties:
         attachment:
-          $ref: '#/components/schemas/AttachmentObject'
+          $ref: '#/components/schemas/Attachment'
     AttachmentThumbnails:
       type: object
       properties:
@@ -17336,7 +17336,7 @@ components:
           type: array
           description: An array of attachment objects. Note that photo thumbnails do not have thumbnails
           items:
-            $ref: '#/components/schemas/AttachmentBaseObject'
+            $ref: '#/components/schemas/AttachmentBase'
           readOnly: true
     AttachmentUpdateInput:
       type: object
@@ -17356,16 +17356,16 @@ components:
           type: object
           properties:
             attachment:
-              $ref: '#/components/schemas/AttachmentObject'
+              $ref: '#/components/schemas/Attachment'
             attachments:
               type: array
               items:
-                $ref: '#/components/schemas/AttachmentObject'
+                $ref: '#/components/schemas/Attachment'
             token:
               type: string
               description: Token for subsequent request
               readOnly: true
-    AuditLogObject:
+    AuditLog:
       type: object
       properties:
         action:
@@ -17444,15 +17444,15 @@ components:
       type: object
       properties:
         audit_log:
-          $ref: '#/components/schemas/AuditLogObject'
+          $ref: '#/components/schemas/AuditLog'
     AuditLogsResponse:
       type: object
       properties:
         audit_logs:
           type: array
           items:
-            $ref: '#/components/schemas/AuditLogObject'
-    AuditObject:
+            $ref: '#/components/schemas/AuditLog'
+    Audit:
       type: object
       properties:
         author_id:
@@ -17494,8 +17494,8 @@ components:
           type: integer
           readOnly: true
         via:
-          $ref: '#/components/schemas/ViaObject'
-    AuthorObject:
+          $ref: '#/components/schemas/Via'
+    Author:
       type: object
       properties:
         email:
@@ -17510,19 +17510,19 @@ components:
           type: string
           description: The author name
           readOnly: true
-    AutomationObject:
+    Automation:
       type: object
       properties:
         actions:
           type: array
           description: An object describing what the automation will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
           items:
-            $ref: '#/components/schemas/ActionObject'
+            $ref: '#/components/schemas/Action'
         active:
           type: boolean
           description: Whether the automation is active
         conditions:
-          $ref: '#/components/schemas/ConditionsObject'
+          $ref: '#/components/schemas/Conditions'
         created_at:
           type: string
           format: date-time
@@ -17574,14 +17574,14 @@ components:
       type: object
       properties:
         automation:
-          $ref: '#/components/schemas/AutomationObject'
+          $ref: '#/components/schemas/Automation'
     AutomationsResponse:
       type: object
       properties:
         automations:
           type: array
           items:
-            $ref: '#/components/schemas/AutomationObject'
+            $ref: '#/components/schemas/Automation'
         count:
           type: integer
           readOnly: true
@@ -17639,7 +17639,7 @@ components:
             triggers:
               type: array
               items:
-                $ref: '#/components/schemas/TriggerObject'
+                $ref: '#/components/schemas/Trigger'
         status:
           type: string
           enum:
@@ -17656,7 +17656,7 @@ components:
         ticket_id:
           type: integer
           description: The id of the ticket the bookmark is for.
-    BookmarkObject:
+    Bookmark:
       title: Bookmarks
       type: object
       properties:
@@ -17672,7 +17672,7 @@ components:
         ticket:
           type: object
           allOf:
-            - $ref: '#/components/schemas/TicketObject'
+            - $ref: '#/components/schemas/Ticket'
           readOnly: true
         url:
           type: string
@@ -17692,19 +17692,19 @@ components:
       type: object
       properties:
         bookmark:
-          $ref: '#/components/schemas/BookmarkObject'
+          $ref: '#/components/schemas/Bookmark'
     BookmarksResponse:
       title: Bookmarks
       type: object
       allOf:
-        - $ref: '#/components/schemas/OffsetPaginationObject'
+        - $ref: '#/components/schemas/OffsetPagination'
         - type: object
           properties:
             bookmarks:
               type: array
               items:
-                $ref: '#/components/schemas/BookmarkObject'
-    BrandAgentObject:
+                $ref: '#/components/schemas/Bookmark'
+    BrandAgent:
       type: object
       properties:
         brand_id:
@@ -17738,20 +17738,20 @@ components:
       type: object
       properties:
         brand_agent:
-          $ref: '#/components/schemas/BrandAgentObject'
+          $ref: '#/components/schemas/BrandAgent'
     BrandAgentsResponse:
       type: object
       properties:
         brand_agents:
           type: array
           items:
-            $ref: '#/components/schemas/BrandAgentObject'
+            $ref: '#/components/schemas/BrandAgent'
     BrandCreateRequest:
       type: object
       properties:
         brand:
-          $ref: '#/components/schemas/BrandObject'
-    BrandObject:
+          $ref: '#/components/schemas/Brand'
+    Brand:
       title: Brands
       type: object
       properties:
@@ -17791,7 +17791,7 @@ components:
           type: boolean
           description: If the brand object is deleted or not
         logo:
-          $ref: '#/components/schemas/AttachmentObject'
+          $ref: '#/components/schemas/Attachment'
         name:
           type: string
           description: The name of the brand
@@ -17863,24 +17863,24 @@ components:
       type: object
       properties:
         brand:
-          $ref: '#/components/schemas/BrandObject'
+          $ref: '#/components/schemas/Brand'
     BrandUpdateRequest:
       type: object
       properties:
         brand:
-          $ref: '#/components/schemas/BrandObject'
+          $ref: '#/components/schemas/Brand'
     BrandsResponse:
       title: Brands
       type: object
       allOf:
-        - $ref: '#/components/schemas/OffsetPaginationObject'
+        - $ref: '#/components/schemas/OffsetPagination'
         - type: object
           properties:
             brands:
               type: array
               description: Array of brands
               items:
-                $ref: '#/components/schemas/BrandObject'
+                $ref: '#/components/schemas/Brand'
     BulkSkillBasedRoutingAttributeValueJob:
       type: object
       properties:
@@ -17895,7 +17895,7 @@ components:
             attribute_values:
               type: array
               items:
-                $ref: '#/components/schemas/SkillBasedRoutingAttributeValueObject'
+                $ref: '#/components/schemas/SkillBasedRoutingAttributeValue'
         items:
           type: array
           description: The list of agent ids
@@ -17927,8 +17927,8 @@ components:
           type: array
           description: An array of [result objects](#result-object)
           items:
-            $ref: '#/components/schemas/ChannelFrameworkResultObject'
-    ChannelFrameworkResultObject:
+            $ref: '#/components/schemas/ChannelFrameworkResult'
+    ChannelFrameworkResult:
       type: object
       properties:
         external_resource_id:
@@ -17936,8 +17936,8 @@ components:
           description: The external ID of the resource, as passed in
           readOnly: true
         status:
-          $ref: '#/components/schemas/ChannelFrameworkResultStatusObject'
-    ChannelFrameworkResultStatusObject:
+          $ref: '#/components/schemas/ChannelFrameworkResultStatus'
+    ChannelFrameworkResultStatus:
       type: object
       description: The status of the import for the indicated resource
       properties:
@@ -17949,7 +17949,7 @@ components:
           type: string
           description: In the case of an exception, a description of the exception. Otherwise, not present.
           readOnly: true
-    CollaboratorObject:
+    Collaborator:
       type: object
       properties:
         email:
@@ -17960,7 +17960,7 @@ components:
       example:
         email: someone@example.com
         name: Someone Special
-    ComplianceDeletionStatusObject:
+    ComplianceDeletionStatus:
       type: object
       properties:
         account_subdomain:
@@ -17989,8 +17989,8 @@ components:
         compliance_deletion_statuses:
           type: array
           items:
-            $ref: '#/components/schemas/ComplianceDeletionStatusObject'
-    ConditionObject:
+            $ref: '#/components/schemas/ComplianceDeletionStatus'
+    Condition:
       type: object
       properties:
         field:
@@ -18002,7 +18002,7 @@ components:
         value:
           type: string
           description: The value of a ticket field
-    ConditionsObject:
+    Conditions:
       type: object
       description: An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
       properties:
@@ -18010,13 +18010,13 @@ components:
           type: array
           description: Logical AND. Tickets must fulfill all of the conditions to be considered matching
           items:
-            $ref: '#/components/schemas/ConditionObject'
+            $ref: '#/components/schemas/Condition'
         any:
           type: array
           description: Logical OR. Tickets may satisfy any of the conditions to be considered matching
           items:
-            $ref: '#/components/schemas/ConditionObject'
-    ConversationLogObject:
+            $ref: '#/components/schemas/Condition'
+    ConversationLog:
       type: object
       properties:
         attachments:
@@ -18025,7 +18025,7 @@ components:
 #          readOnly: true
         author:
           type: object
-          description: Object that describes the user who created the event
+          description:  that describes the user who created the event
           properties:
             type:
               type: string
@@ -18046,7 +18046,7 @@ components:
           additionalProperties: true
         content:
           type: object
-          description: Object that describes the content of the message. The inner fields depends on the record type
+          description:  that describes the content of the message. The inner fields depends on the record type
           additionalProperties: true
           readOnly: true
         created_at:
@@ -18135,7 +18135,7 @@ components:
         events:
           type: array
           items:
-            $ref: '#/components/schemas/ConversationLogObject'
+            $ref: '#/components/schemas/ConversationLog'
         links:
           type: object
           properties:
@@ -18152,7 +18152,7 @@ components:
               type: string
             has_more:
               type: boolean
-    CountOrganizationObject:
+    CountOrganization:
       type: object
       properties:
         refreshed_at:
@@ -18165,7 +18165,7 @@ components:
       type: object
       properties:
         count:
-          $ref: '#/components/schemas/CountOrganizationObject'
+          $ref: '#/components/schemas/CountOrganization'
     CountResponse:
       type: object
       properties:
@@ -18181,7 +18181,7 @@ components:
       type: object
       properties:
         organization:
-          $ref: '#/components/schemas/OrganizationObject'
+          $ref: '#/components/schemas/Organization'
       required:
         - organization
     CreateResourceResult:
@@ -18201,7 +18201,7 @@ components:
       properties:
         user:
           allOf:
-            - $ref: '#/components/schemas/UserObject'
+            - $ref: '#/components/schemas/User'
             - type: object
               properties:
                 authenticity_token:
@@ -18230,7 +18230,7 @@ components:
         tickets:
           type: array
           items:
-            $ref: '#/components/schemas/TicketObject'
+            $ref: '#/components/schemas/Ticket'
       example:
         after_cursor: MTU3NjYxMzUzOS4wfHw0Njd8
         after_url: https://{subdomain}.zendesk.com/api/v2/incremental/tickets/cursor.json?cursor=MTU3NjYxMzUzOS4wfHw0Njd8
@@ -18301,7 +18301,7 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/UserObject'
+            $ref: '#/components/schemas/User'
       example:
         after_cursor: MTU3NjYxMzUzOS4wfHw0Njd8
         after_url: https://example.zendesk.com/api/v2/incremental/users/cursor.json?cursor=MTU3NjYxMzUzOS4wfHw0Njd8
@@ -18357,7 +18357,7 @@ components:
               user_decimal: 5.1
               user_dropdown: option_1
             verified: true
-    CustomFieldObject:
+    CustomField:
       type: object
       properties:
         active:
@@ -18372,7 +18372,7 @@ components:
           type: array
           description: Required and presented for a custom field of type "dropdown". Each option is represented by an object with a `name` and `value` property
           items:
-            $ref: '#/components/schemas/CustomFieldOptionObject'
+            $ref: '#/components/schemas/CustomFieldOption'
         description:
           type: string
           description: User-defined description of this field's purpose
@@ -18428,7 +18428,7 @@ components:
         - key
         - type
         - title
-    CustomFieldOptionObject:
+    CustomFieldOption:
       type: object
       properties:
         id:
@@ -18459,7 +18459,7 @@ components:
       type: object
       properties:
         custom_field_option:
-          $ref: '#/components/schemas/CustomFieldOptionObject'
+          $ref: '#/components/schemas/CustomFieldOption'
     CustomFieldOptionsResponse:
       type: object
       properties:
@@ -18470,7 +18470,7 @@ components:
         custom_field_options:
           type: array
           items:
-            $ref: '#/components/schemas/CustomFieldOptionObject'
+            $ref: '#/components/schemas/CustomFieldOption'
         next_page:
           type: string
           description: URL of the next page
@@ -18481,7 +18481,7 @@ components:
           description: URL of the previous page
           nullable: true
           readOnly: true
-    CustomObject:
+    Custom:
       type: object
       properties:
         created_at:
@@ -18536,7 +18536,7 @@ components:
         - title
         - title_pluralized
         - include_in_list_view
-    CustomObjectCreateInput:
+    CustomCreateInput:
       type: object
       properties:
         key:
@@ -18548,13 +18548,13 @@ components:
         title_pluralized:
           type: string
           description: Pluralized version of the object's title
-    CustomObjectField:
+    CustomField:
       type: object
       allOf:
-        - $ref: '#/components/schemas/CustomFieldObject'
+        - $ref: '#/components/schemas/CustomField'
       properties:
         properties:
-          $ref: '#/components/schemas/CustomObjectFieldPropertiesObject'
+          $ref: '#/components/schemas/CustomFieldProperties'
       example:
         active: true
         created_at: "2022-09-07T23:21:59Z"
@@ -18576,7 +18576,7 @@ components:
         type: text
         updated_at: "2022-09-07T23:22:00Z"
         url: https://company.zendesk.com/api/v2/custom_objects/car/fields/4398096842879.json
-    CustomObjectFieldPropertiesObject:
+    CustomFieldProperties:
       type: object
       description: A set of properties which describe the standard::name field's autonumbering and uniqueness behavior. Autonumbering and uniqueness can't be used together
       properties:
@@ -18601,24 +18601,24 @@ components:
         autoincrement_padding: 5
         autoincrement_prefix: 'Order # '
         is_unique: false
-    CustomObjectFieldResponse:
+    CustomFieldResponse:
       type: object
       properties:
         custom_object_field:
-          $ref: '#/components/schemas/CustomObjectField'
-    CustomObjectFieldsCreateRequest:
+          $ref: '#/components/schemas/CustomField'
+    CustomFieldsCreateRequest:
       type: object
       properties:
         custom_object_field:
-          $ref: '#/components/schemas/CustomObjectField'
-    CustomObjectFieldsResponse:
+          $ref: '#/components/schemas/CustomField'
+    CustomFieldsResponse:
       type: object
       properties:
         custom_object_fields:
           type: array
           items:
-            $ref: '#/components/schemas/CustomObjectField'
-    CustomObjectLimitsResponse:
+            $ref: '#/components/schemas/CustomField'
+    CustomLimitsResponse:
       type: object
       properties:
         count:
@@ -18629,7 +18629,7 @@ components:
           type: integer
           description: The maximum allowed number for the requested resource
           readOnly: true
-    CustomObjectRecord:
+    CustomRecord:
       type: object
       properties:
         created_at:
@@ -18675,7 +18675,7 @@ components:
           readOnly: true
       required:
         - name
-    CustomObjectRecordFilteredSearchCondition:
+    CustomRecordFilteredSearchCondition:
       type: object
       properties:
         field_key:
@@ -18696,12 +18696,12 @@ components:
             operator: value
           nullable: true
       additionalProperties: true
-    CustomObjectRecordResponse:
+    CustomRecordResponse:
       type: object
       properties:
         custom_object_record:
-          $ref: '#/components/schemas/CustomObjectRecord'
-    CustomObjectRecordsBulkCreateRequest:
+          $ref: '#/components/schemas/CustomRecord'
+    CustomRecordsBulkCreateRequest:
       type: object
       properties:
         job:
@@ -18713,18 +18713,18 @@ components:
               type: array
               description: An array of record objects for job actions that create, update, or set. An array of strings for job actions that delete.
               items:
-                $ref: '#/components/schemas/CustomObjectRecord'
-    CustomObjectRecordsCreateRequest:
+                $ref: '#/components/schemas/CustomRecord'
+    CustomRecordsCreateRequest:
       type: object
       properties:
         custom_object_record:
-          $ref: '#/components/schemas/CustomObjectRecord'
-    CustomObjectRecordsFilteredSearchRequestBasic:
+          $ref: '#/components/schemas/CustomRecord'
+    CustomRecordsFilteredSearchRequestBasic:
       type: object
       properties:
         filter:
-          $ref: '#/components/schemas/CustomObjectRecordFilteredSearchCondition'
-    CustomObjectRecordsFilteredSearchRequestComplex:
+          $ref: '#/components/schemas/CustomRecordFilteredSearchCondition'
+    CustomRecordsFilteredSearchRequestComplex:
       type: object
       properties:
         filter:
@@ -18733,12 +18733,12 @@ components:
             $and:
               type: array
               items:
-                $ref: '#/components/schemas/CustomObjectRecordFilteredSearchCondition'
+                $ref: '#/components/schemas/CustomRecordFilteredSearchCondition'
             $or:
               type: array
               items:
-                $ref: '#/components/schemas/CustomObjectRecordFilteredSearchCondition'
-    CustomObjectRecordsJobsResponse:
+                $ref: '#/components/schemas/CustomRecordFilteredSearchCondition'
+    CustomRecordsJobsResponse:
       type: object
       properties:
         job_status:
@@ -18755,7 +18755,7 @@ components:
             results:
               type: array
               items:
-                $ref: '#/components/schemas/CustomObjectRecord'
+                $ref: '#/components/schemas/CustomRecord'
               nullable: true
             status:
               type: string
@@ -18763,7 +18763,7 @@ components:
               type: integer
             url:
               type: string
-    CustomObjectRecordsResponse:
+    CustomRecordsResponse:
       type: object
       properties:
         count:
@@ -18773,7 +18773,7 @@ components:
         custom_object_records:
           type: array
           items:
-            $ref: '#/components/schemas/CustomObjectRecord'
+            $ref: '#/components/schemas/CustomRecord'
         links:
           type: object
           properties:
@@ -18801,29 +18801,29 @@ components:
             - has_more
             - after_cursor
             - before_cursor
-    CustomObjectRecordsUpsertRequest:
+    CustomRecordsUpsertRequest:
       type: object
       properties:
         custom_object_record:
-          $ref: '#/components/schemas/CustomObjectRecord'
-    CustomObjectResponse:
+          $ref: '#/components/schemas/CustomRecord'
+    CustomResponse:
       type: object
       properties:
         custom_object:
-          $ref: '#/components/schemas/CustomObject'
-    CustomObjectsCreateRequest:
+          $ref: '#/components/schemas/Custom'
+    CustomsCreateRequest:
       type: object
       properties:
         custom_object:
-          $ref: '#/components/schemas/CustomObjectCreateInput'
-    CustomObjectsResponse:
+          $ref: '#/components/schemas/CustomCreateInput'
+    CustomsResponse:
       type: object
       properties:
         custom_objects:
           type: array
           items:
-            $ref: '#/components/schemas/CustomObject'
-    CustomRoleConfigurationObject:
+            $ref: '#/components/schemas/Custom'
+    CustomRoleConfiguration:
       type: object
       description: Configuration settings for the role. See [Configuration](#configuration)
       properties:
@@ -18937,12 +18937,12 @@ components:
         voice_dashboard_access:
           type: boolean
           description: Whether or not the agent can view details about calls on the Talk dashboard
-    CustomRoleObject:
+    CustomRole:
       title: Custom Agent Roles
       type: object
       properties:
         configuration:
-          $ref: '#/components/schemas/CustomRoleConfigurationObject'
+          $ref: '#/components/schemas/CustomRoleConfiguration'
         created_at:
           type: string
           format: date-time
@@ -18978,14 +18978,14 @@ components:
       type: object
       properties:
         custom_role:
-          $ref: '#/components/schemas/CustomRoleObject'
+          $ref: '#/components/schemas/CustomRole'
     CustomRolesResponse:
       type: object
       properties:
         custom_roles:
           type: array
           items:
-            $ref: '#/components/schemas/CustomRoleObject'
+            $ref: '#/components/schemas/CustomRole'
     CustomStatusCreateInput:
       type: object
       allOf:
@@ -19006,7 +19006,7 @@ components:
       properties:
         custom_status:
           $ref: '#/components/schemas/CustomStatusCreateInput'
-    CustomStatusObject:
+    CustomStatus:
       type: object
       properties:
         active:
@@ -19073,7 +19073,7 @@ components:
       type: object
       properties:
         custom_status:
-          $ref: '#/components/schemas/CustomStatusObject'
+          $ref: '#/components/schemas/CustomStatus'
     CustomStatusUpdateInput:
       type: object
       properties:
@@ -19103,7 +19103,7 @@ components:
         custom_statuses:
           type: array
           items:
-            $ref: '#/components/schemas/CustomStatusObject'
+            $ref: '#/components/schemas/CustomStatus'
     DefinitionsResponse:
       type: object
       properties:
@@ -19188,7 +19188,7 @@ components:
                           type: string
                         value:
                           type: string
-    DeletedUserObject:
+    DeletedUser:
       type: object
       properties:
         active:
@@ -19244,14 +19244,14 @@ components:
       type: object
       properties:
         deleted_user:
-          $ref: '#/components/schemas/DeletedUserObject'
+          $ref: '#/components/schemas/DeletedUser'
     DeletedUsersResponse:
       type: object
       properties:
         deleted_users:
           type: array
           items:
-            $ref: '#/components/schemas/DeletedUserObject'
+            $ref: '#/components/schemas/DeletedUser'
     DeletionSchedule:
       type: object
       properties:
@@ -19259,7 +19259,7 @@ components:
           type: boolean
           description: Whether the deletion schedule is active
         conditions:
-          $ref: '#/components/schemas/ConditionsObject'
+          $ref: '#/components/schemas/Conditions'
         created_at:
           type: string
           format: date-time
@@ -19288,7 +19288,7 @@ components:
           type: string
           description: Url for obtaining the deletion schedule JSON
           readOnly: true
-    DynamicContentObject:
+    DynamicContent:
       title: Dynamic Content Items
       type: object
       properties:
@@ -19328,7 +19328,7 @@ components:
           type: array
           description: All variants within this item. See [Dynamic Content Item Variants](developer.zendesk.com/api-reference/ticketing/ticket-management/dynamic_content_item_variants/)
           items:
-            $ref: '#/components/schemas/DynamicContentVariantObject'
+            $ref: '#/components/schemas/DynamicContentVariant'
       required:
         - name
         - default_locale_id
@@ -19337,8 +19337,8 @@ components:
       type: object
       properties:
         item:
-          $ref: '#/components/schemas/DynamicContentObject'
-    DynamicContentVariantObject:
+          $ref: '#/components/schemas/DynamicContent'
+    DynamicContentVariant:
       type: object
       properties:
         active:
@@ -19392,25 +19392,25 @@ components:
       type: object
       properties:
         variant:
-          $ref: '#/components/schemas/DynamicContentVariantObject'
+          $ref: '#/components/schemas/DynamicContentVariant'
     DynamicContentVariantsResponse:
       type: object
       properties:
         variants:
           type: array
           items:
-            $ref: '#/components/schemas/DynamicContentVariantObject'
+            $ref: '#/components/schemas/DynamicContentVariant'
     DynamicContentsResponse:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/DynamicContentObject'
-    EmailCCObject:
+            $ref: '#/components/schemas/DynamicContent'
+    EmailCC:
       type: object
       allOf:
-        - $ref: '#/components/schemas/FollowerObject'
+        - $ref: '#/components/schemas/Follower'
         - type: object
           properties:
             action:
@@ -19424,7 +19424,7 @@ components:
               type: string
             user_name:
               type: string
-    EmailNotificationObject:
+    EmailNotification:
       type: object
       properties:
         comment_id:
@@ -19452,7 +19452,7 @@ components:
           type: array
           description: The list of recipients associated to this email notification
           items:
-            $ref: '#/components/schemas/RecipientObject'
+            $ref: '#/components/schemas/Recipient'
           readOnly: true
         ticket_id:
           type: integer
@@ -19488,14 +19488,14 @@ components:
       type: object
       properties:
         email_notification:
-          $ref: '#/components/schemas/EmailNotificationObject'
+          $ref: '#/components/schemas/EmailNotification'
     EmailNotificationsResponse:
       type: object
       properties:
         email_notifications:
           type: array
           items:
-            $ref: '#/components/schemas/EmailNotificationObject'
+            $ref: '#/components/schemas/EmailNotification'
     Error:
       type: object
       properties:
@@ -19523,7 +19523,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-    EssentialsCardObject:
+    EssentialsCard:
       type: object
       properties:
         created_at:
@@ -19550,7 +19550,7 @@ components:
         key:
           type: string
           description: |
-            Object type. Example: `zen:user` refers to `User` type
+             type. Example: `zen:user` refers to `User` type
           readOnly: true
         layout:
           type: string
@@ -19591,14 +19591,14 @@ components:
       type: object
       properties:
         object_layout:
-          $ref: '#/components/schemas/EssentialsCardObject'
+          $ref: '#/components/schemas/EssentialsCard'
     EssentialsCardsResponse:
       type: object
       properties:
         object_layouts:
           type: array
           items:
-            $ref: '#/components/schemas/EssentialsCardObject'
+            $ref: '#/components/schemas/EssentialsCard'
     ExportIncrementalOrganizationsResponse:
       type: object
       properties:
@@ -19614,7 +19614,7 @@ components:
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/OrganizationObject'
+            $ref: '#/components/schemas/Organization'
       example:
         count: 1
         end_of_stream: true
@@ -19656,7 +19656,7 @@ components:
         ticket_events:
           type: array
           items:
-            $ref: '#/components/schemas/TicketMetricEventBaseObject'
+            $ref: '#/components/schemas/TicketMetricEventBase'
       example:
         count: 1
         end_of_stream: true
@@ -19693,7 +19693,7 @@ components:
         - error
         - success
         - details
-    FollowerObject:
+    Follower:
       type: object
       properties:
         action:
@@ -19706,7 +19706,7 @@ components:
           format: email
         user_id:
           type: string
-    GlobalClientObject:
+    GlobalClient:
       title: Global OAuth Clients
       type: object
       properties:
@@ -19747,8 +19747,8 @@ components:
         global_clients:
           type: array
           items:
-            $ref: '#/components/schemas/GlobalClientObject'
-    GroupMembershipObject:
+            $ref: '#/components/schemas/GlobalClient'
+    GroupMembership:
       type: object
       properties:
         created_at:
@@ -19785,15 +19785,15 @@ components:
       type: object
       properties:
         group_membership:
-          $ref: '#/components/schemas/GroupMembershipObject'
+          $ref: '#/components/schemas/GroupMembership'
     GroupMembershipsResponse:
       type: object
       properties:
         group_memberships:
           type: array
           items:
-            $ref: '#/components/schemas/GroupMembershipObject'
-    GroupObject:
+            $ref: '#/components/schemas/GroupMembership'
+    Group:
       type: object
       properties:
         created_at:
@@ -19850,7 +19850,7 @@ components:
       type: object
       properties:
         group:
-          $ref: '#/components/schemas/GroupObject'
+          $ref: '#/components/schemas/Group'
     GroupSLAPoliciesResponse:
       type: object
       properties:
@@ -19860,7 +19860,7 @@ components:
         group_sla_policies:
           type: array
           items:
-            $ref: '#/components/schemas/GroupSLAPolicyObject'
+            $ref: '#/components/schemas/GroupSLAPolicy'
         next_page:
           type: string
           nullable: true
@@ -19869,7 +19869,7 @@ components:
           type: string
           nullable: true
           readOnly: true
-    GroupSLAPolicyFilterConditionObject:
+    GroupSLAPolicyFilterCondition:
       type: object
       properties:
         field:
@@ -19926,15 +19926,15 @@ components:
                               nullable: true
                       type:
                         type: string
-    GroupSLAPolicyFilterObject:
+    GroupSLAPolicyFilter:
       type: object
       description: An object that describes the conditions a ticket must match for a Group SLA policy to be applied to the ticket. See [Filter](#filter).
       properties:
         all:
           type: array
           items:
-            $ref: '#/components/schemas/GroupSLAPolicyFilterConditionObject'
-    GroupSLAPolicyMetricObject:
+            $ref: '#/components/schemas/GroupSLAPolicyFilterCondition'
+    GroupSLAPolicyMetric:
       type: object
       properties:
         business_hours:
@@ -19949,7 +19949,7 @@ components:
         target:
           type: integer
           description: The time within which the end-state for a metric should be met
-    GroupSLAPolicyObject:
+    GroupSLAPolicy:
       type: object
       properties:
         created_at:
@@ -19961,7 +19961,7 @@ components:
           type: string
           description: The description of the Group SLA policy
         filter:
-          $ref: '#/components/schemas/GroupSLAPolicyFilterObject'
+          $ref: '#/components/schemas/GroupSLAPolicyFilter'
         id:
           type: string
           description: Automatically assigned when created
@@ -19970,7 +19970,7 @@ components:
           type: array
           description: Array of [policy metric](#policy-metric) objects
           items:
-            $ref: '#/components/schemas/GroupSLAPolicyMetricObject'
+            $ref: '#/components/schemas/GroupSLAPolicyMetric'
         position:
           type: integer
           description: Position of the Group SLA policy. This position determines the order in which policies are matched to tickets. If not specified, the Group SLA policy is added at the last position
@@ -20008,8 +20008,8 @@ components:
       type: object
       properties:
         group_sla_policy:
-          $ref: '#/components/schemas/GroupSLAPolicyObject'
-    GroupsCountObject:
+          $ref: '#/components/schemas/GroupSLAPolicy'
+    GroupsCount:
       type: object
       properties:
         count:
@@ -20030,8 +20030,8 @@ components:
         groups:
           type: array
           items:
-            $ref: '#/components/schemas/GroupObject'
-    HostMappingObject:
+            $ref: '#/components/schemas/Group'
+    HostMapping:
       title: Host Mapping
       type: object
       properties:
@@ -20154,7 +20154,7 @@ components:
           type: string
           description: One of "associate_agent", "unassociate_agent", "associate_ticket", or "unassociate_ticket"
           readOnly: true
-    JobStatusObject:
+    JobStatus:
       type: object
       properties:
         id:
@@ -20180,7 +20180,7 @@ components:
           oneOf:
             - type: array
               items:
-                $ref: '#/components/schemas/JobStatusResultObject'
+                $ref: '#/components/schemas/JobStatusResult'
               nullable: true
             - type: object
               properties:
@@ -20224,8 +20224,8 @@ components:
       type: object
       properties:
         job_status:
-          $ref: '#/components/schemas/JobStatusObject'
-    JobStatusResultObject:
+          $ref: '#/components/schemas/JobStatus'
+    JobStatusResult:
       oneOf:
         - $ref: '#/components/schemas/CreateResourceResult'
         - $ref: '#/components/schemas/UpdateResourceResult'
@@ -20237,7 +20237,7 @@ components:
         job_statuses:
           type: array
           items:
-            $ref: '#/components/schemas/JobStatusObject'
+            $ref: '#/components/schemas/JobStatus'
       required:
         - job_statuses
     ListDeletedTicketsResponse:
@@ -20265,7 +20265,7 @@ components:
                     type: string
                   subject:
                     type: string
-        - $ref: '#/components/schemas/OffsetPaginationObject'
+        - $ref: '#/components/schemas/OffsetPagination'
     ListTicketCollaboratorsResponse:
       type: object
       additionalProperties: true
@@ -20281,7 +20281,7 @@ components:
     ListTicketProblemsResponse:
       type: object
       additionalProperties: true
-    LocaleObject:
+    Locale:
       type: object
       properties:
         created_at:
@@ -20321,14 +20321,14 @@ components:
       type: object
       properties:
         locale:
-          $ref: '#/components/schemas/LocaleObject'
+          $ref: '#/components/schemas/Locale'
     LocalesResponse:
       type: object
       properties:
         locales:
           type: array
           items:
-            $ref: '#/components/schemas/LocaleObject'
+            $ref: '#/components/schemas/Locale'
     MacroApplyTicketResponse:
       type: object
       properties:
@@ -20366,7 +20366,7 @@ components:
                   type: integer
                 url:
                   type: string
-    MacroAttachmentObject:
+    MacroAttachment:
       type: object
       properties:
         content_type:
@@ -20397,14 +20397,14 @@ components:
       type: object
       properties:
         macro_attachment:
-          $ref: '#/components/schemas/MacroAttachmentObject'
+          $ref: '#/components/schemas/MacroAttachment'
     MacroAttachmentsResponse:
       type: object
       properties:
         macro_attachments:
           type: array
           items:
-            $ref: '#/components/schemas/MacroAttachmentObject'
+            $ref: '#/components/schemas/MacroAttachment'
     MacroCategoriesResponse:
       type: object
       properties:
@@ -20412,14 +20412,14 @@ components:
           type: array
           items:
             type: string
-    MacroCommonObject:
+    MacroCommon:
       type: object
       properties:
         actions:
           type: array
           description: Each action describes what the macro will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
           items:
-            $ref: '#/components/schemas/ActionObject'
+            $ref: '#/components/schemas/Action'
         active:
           type: boolean
           description: Useful for determining if the macro should be displayed
@@ -20494,7 +20494,7 @@ components:
           type: array
           description: Each action describes what the macro will do
           items:
-            $ref: '#/components/schemas/ActionObject'
+            $ref: '#/components/schemas/Action'
         active:
           type: boolean
           description: Useful for determining if the macro should be displayed
@@ -20524,10 +20524,10 @@ components:
       required:
         - title
         - actions
-    MacroObject:
+    Macro:
       type: object
       allOf:
-        - $ref: '#/components/schemas/MacroCommonObject'
+        - $ref: '#/components/schemas/MacroCommon'
         - type: object
           properties:
             app_installation:
@@ -20568,7 +20568,7 @@ components:
       type: object
       properties:
         macro:
-          $ref: '#/components/schemas/MacroObject'
+          $ref: '#/components/schemas/Macro'
     MacroUpdateManyInput:
       type: object
       properties:
@@ -20596,8 +20596,8 @@ components:
             macros:
               type: array
               items:
-                $ref: '#/components/schemas/MacroObject'
-        - $ref: '#/components/schemas/OffsetPaginationObject'
+                $ref: '#/components/schemas/Macro'
+        - $ref: '#/components/schemas/OffsetPagination'
     ManySkillBasedRoutingAttributeValues:
       type: object
       properties:
@@ -20657,7 +20657,7 @@ components:
           description: The URL for the previous page of results
           nullable: true
           readOnly: true
-    OAuthClientObject:
+    OAuthClient:
       type: object
       properties:
         company:
@@ -20736,8 +20736,8 @@ components:
         clients:
           type: array
           items:
-            $ref: '#/components/schemas/OAuthClientObject'
-    OAuthTokenForGrantTypesObject:
+            $ref: '#/components/schemas/OAuthClient'
+    OAuthTokenForGrantTypes:
       title: OAuth Tokens for Grant Types
       type: object
       properties:
@@ -20774,20 +20774,20 @@ components:
       type: object
       properties:
         token:
-          $ref: '#/components/schemas/OauthTokenObject'
+          $ref: '#/components/schemas/OauthToken'
     OAuthTokensResponse:
       type: object
       properties:
         tokens:
           type: array
           items:
-            $ref: '#/components/schemas/OauthTokenObject'
+            $ref: '#/components/schemas/OauthToken'
     OauthClientResponse:
       type: object
       properties:
         client:
-          $ref: '#/components/schemas/OAuthClientObject'
-    OauthTokenObject:
+          $ref: '#/components/schemas/OAuthClient'
+    OauthToken:
       type: object
       properties:
         client_id:
@@ -20853,7 +20853,7 @@ components:
         url: https://example.zendesk.com/api/v2/tokens/1.json
         used_at: "2010-01-22T00:11:12Z"
         user_id: 29
-    ObjectTriggerActionDefinitionObject:
+    TriggerActionDefinition:
       type: object
       properties:
         group:
@@ -20881,7 +20881,7 @@ components:
                 type: string
               value:
                 type: string
-    ObjectTriggerBulkUpdateItem:
+    TriggerBulkUpdateItem:
       type: object
       properties:
         active:
@@ -20899,14 +20899,14 @@ components:
         position: 8
       required:
         - id
-    ObjectTriggerBulkUpdateRequest:
+    TriggerBulkUpdateRequest:
       type: object
       properties:
         triggers:
           type: array
           items:
-            $ref: '#/components/schemas/ObjectTriggerBulkUpdateItem'
-    ObjectTriggerConditionDefinitionObjectAll:
+            $ref: '#/components/schemas/TriggerBulkUpdateItem'
+    TriggerConditionDefinitionAll:
       type: object
       properties:
         group:
@@ -20945,7 +20945,7 @@ components:
                 type: string
               value:
                 type: string
-    ObjectTriggerConditionDefinitionObjectAny:
+    TriggerConditionDefinitionAny:
       type: object
       properties:
         group:
@@ -20984,39 +20984,39 @@ components:
                 type: string
               value:
                 type: string
-    ObjectTriggerDefinitionObject:
+    TriggerDefinition:
       type: object
       properties:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/ObjectTriggerActionDefinitionObject'
+            $ref: '#/components/schemas/TriggerActionDefinition'
         conditions_all:
           type: array
           items:
-            $ref: '#/components/schemas/ObjectTriggerConditionDefinitionObjectAll'
+            $ref: '#/components/schemas/TriggerConditionDefinitionAll'
         conditions_any:
           type: array
           items:
-            $ref: '#/components/schemas/ObjectTriggerConditionDefinitionObjectAny'
-    ObjectTriggerDefinitionResponse:
+            $ref: '#/components/schemas/TriggerConditionDefinitionAny'
+    TriggerDefinitionResponse:
       type: object
       properties:
         definitions:
-          $ref: '#/components/schemas/ObjectTriggerDefinitionObject'
-    ObjectTriggerObject:
+          $ref: '#/components/schemas/TriggerDefinition'
+    Trigger:
       type: object
       properties:
         actions:
           type: array
           description: An array of actions the trigger does when its conditions are met. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
           items:
-            $ref: '#/components/schemas/TriggerActionObject'
+            $ref: '#/components/schemas/TriggerAction'
         active:
           type: boolean
           description: Whether the trigger is active
         conditions:
-          $ref: '#/components/schemas/TriggerConditionsObject'
+          $ref: '#/components/schemas/TriggerConditions'
         created_at:
           type: string
           description: The time the trigger was created
@@ -21067,18 +21067,18 @@ components:
         - conditions
         - actions
         - title
-    ObjectTriggerRequest:
+    TriggerRequest:
       type: object
       properties:
         trigger:
           allOf:
-            - $ref: '#/components/schemas/ObjectTriggerObject'
-    ObjectTriggerResponse:
+            - $ref: '#/components/schemas/Trigger'
+    TriggerResponse:
       type: object
       properties:
         trigger:
-          $ref: '#/components/schemas/ObjectTriggerObject'
-    ObjectTriggersResponse:
+          $ref: '#/components/schemas/Trigger'
+    TriggersResponse:
       type: object
       properties:
         count:
@@ -21092,8 +21092,8 @@ components:
         triggers:
           type: array
           items:
-            $ref: '#/components/schemas/ObjectTriggerObject'
-    OffsetPaginationObject:
+            $ref: '#/components/schemas/Trigger'
+    OffsetPagination:
       type: object
       properties:
         count:
@@ -21109,10 +21109,10 @@ components:
           format: url
           description: the URL of the previous page
           nullable: true
-    OrganizationFieldObject:
+    OrganizationField:
       type: object
       allOf:
-        - $ref: '#/components/schemas/CustomFieldObject'
+        - $ref: '#/components/schemas/CustomField'
       example:
         active: true
         created_at: "2012-10-16T16:04:06Z"
@@ -21131,7 +21131,7 @@ components:
       type: object
       properties:
         organization_field:
-          $ref: '#/components/schemas/OrganizationFieldObject'
+          $ref: '#/components/schemas/OrganizationField'
     OrganizationFieldsResponse:
       type: object
       properties:
@@ -21147,13 +21147,13 @@ components:
         organization_fields:
           type: array
           items:
-            $ref: '#/components/schemas/OrganizationFieldObject'
+            $ref: '#/components/schemas/OrganizationField'
         previous_page:
           type: string
           description: URL of the previous page
           nullable: true
           readOnly: true
-    OrganizationMembershipObject:
+    OrganizationMembership:
       type: object
       properties:
         created_at:
@@ -21212,14 +21212,14 @@ components:
       type: object
       properties:
         organization_membership:
-          $ref: '#/components/schemas/OrganizationMembershipObject'
+          $ref: '#/components/schemas/OrganizationMembership'
     OrganizationMembershipsResponse:
       type: object
       properties:
         organization_memberships:
           type: array
           items:
-            $ref: '#/components/schemas/OrganizationMembershipObject'
+            $ref: '#/components/schemas/OrganizationMembership'
     OrganizationMergeListResponse:
       type: object
       properties:
@@ -21291,7 +21291,7 @@ components:
             - loser_id
             - winner_id
             - status
-    OrganizationMetadataObject:
+    OrganizationMetadata:
       type: object
       properties:
         tickets_count:
@@ -21300,7 +21300,7 @@ components:
         users_count:
           type: integer
           description: The number of users for the organization
-    OrganizationObject:
+    Organization:
       type: object
       properties:
         created_at:
@@ -21388,7 +21388,7 @@ components:
       type: object
       properties:
         organization:
-          $ref: '#/components/schemas/OrganizationObject'
+          $ref: '#/components/schemas/Organization'
     OrganizationSubscriptionCreateRequest:
       type: object
       properties:
@@ -21403,7 +21403,7 @@ components:
         user_id:
           type: integer
           description: The ID of the user
-    OrganizationSubscriptionObject:
+    OrganizationSubscription:
       title: Organization Subscriptions
       type: object
       properties:
@@ -21429,23 +21429,23 @@ components:
       type: object
       properties:
         organization_subscription:
-          $ref: '#/components/schemas/OrganizationSubscriptionObject'
+          $ref: '#/components/schemas/OrganizationSubscription'
     OrganizationSubscriptionsResponse:
       type: object
       allOf:
-        - $ref: '#/components/schemas/OffsetPaginationObject'
+        - $ref: '#/components/schemas/OffsetPagination'
         - type: object
           properties:
             organization_subscriptions:
               type: array
               description: An array of organization subscriptions
               items:
-                $ref: '#/components/schemas/OrganizationSubscriptionObject'
+                $ref: '#/components/schemas/OrganizationSubscription'
     OrganizationsRelatedResponse:
       type: object
       properties:
         organization_related:
-          $ref: '#/components/schemas/OrganizationMetadataObject'
+          $ref: '#/components/schemas/OrganizationMetadata'
     OrganizationsResponse:
       type: object
       properties:
@@ -21457,7 +21457,7 @@ components:
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/OrganizationObject'
+            $ref: '#/components/schemas/Organization'
         previous_page:
           type: string
           nullable: true
@@ -21490,7 +21490,7 @@ components:
       properties:
         push_notification_devices:
           $ref: '#/components/schemas/PushNotificationDevicesInput'
-    QueueObject:
+    Queue:
       type: object
       properties:
         created_at:
@@ -21608,15 +21608,15 @@ components:
       type: object
       properties:
         queue:
-          $ref: '#/components/schemas/QueueObject'
+          $ref: '#/components/schemas/Queue'
     QueuesResponse:
       type: object
       properties:
         queues:
           type: array
           items:
-            $ref: '#/components/schemas/QueueObject'
-    RecipientObject:
+            $ref: '#/components/schemas/Queue'
+    Recipient:
       type: object
       properties:
         delivery_status:
@@ -21653,32 +21653,32 @@ components:
         ticket:
           type: array
           items:
-            $ref: '#/components/schemas/TicketObject'
+            $ref: '#/components/schemas/Ticket'
     RecoverSuspendedTicketUnprocessableContentResponse:
       type: object
       properties:
         ticket:
           type: array
           items:
-            $ref: '#/components/schemas/SuspendedTicketObject'
+            $ref: '#/components/schemas/SuspendedTicket'
     RecoverSuspendedTicketsResponse:
       type: object
       properties:
         tickets:
           type: array
           items:
-            $ref: '#/components/schemas/TicketObject'
+            $ref: '#/components/schemas/Ticket'
     RelationshipFilterDefinition:
       type: object
       properties:
         conditions_all:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionDefinitionObjectAll'
+            $ref: '#/components/schemas/TriggerConditionDefinitionAll'
         conditions_any:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionDefinitionObjectAny'
+            $ref: '#/components/schemas/TriggerConditionDefinitionAny'
     RelationshipFilterDefinitionResponse:
       type: object
       properties:
@@ -21690,7 +21690,7 @@ components:
         authenticity_token:
           type: string
           description: A token of authenticity for the request
-    RequestObject:
+    Request:
       type: object
       properties:
         assignee_id:
@@ -21794,7 +21794,7 @@ components:
           description: The API url of this request
           readOnly: true
         via:
-          $ref: '#/components/schemas/TicketAuditViaObject'
+          $ref: '#/components/schemas/TicketAuditVia'
       example:
         assignee_id: 72983
         can_be_solved_by_me: false
@@ -21821,15 +21821,15 @@ components:
       type: object
       properties:
         request:
-          $ref: '#/components/schemas/RequestObject'
+          $ref: '#/components/schemas/Request'
     RequestsResponse:
       type: object
       properties:
         requests:
           type: array
           items:
-            $ref: '#/components/schemas/RequestObject'
-    ResourceCollectionObject:
+            $ref: '#/components/schemas/Request'
+    ResourceCollection:
       type: object
       properties:
         created_at:
@@ -21878,7 +21878,7 @@ components:
       type: object
       properties:
         resource_collection:
-          $ref: '#/components/schemas/ResourceCollectionObject'
+          $ref: '#/components/schemas/ResourceCollection'
     ResourceCollectionsResponse:
       type: object
       properties:
@@ -21896,7 +21896,7 @@ components:
         resource_collections:
           type: array
           items:
-            $ref: '#/components/schemas/ResourceCollectionObject'
+            $ref: '#/components/schemas/ResourceCollection'
     ReverseLookupResponse:
       type: object
       anyOf:
@@ -21918,8 +21918,8 @@ components:
         sla_policies:
           type: array
           items:
-            $ref: '#/components/schemas/SLAPolicyObject'
-    SLAPolicyFilterConditionObject:
+            $ref: '#/components/schemas/SLAPolicy'
+    SLAPolicyFilterCondition:
       type: object
       properties:
         field:
@@ -22019,19 +22019,19 @@ components:
                               nullable: true
                       type:
                         type: string
-    SLAPolicyFilterObject:
+    SLAPolicyFilter:
       type: object
       description: An object that describes the conditions that a ticket must match in order for an SLA policy to be applied to that ticket. See [Filter](#filter).
       properties:
         all:
           type: array
           items:
-            $ref: '#/components/schemas/SLAPolicyFilterConditionObject'
+            $ref: '#/components/schemas/SLAPolicyFilterCondition'
         any:
           type: array
           items:
-            $ref: '#/components/schemas/SLAPolicyFilterConditionObject'
-    SLAPolicyMetricObject:
+            $ref: '#/components/schemas/SLAPolicyFilterCondition'
+    SLAPolicyMetric:
       type: object
       properties:
         business_hours:
@@ -22046,7 +22046,7 @@ components:
         target:
           type: integer
           description: The time within which the end-state for a metric should be met
-    SLAPolicyObject:
+    SLAPolicy:
       type: object
       properties:
         created_at:
@@ -22058,7 +22058,7 @@ components:
           type: string
           description: The description of the SLA policy
         filter:
-          $ref: '#/components/schemas/SLAPolicyFilterObject'
+          $ref: '#/components/schemas/SLAPolicyFilter'
         id:
           type: integer
           description: Automatically assigned when created
@@ -22067,7 +22067,7 @@ components:
           type: array
           description: Array of [Policy Metric](#policy-metric) objects
           items:
-            $ref: '#/components/schemas/SLAPolicyMetricObject'
+            $ref: '#/components/schemas/SLAPolicyMetric'
         position:
           type: integer
           description: Position of the SLA policy that determines the order they will be matched. If not specified, the SLA policy is added as the last position
@@ -22117,8 +22117,8 @@ components:
       type: object
       properties:
         sla_policy:
-          $ref: '#/components/schemas/SLAPolicyObject'
-    SatisfactionRatingObject:
+          $ref: '#/components/schemas/SLAPolicy'
+    SatisfactionRating:
       type: object
       properties:
         assignee_id:
@@ -22192,7 +22192,7 @@ components:
         satisfaction_rating:
           type: array
           items:
-            $ref: '#/components/schemas/SatisfactionRatingObject'
+            $ref: '#/components/schemas/SatisfactionRating'
     SatisfactionRatingsCountResponse:
       type: object
       properties:
@@ -22210,8 +22210,8 @@ components:
         satisfaction_ratings:
           type: array
           items:
-            $ref: '#/components/schemas/SatisfactionRatingObject'
-    SatisfactionReasonObject:
+            $ref: '#/components/schemas/SatisfactionRating'
+    SatisfactionReason:
       type: object
       properties:
         created_at:
@@ -22264,14 +22264,14 @@ components:
         reason:
           type: array
           items:
-            $ref: '#/components/schemas/SatisfactionReasonObject'
+            $ref: '#/components/schemas/SatisfactionReason'
     SatisfactionReasonsResponse:
       type: object
       properties:
         reasons:
           type: array
           items:
-            $ref: '#/components/schemas/SatisfactionReasonObject'
+            $ref: '#/components/schemas/SatisfactionReason'
     SearchCountResponse:
       type: object
       properties:
@@ -22321,7 +22321,7 @@ components:
           type: array
           description: May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
           items:
-            $ref: '#/components/schemas/SearchResultObject'
+            $ref: '#/components/schemas/SearchResult'
           readOnly: true
       example:
         facets: null
@@ -22359,7 +22359,7 @@ components:
           type: array
           description: May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
           items:
-            $ref: '#/components/schemas/SearchResultObject'
+            $ref: '#/components/schemas/SearchResult'
           readOnly: true
       example:
         count: 1
@@ -22376,7 +22376,7 @@ components:
             result_type: group
             updated_at: "2018-04-06T03:17:05Z"
             url: https://example.zendesk.com/api/v2/groups/1835972.json
-    SearchResultObject:
+    SearchResult:
       type: object
       properties:
         created_at:
@@ -22406,7 +22406,7 @@ components:
         url:
           type: string
           description: The url of the resource
-    SessionObject:
+    Session:
       type: object
       properties:
         authenticated_at:
@@ -22442,15 +22442,15 @@ components:
         session:
           type: array
           items:
-            $ref: '#/components/schemas/SessionObject'
+            $ref: '#/components/schemas/Session'
     SessionsResponse:
       type: object
       properties:
         sessions:
           type: array
           items:
-            $ref: '#/components/schemas/SessionObject'
-    SharingAgreementObject:
+            $ref: '#/components/schemas/Session'
+    SharingAgreement:
       type: object
       properties:
         created_at:
@@ -22500,14 +22500,14 @@ components:
       type: object
       properties:
         sharing_agreement:
-          $ref: '#/components/schemas/SharingAgreementObject'
+          $ref: '#/components/schemas/SharingAgreement'
     SharingAgreementsResponse:
       type: object
       properties:
         sharing_agreements:
           type: array
           items:
-            $ref: '#/components/schemas/SharingAgreementObject'
+            $ref: '#/components/schemas/SharingAgreement'
     SkillBasedRoutingAttributeDefinitions:
       type: object
       properties:
@@ -22532,7 +22532,7 @@ components:
                     type: string
                   title:
                     type: string
-    SkillBasedRoutingAttributeObject:
+    SkillBasedRoutingAttribute:
       type: object
       properties:
         created_at:
@@ -22568,8 +22568,8 @@ components:
       type: object
       properties:
         attribute:
-          $ref: '#/components/schemas/SkillBasedRoutingAttributeObject'
-    SkillBasedRoutingAttributeValueObject:
+          $ref: '#/components/schemas/SkillBasedRoutingAttribute'
+    SkillBasedRoutingAttributeValue:
       type: object
       properties:
         attribute_id:
@@ -22600,7 +22600,7 @@ components:
       type: object
       properties:
         attribute_value:
-          $ref: '#/components/schemas/SkillBasedRoutingAttributeValueObject'
+          $ref: '#/components/schemas/SkillBasedRoutingAttributeValue'
     SkillBasedRoutingAttributeValuesError:
       type: object
       properties:
@@ -22617,14 +22617,14 @@ components:
         attribute_values:
           type: array
           items:
-            $ref: '#/components/schemas/SkillBasedRoutingAttributeValueObject'
+            $ref: '#/components/schemas/SkillBasedRoutingAttributeValue'
     SkillBasedRoutingAttributesResponse:
       type: object
       properties:
         attributes:
           type: array
           items:
-            $ref: '#/components/schemas/SkillBasedRoutingAttributeObject'
+            $ref: '#/components/schemas/SkillBasedRoutingAttribute'
         count:
           type: integer
           readOnly: true
@@ -22643,7 +22643,7 @@ components:
           type: array
           items:
             type: integer
-    SupportAddressObject:
+    SupportAddress:
       type: object
       properties:
         brand_id:
@@ -22734,29 +22734,29 @@ components:
       type: object
       properties:
         recipient_address:
-          $ref: '#/components/schemas/SupportAddressObject'
+          $ref: '#/components/schemas/SupportAddress'
     SupportAddressesResponse:
       type: object
       properties:
         recipient_addresses:
           type: array
           items:
-            $ref: '#/components/schemas/SupportAddressObject'
-    SuspendedTicketObject:
+            $ref: '#/components/schemas/SupportAddress'
+    SuspendedTicket:
       type: object
       properties:
         attachments:
           type: array
           description: The attachments, if any associated to this suspended ticket. See [Attachments](developer.zendesk.com/api-reference/ticketing/tickets/ticket-attachments/)
           items:
-            $ref: '#/components/schemas/AttachmentObject'
+            $ref: '#/components/schemas/Attachment'
           nullable: true
           readOnly: true
         author:
           type: object
           description: The author id (if available), name and email
           allOf:
-            - $ref: '#/components/schemas/AuthorObject'
+            - $ref: '#/components/schemas/Author'
           readOnly: true
         brand_id:
           type: integer
@@ -22816,7 +22816,7 @@ components:
           description: The API url of this ticket
           readOnly: true
         via:
-          $ref: '#/components/schemas/ViaObject'
+          $ref: '#/components/schemas/Via'
       example:
         attachments: [ ]
         author:
@@ -22852,7 +22852,7 @@ components:
         suspended_ticket:
           type: array
           items:
-            $ref: '#/components/schemas/SuspendedTicketObject'
+            $ref: '#/components/schemas/SuspendedTicket'
     SuspendedTicketsAttachmentsResponse:
       type: object
       properties:
@@ -22862,7 +22862,7 @@ components:
             attachments:
               type: array
               items:
-                $ref: '#/components/schemas/AttachmentObject'
+                $ref: '#/components/schemas/Attachment'
             token:
               type: string
               description: Token for subsequent request
@@ -22885,8 +22885,8 @@ components:
         suspended_tickets:
           type: array
           items:
-            $ref: '#/components/schemas/SuspendedTicketObject'
-    SystemFieldOptionObject:
+            $ref: '#/components/schemas/SuspendedTicket'
+    SystemFieldOption:
       type: object
       properties:
         name:
@@ -22897,7 +22897,7 @@ components:
           type: string
           description: Value of the system field option
           readOnly: true
-    TagCountObject:
+    TagCount:
       type: object
       properties:
         refreshed_at:
@@ -22912,8 +22912,8 @@ components:
       type: object
       properties:
         count:
-          $ref: '#/components/schemas/TagCountObject'
-    TagListTagObject:
+          $ref: '#/components/schemas/TagCount'
+    TagListTag:
       type: object
       properties:
         count:
@@ -22923,14 +22923,14 @@ components:
         name:
           type: string
           description: A name for the tag
-    TagUrlObject:
+    TagUrl:
       type: object
       properties:
         url:
           type: string
           description: The url associated to the api request
           readOnly: true
-    TagsByObjectIdResponse:
+    TagsByIdResponse:
       type: object
       properties:
         tags:
@@ -22960,7 +22960,7 @@ components:
         tags:
           type: array
           items:
-            $ref: '#/components/schemas/TagListTagObject'
+            $ref: '#/components/schemas/TagListTag'
     TargetBasecamp:
       type: object
       properties:
@@ -23074,7 +23074,7 @@ components:
       required:
         - email
         - subject
-    TargetFailureObject:
+    TargetFailure:
       type: object
       properties:
         consecutive_failure_count:
@@ -23123,14 +23123,14 @@ components:
       type: object
       properties:
         target_failure:
-          $ref: '#/components/schemas/TargetFailureObject'
+          $ref: '#/components/schemas/TargetFailure'
     TargetFailuresResponse:
       type: object
       properties:
         target_failures:
           type: array
           items:
-            $ref: '#/components/schemas/TargetFailureObject'
+            $ref: '#/components/schemas/TargetFailure'
     TargetFlowdock:
       type: object
       properties:
@@ -23188,7 +23188,7 @@ components:
         - target_url
         - username
         - password
-    TargetObject:
+    Target:
       type: object
       allOf:
         - $ref: '#/components/schemas/TargetCommonFields'
@@ -23239,7 +23239,7 @@ components:
       type: object
       properties:
         target:
-          $ref: '#/components/schemas/TargetObject'
+          $ref: '#/components/schemas/Target'
     TargetTwitter:
       type: object
       properties:
@@ -23279,8 +23279,8 @@ components:
         targets:
           type: array
           items:
-            $ref: '#/components/schemas/TargetObject'
-    TicketAuditObject:
+            $ref: '#/components/schemas/Target'
+    TicketAudit:
       type: object
       properties:
         author_id:
@@ -23312,7 +23312,7 @@ components:
           description: The ID of the associated ticket
           readOnly: true
         via:
-          $ref: '#/components/schemas/TicketAuditViaObject'
+          $ref: '#/components/schemas/TicketAuditVia'
       example:
         author_id: 35436
         created_at: "2009-07-20T22:55:29Z"
@@ -23339,8 +23339,8 @@ components:
       type: object
       properties:
         audit:
-          $ref: '#/components/schemas/TicketAuditObject'
-    TicketAuditViaObject:
+          $ref: '#/components/schemas/TicketAudit'
+    TicketAuditVia:
       type: object
       description: Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
       properties:
@@ -23376,7 +23376,7 @@ components:
         audits:
           type: array
           items:
-            $ref: '#/components/schemas/TicketAuditObject'
+            $ref: '#/components/schemas/TicketAudit'
         before_cursor:
           type: string
           readOnly: true
@@ -23389,7 +23389,7 @@ components:
         audits:
           type: array
           items:
-            $ref: '#/components/schemas/TicketAuditObject'
+            $ref: '#/components/schemas/TicketAudit'
         count:
           type: integer
           readOnly: true
@@ -23457,14 +23457,14 @@ components:
                 timestamp: 1632470783218
                 type: ChatJoin
             visitor_id: 10502823-16EkM3T6VNq7KMd
-    TicketCommentObject:
+    TicketComment:
       type: object
       properties:
         attachments:
           type: array
           description: Attachments, if any. See [Attachment](developer.zendesk.com/api-reference/ticketing/tickets/ticket-attachments/)
           items:
-            $ref: '#/components/schemas/AttachmentObject'
+            $ref: '#/components/schemas/Attachment'
           readOnly: true
         audit_id:
           type: integer
@@ -23510,7 +23510,7 @@ components:
           items:
             type: string
         via:
-          $ref: '#/components/schemas/TicketAuditViaObject'
+          $ref: '#/components/schemas/TicketAuditVia'
       example:
         attachments:
           - content_type: text/plain
@@ -23542,7 +23542,7 @@ components:
       type: object
       properties:
         comment:
-          $ref: '#/components/schemas/TicketCommentObject'
+          $ref: '#/components/schemas/TicketComment'
     TicketCommentsCountResponse:
       type: object
       properties:
@@ -23560,7 +23560,7 @@ components:
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/TicketCommentObject'
+            $ref: '#/components/schemas/TicketComment'
     TicketCreateInput:
       type: object
       allOf:
@@ -23574,7 +23574,7 @@ components:
               type: array
               description: POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
               items:
-                $ref: '#/components/schemas/CollaboratorObject'
+                $ref: '#/components/schemas/Collaborator'
             email_cc_ids:
               type: array
               description: The ids of agents or end users currently CC'ed on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
@@ -23604,7 +23604,7 @@ components:
               type: integer
               description: Enterprise only. The id of the ticket form to render for the ticket
             via:
-              $ref: '#/components/schemas/ViaObject'
+              $ref: '#/components/schemas/Via'
             via_followup_source_id:
               type: integer
               description: POST requests only. The id of a closed ticket when creating a follow-up ticket. See [Creating a follow-up ticket](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#creating-a-follow-up-ticket)
@@ -23624,7 +23624,7 @@ components:
       type: object
       properties:
         comment:
-          $ref: '#/components/schemas/TicketCommentObject'
+          $ref: '#/components/schemas/TicketComment'
         priority:
           type: string
           description: The urgency with which the ticket should be addressed.
@@ -23695,7 +23695,7 @@ components:
               format: date-time
             value:
               type: integer
-    TicketFieldCustomStatusObject:
+    TicketFieldCustomStatus:
       type: object
       properties:
         active:
@@ -23739,7 +23739,7 @@ components:
           format: date-time
           description: The date and time at which the custom ticket status was last updated
           readOnly: true
-    TicketFieldObject:
+    TicketField:
       type: object
       properties:
         active:
@@ -23770,12 +23770,12 @@ components:
           type: array
           description: Required and presented for a custom ticket field of type "multiselect" or "tagger"
           items:
-            $ref: '#/components/schemas/CustomFieldOptionObject'
+            $ref: '#/components/schemas/CustomFieldOption'
         custom_statuses:
           type: array
           description: List of customized ticket statuses. Only presented for a system ticket field of type "custom_status"
           items:
-            $ref: '#/components/schemas/TicketFieldCustomStatusObject'
+            $ref: '#/components/schemas/TicketFieldCustomStatus'
           readOnly: true
         description:
           type: string
@@ -23826,7 +23826,7 @@ components:
           type: array
           description: Presented for a system ticket field of type "tickettype", "priority" or "status"
           items:
-            $ref: '#/components/schemas/SystemFieldOptionObject'
+            $ref: '#/components/schemas/SystemFieldOption'
           readOnly: true
         tag:
           type: string
@@ -23884,15 +23884,15 @@ components:
       type: object
       properties:
         ticket_field:
-          $ref: '#/components/schemas/TicketFieldObject'
+          $ref: '#/components/schemas/TicketField'
     TicketFieldsResponse:
       type: object
       properties:
         ticket_fields:
           type: array
           items:
-            $ref: '#/components/schemas/TicketFieldObject'
-    TicketFormObject:
+            $ref: '#/components/schemas/TicketField'
+    TicketForm:
       type: object
       properties:
         active:
@@ -24043,8 +24043,8 @@ components:
       type: object
       properties:
         ticket_form:
-          $ref: '#/components/schemas/TicketFormObject'
-    TicketFormStatusObject:
+          $ref: '#/components/schemas/TicketForm'
+    TicketFormStatus:
       type: object
       properties:
         custom_status_id:
@@ -24085,7 +24085,7 @@ components:
         ticket_form_statuses:
           type: array
           items:
-            $ref: '#/components/schemas/TicketFormStatusObject'
+            $ref: '#/components/schemas/TicketFormStatus'
           maxItems: 1
     TicketFormStatusesUpdateParams:
       type: object
@@ -24107,7 +24107,7 @@ components:
         ticket_forms:
           type: array
           items:
-            $ref: '#/components/schemas/TicketFormObject'
+            $ref: '#/components/schemas/TicketForm'
     TicketImportInput:
       type: object
       properties:
@@ -24124,7 +24124,7 @@ components:
                   value:
                     type: string
                     description: The comment string value
-              - $ref: '#/components/schemas/TicketCommentObject'
+              - $ref: '#/components/schemas/TicketComment'
         description:
           type: string
           description: Read-only first comment on the ticket. When [creating a ticket](#create-ticket), use `comment` to set the description. See [Description and first comment](#description-and-first-comment)
@@ -24166,7 +24166,7 @@ components:
           description: Whether comment in target ticket is public or private
       required:
         - ids
-    TicketMetricEventBaseObject:
+    TicketMetricEventBase:
       title: Ticket Metric Events
       type: object
       properties:
@@ -24223,44 +24223,44 @@ components:
         ticket_id: 155
         time: "2020-10-26T12:53:12Z"
         type: measure
-    TicketMetricEventBreachObject:
+    TicketMetricEventBreach:
       title: Ticket Metric Event
       type: object
       allOf:
-        - $ref: '#/components/schemas/TicketMetricEventBaseObject'
+        - $ref: '#/components/schemas/TicketMetricEventBase'
         - type: object
           properties:
             deleted:
               type: boolean
               description: Available if `type` is `breach`. In general, you can ignore any breach event when `deleted` is true. See [deleted](#deleted)
               readOnly: true
-    TicketMetricEventGroupSLAObject:
+    TicketMetricEventGroupSLA:
       title: Ticket Metric Event
       type: object
       allOf:
-        - $ref: '#/components/schemas/TicketMetricEventBaseObject'
+        - $ref: '#/components/schemas/TicketMetricEventBase'
         - type: object
           properties:
             group_sla:
               type: object
               description: Available if `type` is "apply_group_sla". The Group SLA policy and target being enforced on the ticket and metric in question, if any. See [group_sla](#group_sla)
               readOnly: true
-    TicketMetricEventSLAObject:
+    TicketMetricEventSLA:
       title: Ticket Metric Event
       type: object
       allOf:
-        - $ref: '#/components/schemas/TicketMetricEventBaseObject'
+        - $ref: '#/components/schemas/TicketMetricEventBase'
         - type: object
           properties:
             sla:
               type: object
               description: Available if `type` is `apply_sla`. The SLA policy and target being enforced on the ticket and metric in question, if any. See [sla](#sla)
               readOnly: true
-    TicketMetricEventUpdateStatusObject:
+    TicketMetricEventUpdateStatus:
       title: Ticket Metric Event
       type: object
       allOf:
-        - $ref: '#/components/schemas/TicketMetricEventBaseObject'
+        - $ref: '#/components/schemas/TicketMetricEventBase'
         - type: object
           properties:
             status:
@@ -24275,7 +24275,7 @@ components:
             ticket_metric_events:
               type: array
               items:
-                $ref: '#/components/schemas/TicketMetricEventBaseObject'
+                $ref: '#/components/schemas/TicketMetricEventBase'
         - type: object
           properties:
             count:
@@ -24284,14 +24284,14 @@ components:
               type: integer
             next_page:
               type: string
-    TicketMetricObject:
+    TicketMetric:
       type: object
       properties:
         agent_wait_time_in_minutes:
           type: object
           description: Number of minutes the agent spent waiting during calendar and business hours
           allOf:
-            - $ref: '#/components/schemas/TicketMetricTimeObject'
+            - $ref: '#/components/schemas/TicketMetricTime'
           readOnly: true
         assigned_at:
           type: string
@@ -24321,13 +24321,13 @@ components:
           type: object
           description: Number of minutes to the first resolution time during calendar and business hours
           allOf:
-            - $ref: '#/components/schemas/TicketMetricTimeObject'
+            - $ref: '#/components/schemas/TicketMetricTime'
           readOnly: true
         full_resolution_time_in_minutes:
           type: object
           description: Number of minutes to the full resolution during calendar and business hours
           allOf:
-            - $ref: '#/components/schemas/TicketMetricTimeObject'
+            - $ref: '#/components/schemas/TicketMetricTime'
           readOnly: true
         group_stations:
           type: integer
@@ -24351,7 +24351,7 @@ components:
           type: object
           description: Number of minutes on hold
           allOf:
-            - $ref: '#/components/schemas/TicketMetricTimeObject'
+            - $ref: '#/components/schemas/TicketMetricTime'
           readOnly: true
         reopens:
           type: integer
@@ -24365,13 +24365,13 @@ components:
           type: object
           description: Number of minutes to the first reply during calendar and business hours
           allOf:
-            - $ref: '#/components/schemas/TicketMetricTimeObject'
+            - $ref: '#/components/schemas/TicketMetricTime'
           readOnly: true
         reply_time_in_seconds:
           type: object
           description: Number of seconds to the first reply during calendar hours, only available for Messaging tickets
           allOf:
-            - $ref: '#/components/schemas/TicketMetricTimeObject'
+            - $ref: '#/components/schemas/TicketMetricTime'
           readOnly: true
         requester_updated_at:
           type: string
@@ -24382,7 +24382,7 @@ components:
           type: object
           description: Number of minutes the requester spent waiting during calendar and business hours
           allOf:
-            - $ref: '#/components/schemas/TicketMetricTimeObject'
+            - $ref: '#/components/schemas/TicketMetricTime'
           readOnly: true
         solved_at:
           type: string
@@ -24444,7 +24444,7 @@ components:
         status_updated_at: "2011-05-04T10:38:52Z"
         ticket_id: 4343
         updated_at: "2011-05-05T10:38:52Z"
-    TicketMetricTimeObject:
+    TicketMetricTime:
       type: object
       properties:
         business:
@@ -24461,15 +24461,15 @@ components:
         ticket_metric:
           type: array
           items:
-            $ref: '#/components/schemas/TicketMetricObject'
+            $ref: '#/components/schemas/TicketMetric'
     TicketMetricsResponse:
       type: object
       properties:
         ticket_metrics:
           type: array
           items:
-            $ref: '#/components/schemas/TicketMetricObject'
-    TicketObject:
+            $ref: '#/components/schemas/TicketMetric'
+    Ticket:
       type: object
       properties:
         allow_attachments:
@@ -24505,7 +24505,7 @@ components:
           type: array
           description: POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
           items:
-            $ref: '#/components/schemas/CollaboratorObject'
+            $ref: '#/components/schemas/Collaborator'
         comment:
           type: object
           description: Write only. An object that adds a comment to the ticket. See [Ticket comments](developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/). To include an attachment with the comment, see [Attaching files](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#attaching-files). A ticket can contain up to 5000 comments in total, including both public and private comments. Once this limit is reached, any additional attempts to add comments results in a 422 error. The ticket can still be updated in other ways, provided that no new comments are added.
@@ -24798,13 +24798,13 @@ components:
       type: object
       properties:
         ticket:
-          $ref: '#/components/schemas/TicketObject'
+          $ref: '#/components/schemas/Ticket'
     TicketSkipCreation:
       type: object
       properties:
         skip:
-          $ref: '#/components/schemas/TicketSkipObject'
-    TicketSkipObject:
+          $ref: '#/components/schemas/TicketSkip'
+    TicketSkip:
       type: object
       properties:
         created_at:
@@ -24824,7 +24824,7 @@ components:
           type: object
           description: The skipped ticket. See the [Ticket object reference](developer.zendesk.com/api-reference/ticketing/tickets/tickets/#json-format)
           allOf:
-            - $ref: '#/components/schemas/TicketObject'
+            - $ref: '#/components/schemas/Ticket'
         ticket_id:
           type: integer
           description: ID of the skipped ticket
@@ -24896,7 +24896,7 @@ components:
         skips:
           type: array
           items:
-            $ref: '#/components/schemas/TicketSkipObject'
+            $ref: '#/components/schemas/TicketSkip'
     TicketUpdateInput:
       type: object
       properties:
@@ -24904,7 +24904,7 @@ components:
           type: array
           description: An array of numeric IDs, emails, or objects containing name and email properties. See [Setting Collaborators](developer.zendesk.com/api-reference/ticketing/tickets/tickets/#setting-collaborators). An email notification is sent to them when the ticket is updated
           items:
-            $ref: '#/components/schemas/CollaboratorObject'
+            $ref: '#/components/schemas/Collaborator'
         assignee_email:
           type: string
           format: email
@@ -24923,12 +24923,12 @@ components:
           items:
             type: integer
         comment:
-          $ref: '#/components/schemas/TicketCommentObject'
+          $ref: '#/components/schemas/TicketComment'
         custom_fields:
           type: array
           description: Custom fields for the ticket. See [Setting custom field values](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-custom-field-values)
           items:
-            $ref: '#/components/schemas/CustomFieldObject'
+            $ref: '#/components/schemas/CustomField'
         custom_status_id:
           type: integer
           description: The custom ticket status id of the ticket. See [custom ticket statuses](#custom-ticket-statuses)
@@ -24941,7 +24941,7 @@ components:
           type: array
           description: An array of objects that represent agent or end users email CCs to add or delete from the ticket. See [Setting email CCs](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-email-ccs)
           items:
-            $ref: '#/components/schemas/EmailCCObject'
+            $ref: '#/components/schemas/EmailCC'
         external_id:
           type: string
           description: An id you can use to link Zendesk Support tickets to local records
@@ -24949,7 +24949,7 @@ components:
           type: array
           description: An array of objects that represent agent followers to add or delete from the ticket. See [Setting followers](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-followers)
           items:
-            $ref: '#/components/schemas/FollowerObject'
+            $ref: '#/components/schemas/Follower'
         group_id:
           type: integer
           description: The group this ticket is assigned to
@@ -25026,9 +25026,9 @@ components:
       type: object
       properties:
         audit:
-          $ref: '#/components/schemas/AuditObject'
+          $ref: '#/components/schemas/Audit'
         ticket:
-          $ref: '#/components/schemas/TicketObject'
+          $ref: '#/components/schemas/Ticket'
     TicketsCreateRequest:
       type: object
       properties:
@@ -25042,7 +25042,7 @@ components:
         tickets:
           type: array
           items:
-            $ref: '#/components/schemas/TicketObject'
+            $ref: '#/components/schemas/Ticket'
     TimeBasedExportIncrementalTicketsResponse:
       type: object
       description: |
@@ -25060,7 +25060,7 @@ components:
         tickets:
           type: array
           items:
-            $ref: '#/components/schemas/TicketObject'
+            $ref: '#/components/schemas/Ticket'
       example:
         count: 2
         end_of_stream: true
@@ -25125,7 +25125,7 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/UserObject'
+            $ref: '#/components/schemas/User'
       example:
         count: 1
         end_of_stream: true
@@ -25180,7 +25180,7 @@ components:
               user_decimal: 5.1
               user_dropdown: option_1
             verified: true
-    TrialAccountObject:
+    TrialAccount:
       type: object
       properties:
         name:
@@ -25196,8 +25196,8 @@ components:
       type: object
       properties:
         account:
-          $ref: '#/components/schemas/TrialAccountObject'
-    TriggerActionDefinitionObject:
+          $ref: '#/components/schemas/TrialAccount'
+    TriggerActionDefinition:
       type: object
       properties:
         group:
@@ -25223,19 +25223,19 @@ components:
                 type: string
               value:
                 type: string
-    TriggerActionDiffObject:
+    TriggerActionDiff:
       type: object
       properties:
         field:
           type: array
           description: An array of [change](#change) objects.
           items:
-            $ref: '#/components/schemas/TriggerChangeObject'
+            $ref: '#/components/schemas/TriggerChange'
         value:
           type: array
           description: An array of [change](#change) objects.
           items:
-            $ref: '#/components/schemas/TriggerChangeObject'
+            $ref: '#/components/schemas/TriggerChange'
       example:
         field:
           - change: +
@@ -25243,7 +25243,7 @@ components:
         value:
           - change: '-'
             content: open
-    TriggerActionObject:
+    TriggerAction:
       type: object
       properties:
         field:
@@ -25370,7 +25370,7 @@ components:
         inactive_count:
           type: integer
           format: int64
-    TriggerChangeObject:
+    TriggerChange:
       type: object
       properties:
         change:
@@ -25391,7 +25391,7 @@ components:
       example:
         change: +
         content: solved
-    TriggerConditionDefinitionObjectAll:
+    TriggerConditionDefinitionAll:
       type: object
       properties:
         group:
@@ -25428,7 +25428,7 @@ components:
                 type: string
               value:
                 type: string
-    TriggerConditionDefinitionObjectAny:
+    TriggerConditionDefinitionAny:
       type: object
       properties:
         group:
@@ -25454,24 +25454,24 @@ components:
           type: string
         type:
           type: string
-    TriggerConditionDiffObject:
+    TriggerConditionDiff:
       type: object
       properties:
         field:
           type: array
           description: An array of [change](#change) objects
           items:
-            $ref: '#/components/schemas/TriggerChangeObject'
+            $ref: '#/components/schemas/TriggerChange'
         operator:
           type: array
           description: An array of [change](#change) objects
           items:
-            $ref: '#/components/schemas/TriggerChangeObject'
+            $ref: '#/components/schemas/TriggerChange'
         value:
           type: array
           description: An array of [change](#change) objects
           items:
-            $ref: '#/components/schemas/TriggerChangeObject'
+            $ref: '#/components/schemas/TriggerChange'
       example:
         field:
           - change: =
@@ -25482,7 +25482,7 @@ components:
         value:
           - change: +
             content: solved
-    TriggerConditionObject:
+    TriggerCondition:
       type: object
       properties:
         field:
@@ -25502,32 +25502,32 @@ components:
         field: status
         operator: less_than
         value: solved
-    TriggerConditionsDiffObject:
+    TriggerConditionsDiff:
       type: object
       properties:
         all:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionDiffObject'
+            $ref: '#/components/schemas/TriggerConditionDiff'
           nullable: true
         any:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionDiffObject'
+            $ref: '#/components/schemas/TriggerConditionDiff'
           nullable: true
-    TriggerConditionsObject:
+    TriggerConditions:
       type: object
       description: An object that describes the circumstances under which the trigger performs its actions. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
       properties:
         all:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionObject'
+            $ref: '#/components/schemas/TriggerCondition'
           nullable: true
         any:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionObject'
+            $ref: '#/components/schemas/TriggerCondition'
           nullable: true
       example:
         all:
@@ -25551,34 +25551,34 @@ components:
             value:
               - "1"
               - "2"
-    TriggerDefinitionObject:
+    TriggerDefinition:
       type: object
       properties:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerActionDefinitionObject'
+            $ref: '#/components/schemas/TriggerActionDefinition'
         conditions_all:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionDefinitionObjectAll'
+            $ref: '#/components/schemas/TriggerConditionDefinitionAll'
         conditions_any:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerConditionDefinitionObjectAny'
+            $ref: '#/components/schemas/TriggerConditionDefinitionAny'
     TriggerDefinitionResponse:
       type: object
       properties:
         definitions:
-          $ref: '#/components/schemas/TriggerDefinitionObject'
-    TriggerObject:
+          $ref: '#/components/schemas/TriggerDefinition'
+    Trigger:
       type: object
       properties:
         actions:
           type: array
           description: An array of actions describing what the ticket trigger will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
           items:
-            $ref: '#/components/schemas/TriggerActionObject'
+            $ref: '#/components/schemas/TriggerAction'
         active:
           type: boolean
           description: Whether the ticket trigger is active
@@ -25586,7 +25586,7 @@ components:
           type: string
           description: The ID of the category the ticket trigger belongs to
         conditions:
-          $ref: '#/components/schemas/TriggerConditionsObject'
+          $ref: '#/components/schemas/TriggerConditions'
         created_at:
           type: string
           description: The time the ticket trigger was created
@@ -25642,7 +25642,7 @@ components:
       type: object
       properties:
         trigger:
-          $ref: '#/components/schemas/TriggerObject'
+          $ref: '#/components/schemas/Trigger'
     TriggerRevisionResponse:
       type: object
       properties:
@@ -25661,11 +25661,11 @@ components:
                 actions:
                   type: array
                   items:
-                    $ref: '#/components/schemas/TriggerActionObject'
+                    $ref: '#/components/schemas/TriggerAction'
                 active:
                   type: boolean
                 conditions:
-                  $ref: '#/components/schemas/TriggerConditionsObject'
+                  $ref: '#/components/schemas/TriggerConditions'
                 description:
                   type: string
                   nullable: true
@@ -25702,19 +25702,19 @@ components:
                     type: array
                     description: An array that contain [action diff objects](#Action Diffs)
                     items:
-                      $ref: '#/components/schemas/TriggerActionDiffObject'
+                      $ref: '#/components/schemas/TriggerActionDiff'
                   active:
                     type: array
                     description: An array of [change](#change) objects
                     items:
-                      $ref: '#/components/schemas/TriggerChangeObject'
+                      $ref: '#/components/schemas/TriggerChange'
                   conditions:
-                    $ref: '#/components/schemas/TriggerConditionDiffObject'
+                    $ref: '#/components/schemas/TriggerConditionDiff'
                   description:
                     type: array
                     description: An array of [change](#change) objects
                     items:
-                      $ref: '#/components/schemas/TriggerChangeObject'
+                      $ref: '#/components/schemas/TriggerChange'
                   source_id:
                     type: integer
                     description: ID of the source revision
@@ -25725,26 +25725,26 @@ components:
                     type: array
                     description: An array of [change](#change) objects
                     items:
-                      $ref: '#/components/schemas/TriggerChangeObject'
+                      $ref: '#/components/schemas/TriggerChange'
               id:
                 type: integer
               snapshot:
-                $ref: '#/components/schemas/TriggerSnapshotObject'
+                $ref: '#/components/schemas/TriggerSnapshot'
               url:
                 type: string
-    TriggerSnapshotObject:
+    TriggerSnapshot:
       type: object
       properties:
         actions:
           type: array
           description: An array of [Actions](#actions) describing what the ticket trigger will do
           items:
-            $ref: '#/components/schemas/TriggerActionObject'
+            $ref: '#/components/schemas/TriggerAction'
         active:
           type: boolean
           description: Whether the ticket trigger is active
         conditions:
-          $ref: '#/components/schemas/TriggerConditionsObject'
+          $ref: '#/components/schemas/TriggerConditions'
         description:
           type: string
           description: The description of the ticket trigger
@@ -25763,7 +25763,7 @@ components:
       properties:
         trigger:
           allOf:
-            - $ref: '#/components/schemas/TriggerObject'
+            - $ref: '#/components/schemas/Trigger'
             - anyOf:
                 - $ref: '#/components/schemas/TriggerCategory'
                 - $ref: '#/components/schemas/TriggerCategoryId'
@@ -25781,8 +25781,8 @@ components:
         triggers:
           type: array
           items:
-            $ref: '#/components/schemas/TriggerObject'
-    TwitterChannelObject:
+            $ref: '#/components/schemas/Trigger'
+    TwitterChannel:
       title: Monitored X handles
       type: object
       properties:
@@ -25842,7 +25842,7 @@ components:
       type: object
       properties:
         monitored_twitter_handle:
-          $ref: '#/components/schemas/TwitterChannelObject'
+          $ref: '#/components/schemas/TwitterChannel'
     TwitterChannelTwicketStatusResponse:
       type: object
       properties:
@@ -25865,7 +25865,7 @@ components:
         monitored_twitter_handles:
           type: array
           items:
-            $ref: '#/components/schemas/TwitterChannelObject'
+            $ref: '#/components/schemas/TwitterChannel'
     UpdateResourceResult:
       type: object
       properties:
@@ -25898,7 +25898,7 @@ components:
             $ref: '#/components/schemas/TicketFormStatusesUpdateParams'
       required:
         - ticket_form_status
-    UrlObject:
+    Url:
       type: object
       properties:
         url:
@@ -25945,10 +25945,10 @@ components:
       required:
         - name
         - email
-    UserFieldObject:
+    UserField:
       type: object
       allOf:
-        - $ref: '#/components/schemas/CustomFieldObject'
+        - $ref: '#/components/schemas/CustomField'
       example:
         active: true
         created_at: "2012-10-16T16:04:06Z"
@@ -25967,7 +25967,7 @@ components:
       type: object
       properties:
         user_field:
-          $ref: '#/components/schemas/UserFieldObject'
+          $ref: '#/components/schemas/UserField'
     UserFieldsResponse:
       type: object
       properties:
@@ -25988,7 +25988,7 @@ components:
         user_fields:
           type: array
           items:
-            $ref: '#/components/schemas/UserFieldObject'
+            $ref: '#/components/schemas/UserField'
     UserForAdmin:
       title: Users
       type: object
@@ -26268,8 +26268,8 @@ components:
         identities:
           type: array
           items:
-            $ref: '#/components/schemas/UserIdentityObject'
-    UserIdentityObject:
+            $ref: '#/components/schemas/UserIdentity'
+    UserIdentity:
       type: object
       properties:
         created_at:
@@ -26363,7 +26363,7 @@ components:
       type: object
       properties:
         identity:
-          $ref: '#/components/schemas/UserIdentityObject'
+          $ref: '#/components/schemas/UserIdentity'
     UserInput:
       anyOf:
         - $ref: '#/components/schemas/UserCreateInput'
@@ -26386,7 +26386,7 @@ components:
           type: integer
         password:
           type: string
-    UserObject:
+    User:
       anyOf:
         - $ref: '#/components/schemas/UserForAdmin'
         - $ref: '#/components/schemas/UserForEndUser'
@@ -26398,7 +26398,7 @@ components:
           type: array
           items:
             type: string
-    UserRelatedObject:
+    UserRelated:
       type: object
       properties:
         assigned_tickets:
@@ -26417,7 +26417,7 @@ components:
       type: object
       properties:
         user_related:
-          $ref: '#/components/schemas/UserRelatedObject'
+          $ref: '#/components/schemas/UserRelated'
     UserRequest:
       type: object
       properties:
@@ -26429,7 +26429,7 @@ components:
       type: object
       properties:
         user:
-          $ref: '#/components/schemas/UserObject'
+          $ref: '#/components/schemas/User'
     UsersRequest:
       type: object
       properties:
@@ -26445,8 +26445,8 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/UserObject'
-    ViaObject:
+            $ref: '#/components/schemas/User'
+    Via:
       type: object
       description: |
         An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
@@ -26495,7 +26495,7 @@ components:
           rel: trigger
           to: { }
       readOnly: true
-    ViewCountObject:
+    ViewCount:
       type: object
       properties:
         active:
@@ -26527,14 +26527,14 @@ components:
       type: object
       properties:
         view_count:
-          $ref: '#/components/schemas/ViewCountObject'
+          $ref: '#/components/schemas/ViewCount'
     ViewCountsResponse:
       type: object
       properties:
         view_counts:
           type: array
           items:
-            $ref: '#/components/schemas/ViewCountObject'
+            $ref: '#/components/schemas/ViewCount'
     ViewExportResponse:
       type: object
       properties:
@@ -26547,7 +26547,7 @@ components:
             view_id:
               type: integer
               readOnly: true
-    ViewObject:
+    View:
       type: object
       properties:
         active:
@@ -26648,7 +26648,7 @@ components:
             type: object
             additionalProperties: true
         view:
-          $ref: '#/components/schemas/ViewObject'
+          $ref: '#/components/schemas/View'
     ViewsCountResponse:
       type: object
       properties:
@@ -26677,12 +26677,12 @@ components:
         views:
           type: array
           items:
-            $ref: '#/components/schemas/ViewObject'
+            $ref: '#/components/schemas/View'
     WorkspaceInput:
       type: object
       properties:
         conditions:
-          $ref: '#/components/schemas/ConditionsObject'
+          $ref: '#/components/schemas/Conditions'
         description:
           type: string
           description: User-defined description of this workspace's purpose
@@ -26695,7 +26695,7 @@ components:
         title:
           type: string
           description: The title of the workspace
-    WorkspaceObject:
+    Workspace:
       type: object
       properties:
         activated:
@@ -26708,7 +26708,7 @@ components:
             type: object
             additionalProperties: true
         conditions:
-          $ref: '#/components/schemas/ConditionsObject'
+          $ref: '#/components/schemas/Conditions'
         created_at:
           type: string
           format: date-time
@@ -26739,7 +26739,7 @@ components:
           type: array
           description: An array of the macro objects that will be used in this workspace. See [Macros](developer.zendesk.com/api-reference/ticketing/business-rules/macros/)
           items:
-            $ref: '#/components/schemas/MacroObject'
+            $ref: '#/components/schemas/Macro'
         ticket_form_id:
           type: integer
           description: The id of the ticket web form associated to this workspace
@@ -26761,8 +26761,8 @@ components:
             workspaces:
               type: array
               items:
-                $ref: '#/components/schemas/WorkspaceObject'
-        - $ref: '#/components/schemas/OffsetPaginationObject'
+                $ref: '#/components/schemas/Workspace'
+        - $ref: '#/components/schemas/OffsetPagination'
   parameters:
     ActivityId:
       name: activity_id
@@ -26928,7 +26928,7 @@ components:
          is not created by an app, then `creator_app_name` is null
       schema:
         type: boolean
-    CustomObjectFieldKeyOrId:
+    CustomFieldKeyOrId:
       name: custom_object_field_key_or_id
       in: path
       description: The key or id of a custom object field
@@ -26936,7 +26936,7 @@ components:
       schema:
         type: string
       example: make
-    CustomObjectKey:
+    CustomKey:
       name: custom_object_key
       in: path
       description: The key of a custom object
@@ -26944,7 +26944,7 @@ components:
       schema:
         type: string
       example: car
-    CustomObjectRecordExternalId:
+    CustomRecordExternalId:
       name: external_id
       in: query
       description: The external id of a custom object record
@@ -26952,7 +26952,7 @@ components:
       schema:
         type: string
       example: X90001
-    CustomObjectRecordId:
+    CustomRecordId:
       name: custom_object_record_id
       in: path
       description: The id of a custom object record
@@ -26960,7 +26960,7 @@ components:
       schema:
         type: string
       example: 01GCSJW391QVSC80GYDH7E93Q6
-    CustomObjectRecordName:
+    CustomRecordName:
       name: name
       in: query
       description: The name of a custom object record
@@ -27316,7 +27316,7 @@ components:
       schema:
         type: integer
       example: 223443
-    ObjectKey:
+    Key:
       name: object_zrn_type
       in: path
       description: |
@@ -27703,7 +27703,7 @@ components:
         type: object
         properties:
           json:
-            $ref: '#/components/schemas/TriggerObject'
+            $ref: '#/components/schemas/Trigger'
     TriggerSearchQuery:
       name: query
       in: query
@@ -28379,7 +28379,7 @@ components:
             verified: true
           user_id: 3343
           verb: tickets.assignment
-    AddTagsByObjectIdResponseExample:
+    AddTagsByIdResponseExample:
       value:
         tags:
           - urgent
@@ -29324,7 +29324,7 @@ components:
               user_decimal: 5.1
               user_dropdown: option_1
             verified: true
-    CustomObjectFieldCreateResponseExample:
+    CustomFieldCreateResponseExample:
       value:
         custom_object_field:
           active: true
@@ -29341,17 +29341,17 @@ components:
           type: text
           updated_at: 2022-09-07T23:22:00Z
           url: https://{subdomain}.zendesk.com/api/v2/custom_objects/car/fields.json?id=4398096842879
-    CustomObjectFieldsCreateRequestExample:
+    CustomFieldsCreateRequestExample:
       value:
         custom_object_field:
           key: color
           title: Color
           type: text
-    CustomObjectFieldsLimitResponseExample:
+    CustomFieldsLimitResponseExample:
       value:
         count: 44
         limit: 400
-    CustomObjectFieldsResponseExample:
+    CustomFieldsResponseExample:
       value:
         custom_object_fields:
           - active: true
@@ -29402,7 +29402,7 @@ components:
             type: text
             updated_at: 2022-09-07T23:22:14Z
             url: https://{subdomain}.zendesk.com/api/v2/custom_objects/car/fields.json?id=4398096843007
-    CustomObjectRecordsAutocompleteResponseExample:
+    CustomRecordsAutocompleteResponseExample:
       value:
         count: 100
         custom_object_records:
@@ -29437,7 +29437,7 @@ components:
           after_cursor: eyJmcm9tIjoxLCJzaXplIjoxLCJzZWFyY2hBZnRlciI6bnVsbCwic29ydCI6bnVsbH0=
           before_cursor: null
           has_more: true
-    CustomObjectRecordsBulkCreateRequestExample:
+    CustomRecordsBulkCreateRequestExample:
       value:
         job:
           action: create
@@ -29456,14 +29456,14 @@ components:
                 external_id: ddd445
                 year: 2017
               name: 2017 Ford
-    CustomObjectRecordsCreateRequestExample:
+    CustomRecordsCreateRequestExample:
       value:
         custom_object_record:
           custom_object_fields:
             make: Tesla
             model: "Y"
           name: My car 1
-    CustomObjectRecordsCreateResponseExample:
+    CustomRecordsCreateResponseExample:
       value:
         custom_object_record:
           created_at: "2022-09-26T22:25:10Z"
@@ -29479,7 +29479,7 @@ components:
           updated_at: 2022-09-26T22:25:10Z
           updated_by_user_id: "10001"
           url: https://{subdomain}.zendesk.com/api/v2/custom_objects/car/records/01GDXYEY1FQYN066VHF49YHJ21.json
-    CustomObjectRecordsFilteredSearchRequestExample:
+    CustomRecordsFilteredSearchRequestExample:
       value:
         filter:
           $and:
@@ -29492,7 +29492,7 @@ components:
                 $eq: foo
             - custom_object_fields.key_four:
                 $eq: bar
-    CustomObjectRecordsIndexResponseExample:
+    CustomRecordsIndexResponseExample:
       value:
         custom_object_records:
           - created_at: "2022-09-12T19:29:59Z"
@@ -29526,7 +29526,7 @@ components:
           after_cursor: eyJmcm9tIjoxLCJzaXplIjoxLCJzZWFyY2hBZnRlciI6bnVsbCwic29ydCI6bnVsbH0=
           before_cursor: null
           has_more: true
-    CustomObjectRecordsJobsResponseExample:
+    CustomRecordsJobsResponseExample:
       value:
         job_status:
           id: V3-291e720c98aef4d953563ab090486213
@@ -29536,11 +29536,11 @@ components:
           status: queued
           total: 2
           url: https://{subdomain}.zendesk.com/api/v2/job_statuses/V3-291e720c98aef4d953563ab090486213.json
-    CustomObjectRecordsLimitResponseExample:
+    CustomRecordsLimitResponseExample:
       value:
         count: 10294
         limit: 1000000
-    CustomObjectRecordsSearchResponseExample:
+    CustomRecordsSearchResponseExample:
       value:
         count: 100
         custom_object_records:
@@ -29575,14 +29575,14 @@ components:
           after_cursor: eyJmcm9tIjoxLCJzaXplIjoxLCJzZWFyY2hBZnRlciI6bnVsbCwic29ydCI6bnVsbH0=
           before_cursor: null
           has_more: true
-    CustomObjectRecordsUpsertRequestExample:
+    CustomRecordsUpsertRequestExample:
       value:
         custom_object_record:
           custom_object_fields:
             make: Oldsmobile
             model: Cutlass Supreme
           name: 1997 Cutlass Supreme
-    CustomObjectRecordsUpsertResponseExample:
+    CustomRecordsUpsertResponseExample:
       value:
         custom_object_record:
           created_at: "2023-09-26T22:25:10Z"
@@ -29597,13 +29597,13 @@ components:
           updated_at: 2023-09-26T22:25:10Z
           updated_by_user_id: "10001"
           url: https://{subdomain}.zendesk.com/api/v2/custom_objects/car/records/01GDXYEY1FQYN066VHF49YHJ21.json
-    CustomObjectsCreateRequestExample:
+    CustomsCreateRequestExample:
       value:
         custom_object:
           key: apartment
           title: Apartment
           title_pluralized: Apartments
-    CustomObjectsCreateResponseExample:
+    CustomsCreateResponseExample:
       value:
         custom_object:
           created_at: "2022-09-02T22:44:35Z"
@@ -29619,11 +29619,11 @@ components:
           updated_at: 2022-09-02T22:44:35Z
           updated_by_user_id: "10234"
           url: https://{subdomain}.zendesk.com/api/v2/custom_objects/01GC0617DV48CAXK6WA4DW51HD.json
-    CustomObjectsLimitResponseExample:
+    CustomsLimitResponseExample:
       value:
         count: 19
         limit: 50
-    CustomObjectsResponseExample:
+    CustomsResponseExample:
       value:
         custom_objects:
           - created_at: "2022-09-02T22:44:35Z"
@@ -31035,14 +31035,14 @@ components:
             url: https://example.zendesk.com/api/v2/tokens/8678530.json
             used_at: "2010-01-22T00:11:12Z"
             user_id: 29
-    ObjectTriggerBulkUpdateRequestExample:
+    TriggerBulkUpdateRequestExample:
       value:
         triggers:
           - id: 25
             position: 1
           - active: false
             id: 26
-    ObjectTriggerDefinitionResponseExample:
+    TriggerDefinitionResponseExample:
       value:
         definitions:
           actions:
@@ -31374,7 +31374,7 @@ components:
               subject: custom_object.order.custom_fields.miles
               title: miles
               type: text
-    ObjectTriggerRequestExample:
+    TriggerRequestExample:
       value:
         trigger:
           actions:
@@ -31386,7 +31386,7 @@ components:
               - field: custom_object.order.custom_fields.heat
                 operator: not_present
           title: active test order trigger with any conditions
-    ObjectTriggerResponseExample:
+    TriggerResponseExample:
       value:
         trigger:
           actions:
@@ -31406,7 +31406,7 @@ components:
           title: active test order trigger with any conditions
           updated_at: "2024-07-08T22:34:49Z"
           url: http://{subdomain}.zendesk.com/api/v2/custom_objects/order/triggers/27.json
-    ObjectTriggersActiveResponseExample:
+    TriggersActiveResponseExample:
       value:
         count: 1
         next_page: null
@@ -31423,7 +31423,7 @@ components:
             title: Order object trigger
             updated_at: "2024-06-27T16:51:54Z"
             url: http://{subdomain}.zendesk.com/api/v2/custom_objects/order/triggers/25.json
-    ObjectTriggersResponseExample:
+    TriggersResponseExample:
       value:
         count: 2
         next_page: null
@@ -31455,7 +31455,7 @@ components:
             title: Set order miles when heat not present
             updated_at: "2024-07-08T20:44:32Z"
             url: http://{subdomain}.zendesk.com/api/v2/custom_objects/order/triggers/26.json
-    ObjectTriggersSearchResponseExample:
+    TriggersSearchResponseExample:
       value:
         count: 1
         next_page: null
@@ -32845,7 +32845,7 @@ components:
         tags:
           - attention
           - attack
-    TagsByObjectIdResponse:
+    TagsByIdResponse:
       value:
         tags:
           - urgent

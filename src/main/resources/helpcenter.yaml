@@ -70,9 +70,7 @@ paths:
       description: |
         Adds a post to the specified [topic](developer.zendesk.com/api-reference/help_center/help-center-api/topics).
 
-        #### Allowed for
-
-        * End users
+        Allowed for End users
 
         Agents with the Help Center manager role can optionally supply an
         `author_id` as part of the `post` object. If it is provided, the post's
@@ -110,9 +108,7 @@ paths:
       description: |
         Gets information about a given post.
 
-        #### Allowed for
-
-        * Anonymous users
+        Allowed for Anonymous users
 
         #### Sideloads
         The following sideloads are supported:
@@ -3153,9 +3149,11 @@ paths:
       responses:
         "204":
           description: Default success response
+security:
+  - basicAuth: [ ]
 components:
   schemas:
-    ArticleAttachmentObject:
+    ArticleAttachment:
       type: object
       properties:
         article_id:
@@ -3219,15 +3217,15 @@ components:
       type: object
       properties:
         article_attachment:
-          $ref: '#/components/schemas/ArticleAttachmentObject'
+          $ref: '#/components/schemas/ArticleAttachment'
     ArticleAttachmentsResponse:
       type: object
       properties:
         article_attachments:
           type: array
           items:
-            $ref: '#/components/schemas/ArticleAttachmentObject'
-    ArticleObject:
+            $ref: '#/components/schemas/ArticleAttachment'
+    Article:
       type: object
       properties:
         author_id:
@@ -3372,7 +3370,7 @@ components:
       type: object
       properties:
         article:
-          $ref: '#/components/schemas/ArticleObject'
+          $ref: '#/components/schemas/Article'
     ArticleSearchResponse:
       type: object
       properties:
@@ -3384,7 +3382,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/ArticleObject'
+            $ref: '#/components/schemas/Article'
         snippet:
           type: string
           description: |
@@ -3396,7 +3394,7 @@ components:
         articles:
           type: array
           items:
-            $ref: '#/components/schemas/ArticleObject'
+            $ref: '#/components/schemas/Article'
     BadRequestErrorResponse:
       type: object
       properties:
@@ -3413,8 +3411,8 @@ components:
         categories:
           type: array
           items:
-            $ref: '#/components/schemas/CategoryObject'
-    CategoryObject:
+            $ref: '#/components/schemas/Category'
+    Category:
       type: object
       properties:
         created_at:
@@ -3475,8 +3473,8 @@ components:
       type: object
       properties:
         category:
-          $ref: '#/components/schemas/CategoryObject'
-    CommentObject:
+          $ref: '#/components/schemas/Category'
+    Comment:
       type: object
       properties:
         author_id:
@@ -3547,22 +3545,22 @@ components:
       type: object
       properties:
         comment:
-          $ref: '#/components/schemas/CommentObject'
+          $ref: '#/components/schemas/Comment'
     CommentsResponse:
       type: object
       properties:
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/CommentObject'
+            $ref: '#/components/schemas/Comment'
     CommunityPostSearchResponse:
       type: object
       properties:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/PostObject'
-    ContentSubscriptionObject:
+            $ref: '#/components/schemas/Post'
+    ContentSubscription:
       type: object
       properties:
         content_id:
@@ -3618,7 +3616,7 @@ components:
         subscriptions:
           type: array
           items:
-            $ref: '#/components/schemas/ContentSubscriptionObject'
+            $ref: '#/components/schemas/ContentSubscription'
     CreateUserImageResponse:
       type: object
       properties:
@@ -3638,7 +3636,7 @@ components:
           type: array
           items:
             type: string
-    HelpCenterSessionObject:
+    HelpCenterSession:
       type: object
       properties:
         csrf_token:
@@ -3647,8 +3645,8 @@ components:
       type: object
       properties:
         current_session:
-          $ref: '#/components/schemas/HelpCenterSessionObject'
-    LabelObject:
+          $ref: '#/components/schemas/HelpCenterSession'
+    Label:
       type: object
       properties:
         created_at:
@@ -3680,14 +3678,14 @@ components:
       type: object
       properties:
         label:
-          $ref: '#/components/schemas/LabelObject'
+          $ref: '#/components/schemas/Label'
     LabelsResponse:
       type: object
       properties:
         labels:
           type: array
           items:
-            $ref: '#/components/schemas/LabelObject'
+            $ref: '#/components/schemas/Label'
     LocalesWithDefaultResponse:
       type: object
       properties:
@@ -3697,7 +3695,7 @@ components:
           type: array
           items:
             type: string
-    PostCommentObject:
+    PostComment:
       type: object
       properties:
         author_id:
@@ -3762,15 +3760,15 @@ components:
       type: object
       properties:
         comment:
-          $ref: '#/components/schemas/PostCommentObject'
+          $ref: '#/components/schemas/PostComment'
     PostCommentsResponse:
       type: object
       properties:
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/PostCommentObject'
-    PostObject:
+            $ref: '#/components/schemas/PostComment'
+    Post:
       type: object
       properties:
         author_id:
@@ -3861,14 +3859,14 @@ components:
       type: object
       properties:
         post:
-          $ref: '#/components/schemas/PostObject'
+          $ref: '#/components/schemas/Post'
     PostsResponse:
       type: object
       properties:
         posts:
           type: array
           items:
-            $ref: '#/components/schemas/PostObject'
+            $ref: '#/components/schemas/Post'
     RequestUserImageUploadResponse:
       type: object
       properties:
@@ -3882,7 +3880,7 @@ components:
               type: string
             url:
               type: string
-    SearchObject:
+    Search:
       type: object
       properties:
         results:
@@ -3890,11 +3888,11 @@ components:
           description: An array with the base articles or community posts
           items:
             oneOf:
-              - $ref: '#/components/schemas/ArticleObject'
-              - $ref: '#/components/schemas/PostCommentObject'
+              - $ref: '#/components/schemas/Article'
+              - $ref: '#/components/schemas/PostComment'
       required:
         - results
-    SectionObject:
+    Section:
       type: object
       properties:
         category_id:
@@ -3996,20 +3994,20 @@ components:
       type: object
       properties:
         section:
-          $ref: '#/components/schemas/SectionObject'
+          $ref: '#/components/schemas/Section'
     SectionsResponse:
       type: object
       properties:
         sections:
           type: array
           items:
-            $ref: '#/components/schemas/SectionObject'
+            $ref: '#/components/schemas/Section'
     SubscriptionResponse:
       type: object
       properties:
         subscription:
-          $ref: '#/components/schemas/ContentSubscriptionObject'
-    TopicObject:
+          $ref: '#/components/schemas/ContentSubscription'
+    Topic:
       type: object
       description: |
         The `manageable_by` attribute takes one of the following values:
@@ -4078,15 +4076,15 @@ components:
       type: object
       properties:
         topic:
-          $ref: '#/components/schemas/TopicObject'
+          $ref: '#/components/schemas/Topic'
     TopicsResponse:
       type: object
       properties:
         topics:
           type: array
           items:
-            $ref: '#/components/schemas/TopicObject'
-    TranslationObject:
+            $ref: '#/components/schemas/Topic'
+    Translation:
       type: object
       properties:
         body:
@@ -4154,14 +4152,14 @@ components:
       type: object
       properties:
         translation:
-          $ref: '#/components/schemas/TranslationObject'
+          $ref: '#/components/schemas/Translation'
     TranslationsResponse:
       type: object
       properties:
         translations:
           type: array
           items:
-            $ref: '#/components/schemas/TranslationObject'
+            $ref: '#/components/schemas/Translation'
     UnifiedSearchResult:
       type: object
       properties:
@@ -4194,7 +4192,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UnifiedSearchResult'
-    UserSegmentObject:
+    UserSegment:
       type: object
       description: |
         The `user_type` attribute takes one of the following values:
@@ -4278,15 +4276,15 @@ components:
       type: object
       properties:
         user_segment:
-          $ref: '#/components/schemas/UserSegmentObject'
+          $ref: '#/components/schemas/UserSegment'
     UserSegmentsResponse:
       type: object
       properties:
         user_segments:
           type: array
           items:
-            $ref: '#/components/schemas/UserSegmentObject'
-    UserSubscriptionObject:
+            $ref: '#/components/schemas/UserSegment'
+    UserSubscription:
       type: object
       properties:
         followed_id:
@@ -4315,8 +4313,8 @@ components:
         user_subscriptions:
           type: array
           items:
-            $ref: '#/components/schemas/UserSubscriptionObject'
-    VoteObject:
+            $ref: '#/components/schemas/UserSubscription'
+    Vote:
       type: object
       properties:
         created_at:
@@ -4363,14 +4361,14 @@ components:
       type: object
       properties:
         vote:
-          $ref: '#/components/schemas/VoteObject'
+          $ref: '#/components/schemas/Vote'
     VotesResponse:
       type: object
       properties:
         votes:
           type: array
           items:
-            $ref: '#/components/schemas/VoteObject'
+            $ref: '#/components/schemas/Vote'
   parameters:
     ArticleAttachmentId:
       name: article_attachment_id
@@ -5019,5 +5017,3 @@ components:
     basicAuth:
       type: http
       scheme: basic
-security:
-  - basicAuth: [ ]
