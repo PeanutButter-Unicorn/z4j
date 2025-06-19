@@ -42,7 +42,7 @@ public class BasicAuthFilter {
     @RequestFilter
     public void doFilter(MutableHttpRequest<?> request) {
         String credentialsString = String.format("%s/token:%s", email, token);
-        log.debug("Add basic auth header: Basic {}", credentialsString);
+        log.debug("Add basic auth header: Basic {}/token:<token>", email);
         request.header("Authorization", "Basic " + getEncoder().encodeToString(credentialsString.getBytes()));
     }
 }
