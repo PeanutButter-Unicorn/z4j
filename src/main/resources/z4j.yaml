@@ -185,7 +185,8 @@ components:
       type: object
       properties:
         article_id:
-          type: long
+          type: integer
+          format: int64
           description: The associated article, if present
         content_type:
           type: string
@@ -210,7 +211,8 @@ components:
           type: string
           description: Unique identifier for the guide-media to associate with this attachment, applicable only during creation.
         id:
-          type: long
+          type: integer
+          format: int64
           description: Assigned ID when the article attachment is created
           readOnly: true
         inline:
@@ -220,7 +222,8 @@ components:
           type: string
           description: The locale of translation that the attachment will be attached to and can only be set on inline attachments
         size:
-          type: long
+          type: integer
+          format: int64
           description: The attachment file size in bytes
           readOnly: true
         updated_at:
@@ -257,7 +260,8 @@ components:
       type: object
       properties:
         author_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user who wrote the article (set to the user who made the request on create by default)
         body:
           type: string
@@ -287,7 +291,8 @@ components:
           description: The url of the article in Help Center
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the article is created
           readOnly: true
         label_names:
@@ -309,16 +314,19 @@ components:
             type: string
           readOnly: true
         permission_group_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the permission group which defines who can edit and publish this article
         position:
-          type: long
+          type: integer
+          format: int64
           description: The position of this article in the article list. 0 by default
         promoted:
           type: boolean
           description: True if this article is promoted; false otherwise. false by default
         section_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the section to which this article belongs
         source_locale:
           type: string
@@ -336,18 +344,21 @@ components:
           description: The API url of the article
           readOnly: true
         user_segment_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user segment which defines who can see this article. Set to null to make it accessible to everyone. Either user_segment_id or user_segment_ids must be specified
           nullable: true
         user_segment_ids:
           type: array
           description: List of user segment ids which define who can view this article. Set to an empty list to make it accessible to everyone. For Enterprise plans only this may contain more than one user_segment_id. Either user_segment_id or user_segment_ids must be specified
         vote_count:
-          type: long
+          type: integer
+          format: int64
           description: The total number of upvotes and downvotes
           readOnly: true
         vote_sum:
-          type: long
+          type: integer
+          format: int64
           description: The sum of upvotes (+1) and downvotes (-1), which may be positive or negative
           readOnly: true
       example:
@@ -375,14 +386,16 @@ components:
               type: string
               example: en-us
             permission_group_id:
-              type: long
+              type: integer
+              format: int64
               default: 0
               example: 56
             title:
               type: string
               example: Taking photos in low light
             user_segment_id:
-              type: long
+              type: integer
+              format: int64
               example: 123
           required:
             - title
@@ -456,7 +469,8 @@ components:
           description: The url of this category in Help Center
         #          readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when creating categories
         #          readOnly: true
         locale:
@@ -470,7 +484,8 @@ components:
           description: Whether the category is out of date
         #          readOnly: true
         position:
-          type: long
+          type: integer
+          format: int64
           description: The position of this category relative to other categories
         source_locale:
           type: string
@@ -506,7 +521,8 @@ components:
       type: object
       properties:
         author_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the author of this comment. Writable on create by Help Center managers. See [Create Comment](#create-comment)
         body:
           type: string
@@ -519,14 +535,16 @@ components:
           description: The url at which the comment is presented in Help Center
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the comment is created
           readOnly: true
         locale:
           type: string
           description: The locale in which this comment was made
         non_author_editor_id:
-          type: long
+          type: integer
+          format: int64
           description: The user id of whoever performed the most recent (if any) non-author edit. A non-author edit consists of an edit make by a user other than the author that creates or updates the `body` or `author_id`. Note that only edits made after May 17, 2021 will be reflected in this field. If no non-author edits have occured since May 17, 2021, then this field will be `null`.
           readOnly: true
         non_author_updated_at:
@@ -535,7 +553,8 @@ components:
           description: When the comment was last edited by a non-author user
           readOnly: true
         source_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the item on which this comment was made
           readOnly: true
         source_type:
@@ -551,11 +570,13 @@ components:
           description: The API url of this comment
           readOnly: true
         vote_count:
-          type: long
+          type: integer
+          format: int64
           description: The total number of upvotes and downvotes
           readOnly: true
         vote_sum:
-          type: long
+          type: integer
+          format: int64
           description: The sum of upvotes (+1) and downvotes (-1), which may be positive or negative
           readOnly: true
       example:
@@ -592,7 +613,8 @@ components:
       type: object
       properties:
         content_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the subscribed item
           readOnly: true
         content_type:
@@ -604,7 +626,8 @@ components:
           description: The time at which the subscription was created
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the subscription is created
           readOnly: true
         include_comments:
@@ -627,7 +650,8 @@ components:
           description: The API url of the subscription
           readOnly: true
         user_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user who has this subscription
           readOnly: true
       example:
@@ -682,7 +706,8 @@ components:
           description: The time at which the label was created
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the label is created
           readOnly: true
         name:
@@ -727,7 +752,8 @@ components:
       type: object
       properties:
         author_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the author of the comment. Writable on create by Help Center managers. See [Create Post Comment](#create-post-comment)
         body:
           type: string
@@ -740,11 +766,13 @@ components:
           description: The community url of the comment
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the comment is created
           readOnly: true
         non_author_editor_id:
-          type: long
+          type: integer
+          format: int64
           description: The user id of whoever performed the most recent (if any) non-author edit. A non-author edit consists of an edit make by a user other than the author that creates or updates the `body`. Note that only edits made after May 17, 2021 will be reflected in this field. If no non-author edits have occured since May 17, 2021, then this field will be `null`.
           readOnly: true
         non_author_updated_at:
@@ -756,7 +784,8 @@ components:
           type: boolean
           description: Whether the comment is marked as official
         post_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the post on which the comment was made
           readOnly: true
         updated_at:
@@ -768,11 +797,13 @@ components:
           description: The API url of the comment
           readOnly: true
         vote_count:
-          type: long
+          type: integer
+          format: int64
           description: The total number of upvotes and downvotes
           readOnly: true
         vote_sum:
-          type: long
+          type: integer
+          format: int64
           description: The sum of upvotes (+1) and downvotes (-1), which may be positive or negative
           readOnly: true
       example:
@@ -800,21 +831,24 @@ components:
       type: object
       properties:
         author_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the author of the post. *Writable on create by Help Center managers -- see Create Post
           readOnly: true
         closed:
           type: boolean
           description: Whether further comments are allowed
         comment_count:
-          type: long
+          type: integer
+          format: int64
           description: The number of comments on the post
           readOnly: true
         content_tag_ids:
           type: array
           description: The list of content tags attached to the post
           items:
-            type: long
+            type: integer
+            format: int64
         created_at:
           type: string
           format: date-time
@@ -827,7 +861,8 @@ components:
           type: boolean
           description: Whether the post is featured
         follower_count:
-          type: long
+          type: integer
+          format: int64
           description: The number of followers of the post
           readOnly: true
         html_url:
@@ -835,11 +870,13 @@ components:
           description: The community url of the post
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the post is created
           readOnly: true
         non_author_editor_id:
-          type: long
+          type: integer
+          format: int64
           description: The user id of whoever performed the most recent (if any) non-author edit. A non-author edit consists of an edit make by a user other than the author that creates or updates the `title` or `details`. Note that only edits made after May 17, 2021 will be reflected in this field. If no non-author edits have occured since May 17, 2021, then this field will be `null`.
           readOnly: true
         non_author_updated_at:
@@ -857,7 +894,8 @@ components:
           type: string
           description: The title of the post
         topic_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the topic that the post belongs to
         updated_at:
           type: string
@@ -869,11 +907,13 @@ components:
           description: The API url of the post
           readOnly: true
         vote_count:
-          type: long
+          type: integer
+          format: int64
           description: The total number of upvotes and downvotes
           readOnly: true
         vote_sum:
-          type: long
+          type: integer
+          format: int64
           description: The sum of upvotes (+1) and downvotes (-1), which may be positive or negative
           readOnly: true
       example:
@@ -924,7 +964,8 @@ components:
       type: object
       properties:
         category_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the category to which this section belongs
         created_at:
           type: string
@@ -938,7 +979,8 @@ components:
           description: The url of this section in HC
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when creating subscriptions
           readOnly: true
         locale:
@@ -952,11 +994,13 @@ components:
           description: Whether the section is out of date
           readOnly: true
         parent_section_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the section to which this section belongs. Only writable for Guide Enterprise customers
           nullable: true
         position:
-          type: long
+          type: integer
+          format: int64
           description: The position of this section in the section list. Used when sorting is set to ´manual´. By default the section is added to the end of the list
         source_locale:
           type: string
@@ -990,7 +1034,8 @@ components:
           type: object
           properties:
             category_id:
-              type: long
+              type: integer
+              format: int64
               description: The id of the category to which this section belongs
             description:
               type: string
@@ -999,10 +1044,12 @@ components:
               type: string
               description: The name of the section
             parent_section_id:
-              type: long
+              type: integer
+              format: int64
               description: The id of the section to which this section belongs. Only writable for Guide Enterprise customers
             position:
-              type: long
+              type: integer
+              format: int64
               description: The position of this section in the section list. Used when sorting is set to ´manual´.
             sorting:
               type: string
@@ -1056,7 +1103,8 @@ components:
           description: The description of the topic. By default an empty string
           nullable: true
         follower_count:
-          type: long
+          type: integer
+          format: int64
           description: The number of users following the topic
           readOnly: true
         html_url:
@@ -1064,7 +1112,8 @@ components:
           description: The community url of the topic
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the topic is created
           readOnly: true
         manageable_by:
@@ -1077,7 +1126,8 @@ components:
           type: string
           description: The name of the topic
         position:
-          type: long
+          type: integer
+          format: int64
           description: The position of the topic relative to other topics in the community
         updated_at:
           type: string
@@ -1088,7 +1138,8 @@ components:
           description: The API url of the topic
           readOnly: true
         user_segment_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user segment to which this topic belongs
           nullable: true
       example:
@@ -1123,7 +1174,8 @@ components:
           description: The time at which the translation was created
           readOnly: true
         created_by_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user who created the translation
           readOnly: true
         draft:
@@ -1134,7 +1186,8 @@ components:
           description: The url of the translation in Help Center
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when a translation is created
           readOnly: true
         locale:
@@ -1144,7 +1197,8 @@ components:
           type: boolean
           description: True if the translation is outdated; false otherwise. False by default
         source_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the item that has this translation
           readOnly: true
         source_type:
@@ -1159,7 +1213,8 @@ components:
           description: The time at which the translation was last updated
           readOnly: true
         updated_by_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user who last updated the translation
           nullable: true
           readOnly: true
@@ -1243,7 +1298,8 @@ components:
           type: array
           description: The ids of users added specifically to this user segment, regardless of matching tags or other criteria
           items:
-            type: long
+            type: integer
+            format: int64
         built_in:
           type: boolean
           description: Whether the user segment is built-in. Built-in user segments cannot be modified
@@ -1256,9 +1312,11 @@ components:
           type: array
           description: The ids of the groups that have access
           items:
-            type: long
+            type: integer
+            format: int64
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the user segment is created
         name:
           type: string
@@ -1272,7 +1330,8 @@ components:
           type: array
           description: The ids of the organizations that have access
           items:
-            type: long
+            type: integer
+            format: int64
         tags:
           type: array
           description: All the tags a user must have to have access
@@ -1316,15 +1375,18 @@ components:
       type: object
       properties:
         followed_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user being followed
           readOnly: true
         follower_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user doing the following
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the subscription is created
           readOnly: true
       example:
@@ -1350,11 +1412,13 @@ components:
           description: The time at which the vote was created
           readOnly: true
         id:
-          type: long
+          type: integer
+          format: int64
           description: Automatically assigned when the vote is created
           readOnly: true
         item_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the item for which this vote was cast
           readOnly: true
         item_type:
@@ -1370,11 +1434,13 @@ components:
           description: The API url of this vote
           readOnly: true
         user_id:
-          type: long
+          type: integer
+          format: int64
           description: The id of the user who cast this vote
           readOnly: true
         value:
-          type: long
+          type: integer
+          format: int64
           description: The value of the vote
       example:
         created_at: "2012-04-04T09:14:57Z"
@@ -1404,7 +1470,8 @@ components:
       description: The unique ID of the article attachment
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 1428
     ArticleId:
       name: article_id
@@ -1412,7 +1479,8 @@ components:
       description: The unique ID of the article
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360026053753
     ArticlesSortBy:
       name: sort_by
@@ -1431,7 +1499,8 @@ components:
       description: The unique ID of the category
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360002011513
     CommentId:
       name: comment_id
@@ -1439,7 +1508,8 @@ components:
       description: The unique ID of the comment
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360004163994
     LabelId:
       name: label_id
@@ -1447,7 +1517,8 @@ components:
       description: The unique ID of the label
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360015727233
     OptionalLocale:
       name: locale
@@ -1464,7 +1535,8 @@ components:
       description: The unique ID of the post comment
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360010837133
     PostId:
       name: post_id
@@ -1472,7 +1544,8 @@ components:
       description: The unique ID of the post
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360039436873
     RequiredLocale:
       name: locale
@@ -1489,7 +1562,8 @@ components:
       description: The unique ID of the section
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360004785313
     SortBy:
       name: sort_by
@@ -1516,7 +1590,8 @@ components:
       description: The unique ID of the subscription
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 1234
     TopicId:
       name: topic_id
@@ -1524,7 +1599,8 @@ components:
       description: The unique ID of the topic
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 360001326113
     TranslationId:
       name: translation_id
@@ -1532,7 +1608,8 @@ components:
       description: The unique ID of the translation
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 1234
     UserId:
       name: user_id
@@ -1540,7 +1617,8 @@ components:
       description: The unique ID of the user
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 1234
     UserSegmentId:
       name: user_segment_id
@@ -1548,7 +1626,8 @@ components:
       description: The unique ID of the user segment
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 1234
     VoteId:
       name: vote_id
@@ -1556,7 +1635,8 @@ components:
       description: The unique ID of the vote
       required: true
       schema:
-        type: long
+        type: integer
+        format: int64
       example: 35467
   examples:
     ArticleAttachmentResponseExample:
