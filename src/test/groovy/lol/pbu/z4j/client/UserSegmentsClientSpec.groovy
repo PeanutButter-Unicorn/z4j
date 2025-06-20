@@ -11,6 +11,11 @@ import spock.lang.Specification
 @MicronautTest
 class UserSegmentsClientSpec extends Specification {
 
+    /**
+     * NOTE: there's an undocumented defect in zendesk's documented api vs their actual behavior.
+     * the user_segment object requires an ID and a name, whereas their docs say the ID is all that's required.
+     */
+
     @Inject
     @Shared
     UserSegmentsClient userSegmentsClient
@@ -42,5 +47,65 @@ class UserSegmentsClientSpec extends Specification {
         userSegment       | _
         "signed_in_users" | _
         "staff"           | _
+    }
+
+    def "can delete user segment with '#segmentName' name"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        when:"delete user segment from previous step"
+        def response = userSegmentsClient.deleteUserSegment(userSegment.getId())
+
+        then:"received expected 204 response"
+        response.status() == HttpStatus.NO_CONTENT
+
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+    def "can list user segment sections"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        when:"list sections with user segment from previous step"
+        def response = userSegmentsClient.listUserSegmentSections(userSegment.getId())
+
+        then: "received expected 200 response"
+        response.status() == HttpStatus.OK
+
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+    def "can list user segment topics"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        when:"list topics with user segment from previous step"
+        def response = userSegmentsClient.listUserSegmentTopics(userSegment.getId())
+
+        then: "received expected 200 response"
+        response.status() == HttpStatus.OK
+
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+
+    /**
+     * creates a user segment from the given user type and name
+     * @param userType either "signed_in_users" or "staff"
+     * @param name the name of the user segment
+     * @return the ID of the created user segment
+     */
+    UserSegment createUserSegment(String userType, String name) {
+        return userSegmentsClient.createUserSegment(new CreateUserSegmentRequest(
+                new UserSegment(name, userType))).body().getUserSegment()
     }
 }
