@@ -12,8 +12,10 @@ import spock.lang.Specification
 class UserSegmentsClientSpec extends Specification {
 
     /**
-     * NOTE: there's an undocumented defect in zendesk's documented api vs their actual behavior.
-     * the user_segment object requires an ID and a name, whereas their docs say the ID is all that's required.
+     * NOTE: there're two an undocumented defects in zendesk's documented api vs their actual behavior.
+     *
+     * - the user_segment object requires an ID and a name, whereas their docs say the ID is all that's required.
+     * - the update user segment endpoint requires a user segment object (the createUserSegment Object can be used)
      */
 
     @Inject
@@ -87,6 +89,43 @@ class UserSegmentsClientSpec extends Specification {
 
         when:"list topics with user segment from previous step"
         def response = userSegmentsClient.listUserSegmentTopics(userSegment.getId())
+
+        then: "received expected 200 response"
+        response.status() == HttpStatus.OK
+
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+    def "can show user segment"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        when:"show user segment with user segment ID from previous step"
+        def response = userSegmentsClient.showUserSegment(userSegment.getId())
+
+        then: "received expected 200 response"
+        response.status() == HttpStatus.OK
+
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+    def "can update user segment"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        and: "create local iteration of user segment object with updated name"
+        userSegment.setName("this is a new name")
+
+        when:"show update segment with user segment ID from previous step"
+        def response = userSegmentsClient.updateUserSegment(
+                userSegment.getId(),
+                new CreateUserSegmentRequest(userSegment))
 
         then: "received expected 200 response"
         response.status() == HttpStatus.OK

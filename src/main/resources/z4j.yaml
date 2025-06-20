@@ -95,6 +95,14 @@ paths:
       summary: Update User Segment
       description: |
         Allowed for Help Center managers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_segment:
+                  $ref: '#/components/schemas/UserSegment'
       responses:
         "200":
           description: OK Response
