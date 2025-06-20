@@ -1,25 +1,27 @@
 package lol.pbu.z4j.client
 
-
 import io.micronaut.http.HttpStatus
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
-import lol.pbu.z4j.model.UserSegmentObject
+import lol.pbu.z4j.model.CreateUserSegmentRequest
+import lol.pbu.z4j.model.UserSegment
 import spock.lang.Shared
 import spock.lang.Specification
 
 @MicronautTest
 class UserSegmentsClientSpec extends Specification {
 
+    /**
+     * NOTE: there're two an undocumented defects in zendesk's documented api vs their actual behavior.
+     *
+     * - the user_segment object requires an ID and a name, whereas their docs say the ID is all that's required.
+     * - the update user segment endpoint requires a user segment object (the createUserSegment Object can be used)
+     */
+
     @Inject
     @Shared
     UserSegmentsClient userSegmentsClient
 
-    @Shared
-    List<Map<String, String>> userSegmentScenarios = [
-            [segmentType: "signed_in_users", name: "signed in users", updatedName: "updated signed in users test"],
-            [segmentType: "staff", name: "staff", updatedName: "updated staff members test"]
-    ]
 
     def "can list user segments"() {
         when: "list user segments with query value '#segmentQuery'"
@@ -35,129 +37,114 @@ class UserSegmentsClientSpec extends Specification {
         false        | _
     }
 
-    def "test the listUserSegmentTopics function"() {
+    def "can create user segment with '#userSegment' user type"() {
         when:
-        //create a user id to use to test with
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String);
-        def createResponse = userSegmentsClient.createUserSegment(userSegment);
+        def response = userSegmentsClient.createUserSegment(new CreateUserSegmentRequest(
+                new UserSegment(userSegment, userSegment)))
 
         then: "received expected 201 response"
-        createResponse.status() == HttpStatus.CREATED;
-
-        and:
-        Long id = createResponse.body().userSegment.id;
-
-        then: "test the response from the listUserSegmentTopics method"
-        def response = userSegmentsClient.listUserSegmentTopics(id);
-        and:
-        response.status() == HttpStatus.OK;
-
-        //collect the variables
-        where:
-        [userSegmentString, userSegmentName, updatedUserSegmentName] << userSegmentScenarios.collect {
-            [it.segmentType, it.name, it.updatedName]
-        }
-    }
-
-    def "test the listUserSegmentSections function"(){
-        when:
-        //create a user id to use to test with
-        //create a function to produce a user id separately
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String);
-        def createResponse = userSegmentsClient.createUserSegment(userSegment);
-
-        then: "received expected 201 response"
-        createResponse.status() == HttpStatus.CREATED;
-
-        and:
-        Long id = createResponse.body().userSegment.id;
-
-        then: "test the response from the listUserSegmentSections method"
-        def response = userSegmentsClient.listUserSegmentSections(id);
-        and:
-        response.status() == HttpStatus.OK;
-
-        //collect the variables
-        where:
-        [userSegmentString, userSegmentName, updatedUserSegmentName] << userSegmentScenarios.collect {
-            [it.segmentType, it.name, it.updatedName]
-        }
-    }
-
-    def "can create user segments and delete them for #userSegmentString"() {
-        when: "create user segment for #userSegmentString and named #userSegmentName"
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String)
-        def createResponse = userSegmentsClient.createUserSegment(userSegment)
-
-        then: "received expected 201 response"
-        createResponse.status() == HttpStatus.CREATED
-
-        and:
-        Long id = createResponse.body().userSegment.id
-
-        then: "delete user segment with id #id"
-        def deleteResponse = userSegmentsClient.deleteUserSegment(id)
-
-        then: "received expected 204 response"
-        deleteResponse.status() == HttpStatus.NO_CONTENT
+        response.status() == HttpStatus.CREATED
 
         where:
-        [userSegmentString, userSegmentName, updatedUserSegmentName] << userSegmentScenarios.collect {
-            [it.segmentType, it.name, it.updatedName]
-        }
+        userSegment       | _
+        "signed_in_users" | _
+        "staff"           | _
     }
 
+    def "can delete user segment with '#segmentName' name"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
 
-    def "can create user segments and update them for #userSegmentString"() {
-        when: "create user segment for #userSegmentString and named #userSegmentName"
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String)
-        def createResponse = userSegmentsClient.createUserSegment(userSegment)
+        when:"delete user segment from previous step"
+        def response = userSegmentsClient.deleteUserSegment(userSegment.getId())
 
-        then: "received expected 201 response"
-        createResponse.status() == HttpStatus.CREATED
+        then:"received expected 204 response"
+        response.status() == HttpStatus.NO_CONTENT
 
-        and:
-        Long id = createResponse.body().userSegment.id
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
 
-        when: "update user segment with id #id and name #updatedUserSegmentName"
-        def updatedUserSegment = new UserSegmentObject(userSegmentString as String, updatedUserSegmentName as String)
-        def updateResponse = userSegmentsClient.updateUserSegment(id, updatedUserSegment)
+    def "can list user segment sections"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        when:"list sections with user segment from previous step"
+        def response = userSegmentsClient.listUserSegmentSections(userSegment.getId())
 
         then: "received expected 200 response"
-        updateResponse.status() == HttpStatus.OK
-
-        cleanup:
-        userSegmentsClient.deleteUserSegment(id)
+        response.status() == HttpStatus.OK
 
         where:
-        [userSegmentString, userSegmentName, updatedUserSegmentName] << userSegmentScenarios.collect {
-            [it.segmentType, it.name, it.updatedName]
-        }
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
     }
 
-    def "can create user segments and show them for #userSegmentString"() {
-        when: "create user segment for #userSegmentString and named #userSegmentName"
-        def userSegment = new UserSegmentObject(userSegmentString as String, userSegmentName as String)
-        def createResponse = userSegmentsClient.createUserSegment(userSegment)
+    def "can list user segment topics"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
 
-        then: "received expected 201 response"
-        createResponse.status() == HttpStatus.CREATED
-
-        and:
-        Long id = createResponse.body().userSegment.id
-
-        when: "show user segment with id #id"
-        def showResponse = userSegmentsClient.showUserSegment(id)
+        when:"list topics with user segment from previous step"
+        def response = userSegmentsClient.listUserSegmentTopics(userSegment.getId())
 
         then: "received expected 200 response"
-        showResponse.status() == HttpStatus.OK
-
-        cleanup:
-        userSegmentsClient.deleteUserSegment(id)
+        response.status() == HttpStatus.OK
 
         where:
-        [userSegmentString, userSegmentName] << userSegmentScenarios.collect {
-            [it.segmentType, it.name]
-        }
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+    def "can show user segment"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        when:"show user segment with user segment ID from previous step"
+        def response = userSegmentsClient.showUserSegment(userSegment.getId())
+
+        then: "received expected 200 response"
+        response.status() == HttpStatus.OK
+
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+    def "can update user segment"() {
+        given: "create user segment on server with #userType and #name"
+        def userSegment = createUserSegment(userType, segmentName)
+
+        and: "create local iteration of user segment object with updated name"
+        userSegment.setName("this is a new name")
+
+        when:"show update segment with user segment ID from previous step"
+        def response = userSegmentsClient.updateUserSegment(
+                userSegment.getId(),
+                new CreateUserSegmentRequest(userSegment))
+
+        then: "received expected 200 response"
+        response.status() == HttpStatus.OK
+
+        where:
+        userType          | segmentName            | _
+        "signed_in_users" | "signed_in_users name" | _
+        "staff"           | "staff name"           | _
+    }
+
+
+    /**
+     * creates a user segment from the given user type and name
+     * @param userType either "signed_in_users" or "staff"
+     * @param name the name of the user segment
+     * @return the ID of the created user segment
+     */
+    UserSegment createUserSegment(String userType, String name) {
+        return userSegmentsClient.createUserSegment(new CreateUserSegmentRequest(
+                new UserSegment(name, userType))).body().getUserSegment()
     }
 }
