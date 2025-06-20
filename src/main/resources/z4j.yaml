@@ -1299,6 +1299,7 @@ components:
         user_type: staff
       required:
         - user_type
+        - name
     UserSegmentResponse:
       type: object
       properties:
