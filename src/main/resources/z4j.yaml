@@ -6,6 +6,124 @@ info:
 tags:
   - name: User Subscriptions
 paths:
+  /api/v2/help_center/{locale}/articles:
+    parameters:
+      - $ref: '#/components/parameters/OptionalLocale'
+    get:
+      operationId: ListArticles
+      tags:
+        - Articles
+      summary: List Articles
+      parameters:
+        - name: sort_by
+          in: query
+          description: Sorts the articles by one of the accepted values
+          schema:
+            type: string
+            enum:
+              - position
+              - title
+              - created_at
+              - updated_at
+        - name: sort_order
+          in: query
+          description: Selects the order of the results.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: start_time
+          in: query
+          description: You can use the incremental article endpoint to list all the articles that were updated since a certain date and time.
+          schema:
+            type: integer
+            format: int64
+          example: 1404345231
+        - name: label_names
+          in: query
+          description: Only articles that have all the labels are returned.
+          schema:
+            type: string
+          example: photos,camera
+      responses:
+        "200":
+          description: OK Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticlesResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/ArticlesResponseExample'
+  /api/v2/help_center/{locale}/articles/{article_id}:
+    parameters:
+      - $ref: '#/components/parameters/OptionalLocale'
+      - $ref: '#/components/parameters/ArticleId'
+    get:
+      operationId: ShowArticle
+      tags:
+        - Articles
+      summary: Show Article
+      description: |
+        Shows the properties of an article.
+
+        **Note**: `{/locale}` is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.
+
+        #### Allowed for
+
+        * Anonymous users
+
+        #### Sideloads
+
+        The following sideloads are supported:
+
+        | Name          | Will sideload
+        |---------------|--------------
+        | users         | the author
+        | sections      | the section
+        | categories    | the category
+        | translations  | the article, section and category translations, if any
+
+        Unlike other sideloads, translations are embedded within the article because they're
+        not shared between resources.
+        Section and category translations are only sideloaded if present.
+      responses:
+        "200":
+          description: OK Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/ArticleResponseExample'
+    put:
+      operationId: UpdateArticle
+      tags:
+        - Articles
+      summary: Update Article
+      responses:
+        "200":
+          description: OK Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/ArticleResponseExample'
+    delete:
+      operationId: ArchiveArticle
+      tags:
+        - Articles
+      summary: Archive Article
+      description: |
+        Archives the article. You can restore the article using the Help Center user interface. {@see <a href='https://support.zendesk.com/hc/en-us/articles/235721587'>Viewing and restoring archived articles</a>}.
+        Allowed for Agents
+      responses:
+        "204":
+          description: Default success response
   /api/v2/help_center/user_segments:
     get:
       operationId: ListUserSegments
@@ -165,7 +283,7 @@ paths:
       description: |
         Lists the topics that use the specified user segment.
 
-        This endpoint supports pagination as described in [Pagination](developer.zendesk.com/api-reference/help_center/help-center-api/help-center-api/#pagination).
+        This endpoint supports pagination as described in @see <a href='developer.zendesk.com/api-reference/help_center/help-center-api/help-center-api/#pagination'>Pagination</a>.
 
         #### Allowed for
 
@@ -176,7 +294,7 @@ paths:
         * Cursor pagination (recommended)
         * Offset pagination
 
-        See [Pagination](developer.zendesk.com/api-reference/introduction/pagination/).
+        See @see <a href='developer.zendesk.com/api-reference/introduction/pagination/'>Pagination</a>.
       responses:
         "200":
           description: OK Response
@@ -273,7 +391,7 @@ components:
           description: The id of the user who wrote the article (set to the user who made the request on create by default)
         body:
           type: string
-          description: HTML body of the article. Unsafe tags and attributes may be removed before display. For a list of safe tags and attributes, see [Allowing unsafe HTML in Help Center articles](https://support.zendesk.com/hc/en-us/articles/115015895948) in Zendesk help
+          description: HTML body of the article. Unsafe tags and attributes may be removed before display. For a list of safe tags and attributes, see @see <a href='https://support.zendesk.com/hc/en-us/articles/115015895948'>Allowing unsafe HTML in Help Center articles</a> in Zendesk help
         comments_disabled:
           type: boolean
           description: True if comments are disabled; false otherwise
@@ -531,13 +649,13 @@ components:
         author_id:
           type: integer
           format: int64
-          description: The id of the author of this comment. Writable on create by Help Center managers. See [Create Comment](#create-comment)
+          description: The id of the author of this comment. Writable on create by Help Center managers. See @see <a href='#create-comment'>Create Comment</a>
         body:
           type: string
-          description: The comment made by the author. See [User content](#user-content)
+          description: The comment made by the author. See @see <a href='#user-content'>User content</a>
         created_at:
           type: string
-          description: The time the comment was created. Writable on create by Help Center managers. See [Create Comment](#create-comment)
+          description: The time the comment was created. Writable on create by Help Center managers. See @see <a href='#create-comment'>Create Comment</a>
         html_url:
           type: string
           description: The url at which the comment is presented in Help Center
@@ -648,7 +766,7 @@ components:
           readOnly: true
         source_locale:
           type: string
-          description: Used only for [Create Section Subscription](#create-section-subscription) and [Create Article Subscription](#create-article-subscription), where it's mandatory. Selects the locale of the content to be subscribed
+          description: Used only for @see <a href='#create-section-subscription'>Create Section Subscription</a> and @see <a href='#create-article-subscription'>Create Article Subscription</a>, where it's mandatory. Selects the locale of the content to be subscribed
         updated_at:
           type: string
           description: The time at which the subscription was last updated
@@ -762,13 +880,13 @@ components:
         author_id:
           type: integer
           format: int64
-          description: The id of the author of the comment. Writable on create by Help Center managers. See [Create Post Comment](#create-post-comment)
+          description: The id of the author of the comment. Writable on create by Help Center managers. See @see <a href='#create-post-comment'>Create Post Comment</a>
         body:
           type: string
-          description: The comment made by the author. See [User content](#user-content)
+          description: The comment made by the author. See @see <a href='#user-content'>User content</a>
         created_at:
           type: string
-          description: When the comment was created. Writable on create by Help Center managers. See [Create Post Comment](#create-post-comment)
+          description: When the comment was created. Writable on create by Help Center managers. See @see <a href='#create-post-comment'>Create Post Comment</a>
         html_url:
           type: string
           description: The community url of the comment
@@ -860,11 +978,11 @@ components:
         created_at:
           type: string
           format: date-time
-          description: When the post was created. Writable on create by Help Center managers -- see [Create Post](#create-post)
+          description: When the post was created. Writable on create by Help Center managers -- see @see <a href='#create-post'>Create Post</a>
           readOnly: true
         details:
           type: string
-          description: The details of the post made by the author. See [User content](#user-content)
+          description: The details of the post made by the author. See @see <a href='#user-content'>User content</a>
         featured:
           type: boolean
           description: Whether the post is featured
