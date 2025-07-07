@@ -6,6 +6,59 @@ info:
 tags:
   - name: User Subscriptions
 paths:
+  /api/v2/help_center/{locale}/articles:
+    parameters:
+      - $ref: '#/components/parameters/OptionalLocale'
+    get:
+      operationId: ListArticles
+      tags:
+        - Articles
+      summary: List Articles
+      parameters:
+        - name: sort_by
+          in: query
+          description: Sorts the articles by one of the accepted values
+          required: false
+          schema:
+            type: string
+            enum:
+              - position
+              - title
+              - created_at
+              - updated_at
+        - name: sort_order
+          in: query
+          description: Selects the order of the results.
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: start_time
+          in: query
+          required: false
+          description: You can use the incremental article endpoint to list all the articles that were updated since a certain date and time.
+          schema:
+            type: integer
+          example: 1404345231
+        - name: label_names
+          required: false
+          in: query
+          description: Only articles that have all the labels are returned.
+          schema:
+            type: string
+          example: photos,camera
+      responses:
+        "200":
+          description: OK Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticlesResponse'
+              examples:
+                default:
+                  $ref: '#/components/examples/ArticlesResponseExample'
   /api/v2/help_center/user_segments:
     get:
       operationId: ListUserSegments
