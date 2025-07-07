@@ -2264,7 +2264,3 @@ components:
           id: 35467
           user_id: 888887
           value: -1
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
