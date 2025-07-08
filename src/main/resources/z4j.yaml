@@ -4,17 +4,19 @@ info:
   description: Help Center v2 REST API
   version: 2.0.0
   tags:
-  - User Subscriptions
-  - Locales
+    - User Subscriptions
+    - Locales
 paths:
-  /api/v2/locales/public:
+  /api/v2/locales:
     get:
-      operationId: ListAvailablePublicLocales
+      operationId: ListLocales
       tags:
         - Locales
-      summary: List Available Public Locales
+      summary: List Locales
       description: |
-        Lists the translation locales that are available to all accounts. Allowed For anyone
+        Lists the translation locales available for the account.
+        
+        Allowed for anyone
       responses:
         "200":
           description: Success response
@@ -1651,7 +1653,7 @@ components:
     OptionalLocale:
       name: locale
       in: path
-      description: The locale the item is displayed in
+      description: The locale the item is displayed in. (must be lowercase, even if returned from zendesk as mixed case)
       required: true
       schema:
         type: string
