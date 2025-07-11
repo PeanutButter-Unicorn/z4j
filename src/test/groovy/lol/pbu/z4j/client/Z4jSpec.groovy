@@ -10,10 +10,10 @@ import spock.lang.Specification
 class Z4jSpec extends Specification {
 
     @Shared
-    ApplicationContext managerCtx, agentCtx, userCtx, badTokenCtx, badEmailCtx, badUrlCtx
+    ApplicationContext adminCtx, agentCtx, userCtx, badTokenCtx, badEmailCtx, badUrlCtx
 
     void setupSpec() {
-        managerCtx = getCtx("Z4J_ADMIN_EMAIL")
+        adminCtx = getCtx("Z4J_ADMIN_EMAIL")
         agentCtx = getCtx("Z4J_AGENT_EMAIL")
         userCtx = getCtx("Z4J_END_USER_EMAIL")
         badTokenCtx = getCtx("Z4J_ADMIN_EMAIL", ["micronaut.http.services.zendesk.token": "this-is-an-invalid-token"])
@@ -22,7 +22,7 @@ class Z4jSpec extends Specification {
     }
 
     void cleanupSpec() {
-        managerCtx?.stop()
+        adminCtx?.stop()
         agentCtx?.stop()
         userCtx?.stop()
         badTokenCtx?.stop()

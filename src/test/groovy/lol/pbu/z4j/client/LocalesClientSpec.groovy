@@ -1,9 +1,7 @@
 package lol.pbu.z4j.client
 
-
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.exceptions.HttpClientException
-import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import spock.lang.Shared
 import spock.lang.Unroll
@@ -12,11 +10,11 @@ import spock.lang.Unroll
 class LocalesClientSpec extends Z4jSpec {
 
     @Shared
-    LocalesClient managersLocalesClient, agentsLocalesClient, usersLocalesClient, noAuthLocalesClient,
+    LocalesClient adminLocalesClient, agentsLocalesClient, usersLocalesClient, noAuthLocalesClient,
                   badEmailLocalesClient, badUrlLocalesClient
 
     def setupSpec() {
-        managersLocalesClient = managerCtx.getBean(LocalesClient.class)
+        adminLocalesClient = adminCtx.getBean(LocalesClient.class)
         agentsLocalesClient = agentCtx.getBean(LocalesClient.class)
         usersLocalesClient = userCtx.getBean(LocalesClient.class)
         noAuthLocalesClient = badTokenCtx.getBean(LocalesClient.class)
@@ -35,7 +33,7 @@ class LocalesClientSpec extends Z4jSpec {
 
         where:
         clientName              | localesClient
-        "managers client"       | managersLocalesClient
+        "managers client"       | adminLocalesClient
         "agents client"         | agentsLocalesClient
         "users client"          | usersLocalesClient
         "no-auth client"        | noAuthLocalesClient
