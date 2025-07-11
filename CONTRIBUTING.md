@@ -13,12 +13,12 @@ PBU projects are open to contributions! Below are some instructions on best prac
 - We follow (and enforce) [conventional commits] in this repo.
 ## Set up your machine
 
-`z4j` is written in java 21, runs on [graal community distro], and uses [gradle] as its build tool.
+`z4j` is written in java 17, runs on [graal community distro], and uses [gradle] as its build tool.
 
 ### Prerequisites:
 - Gradle doesn't need to be installed locally, a [gradle wrapper] is provided with this repo.
 - Docker or Podman installed and running at compile time
-- Graal-CE 21
+- Graal-CE 17
 - Git
 
 #### Getting Started
