@@ -38,7 +38,6 @@ class TicketsClientSpec extends Z4jSpec {
         client             | _
         ticketsAgentClient | _
         ticketsAdminClient | _
-        ticketsUserClient  | _
     }
 
     def "Listing tickets fail with unsupported queries as expected"() {
@@ -52,6 +51,7 @@ class TicketsClientSpec extends Z4jSpec {
         client               | _
         ticketBadEmailClient | _
         ticketBadUrlClient   | _
+        ticketsUserClient    | _
     }
 
 
@@ -69,7 +69,6 @@ class TicketsClientSpec extends Z4jSpec {
         client             | _
         ticketsAgentClient | _
         ticketsAdminClient | _
-        ticketsUserClient  | _
     }
 
     def "can get a ticket"() {
@@ -83,6 +82,7 @@ class TicketsClientSpec extends Z4jSpec {
         client               | _
         ticketBadEmailClient | _
         ticketBadUrlClient   | _
+        ticketsUserClient    | _
     }
 
     def "can create a ticket"() {
@@ -106,7 +106,6 @@ class TicketsClientSpec extends Z4jSpec {
         client             | _
         ticketsAgentClient | _
         ticketsAdminClient | _
-        ticketsUserClient  | _
     }
 
     def "can create a ticket"() {
@@ -126,5 +125,6 @@ class TicketsClientSpec extends Z4jSpec {
         client               | _
         ticketBadEmailClient | _
         ticketBadUrlClient   | _
+        ticketsUserClient    | _
     }
 }
