@@ -1,15 +1,18 @@
 plugins {
     id("it.nicolasfarabegoli.conventional-commits") version "3.1.3"
     id("groovy")
+    id("io.micronaut.application") version "4.5.3"
     id("io.micronaut.aot") version "4.5.3"
     id("io.micronaut.library") version "4.5.3"
     id("io.micronaut.openapi") version "4.5.3"
-    id("maven-publish")
-    id("org.jreleaser") version "1.19.0"
 }
 
 version = project.properties["z4jVersion"]!!
 group = "lol.pbu"
+
+application {
+    mainClass.set("lol.pbu.Application")
+}
 
 repositories {
     mavenCentral()
@@ -34,8 +37,6 @@ dependencies {
 
 java {
     sourceCompatibility = JavaVersion.toVersion("17") // graalvm-ce
-    withJavadocJar()
-    withSourcesJar()
 }
 
 micronaut {
@@ -68,63 +69,6 @@ micronaut {
             clientId.set("zendesk")
             apiNameSuffix.set("Client")
             alwaysUseGenerateHttpResponse.set(true)
-        }
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-
-            pom {
-                name.set("z4j")
-                description.set("Zendesk API client for Java")
-                url.set("https://github.com/PeanutButter-Unicorn/z4j")
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("Jonathan-Zollinger")
-                        name.set("Jonathan Zollinger")
-                        email.set("jonathan.zollinger@gmail.com")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:https://github.com/PeanutButter-Unicorn/z4j.git")
-                    developerConnection.set("scm:git:ssh://github.com/PeanutButter-Unicorn/z4j.git")
-                    url.set("https://github.com/PeanutButter-Unicorn/z4j")
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "staging"
-            url = layout.buildDirectory.dir("staging-deploy")
-        }
-    }
-}
-
-jreleaser {
-    signing {
-        isEnabled.set(true)
-        isArmored.set(true)
-    }
-    deploy {
-        maven {
-            mavenCentral {
-                sonatype {
-                    isEnabled.set(true)
-                    url.set("https://central.sonatype.com/api/v1/publisher")
-                    stagingRepository(layout.buildDirectory.dir("staging-deploy"))
-                }
-            }
         }
     }
 }
