@@ -3,7 +3,6 @@ package lol.pbu.z4j.client
 import io.micronaut.context.ApplicationContext
 import io.micronaut.runtime.server.EmbeddedServer
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
-import jakarta.inject.Inject
 import net.datafaker.Faker
 import spock.lang.Shared
 import spock.lang.Specification
