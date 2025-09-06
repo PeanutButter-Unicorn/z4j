@@ -32,3 +32,9 @@ jobs:
         [ -z "${Z4J_END_USER_EMAIL}" ] && echo "Z4J_END_USER_EMAIL is NOT set" || echo "Z4J_END_USER_EMAIL is set"
     - name: Run Tests
       run: ./gradlew test
+    - name: Upload test report
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: build/reports/tests/test
