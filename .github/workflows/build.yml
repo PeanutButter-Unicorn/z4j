@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -30,13 +29,10 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
-
   dependency-submission:
-
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -44,6 +40,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'graalvm-community'
-
       - name: Generate and submit dependency graph
         uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
