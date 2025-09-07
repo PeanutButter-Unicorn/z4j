@@ -5,6 +5,8 @@ plugins {
     id("io.micronaut.aot") version "4.5.3"
     id("io.micronaut.library") version "4.5.3"
     id("io.micronaut.openapi") version "4.5.3"
+    id("jacoco")
+    id("org.sonarqube") version "latest.release"
 }
 
 version = project.properties["z4jVersion"]!!
@@ -72,5 +74,17 @@ micronaut {
             apiNameSuffix.set("Client")
             alwaysUseGenerateHttpResponse.set(true)
         }
+    }
+}
+sonar {
+    properties {
+        property("sonar.projectKey", "PeanutButter-Unicorn_z4j")
+        property("sonar.projectName", "Zendesk Java Client")
+    }
+}
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
     }
 }
