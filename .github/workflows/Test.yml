@@ -5,7 +5,7 @@ on:
       - "main"
       - "[0-9]+.[0-9]+.[0-9]+" # release branches
 jobs:
-  test:
+  build-and-analyze:
     runs-on: ubuntu-latest
     env:
       Z4J_URL: ${{ secrets.ZENDESK_URL }}
@@ -13,10 +13,13 @@ jobs:
       Z4J_ADMIN_EMAIL: ${{ secrets.ZENDESK_ADMIN_EMAIL}}
       Z4J_AGENT_EMAIL: ${{ secrets.ZENDESK_AGENT_EMAIL}}
       Z4J_END_USER_EMAIL: ${{ secrets.ZENDESK_END_USER_EMAIL}}
+      # GITHUB_TOKEN is required for SonarCloud to decorate PRs
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0 # give full history to sonar
+        # SonarQube needs a full history to assign issues correctly
+        fetch-depth: 0
     - name: Set up JDK
       uses: graalvm/setup-graalvm@v1
       with:
@@ -31,18 +34,20 @@ jobs:
         [ -z "${Z4J_ADMIN_EMAIL}" ] && echo "Z4J_ADMIN_EMAIL is NOT set" || echo "Z4J_ADMIN_EMAIL is set"
         [ -z "${Z4J_AGENT_EMAIL}" ] && echo "Z4J_AGENT_EMAIL is NOT set" || echo "Z4J_AGENT_EMAIL is set"
         [ -z "${Z4J_END_USER_EMAIL}" ] && echo "Z4J_END_USER_EMAIL is NOT set" || echo "Z4J_END_USER_EMAIL is set"
-    - name: Run Tests
-      run: ./gradlew test
+    - name: Build and run tests
+      run: ./gradlew build
+    - name: Sonar Scan
+      # Only run SonarQube on PRs to main to avoid issues with forks
+      if: ${{ github.event.pull_request.base.ref == 'main' && github.event.action != 'closed' }}
+      run: |
+        ./gradlew sonar
+        -Dsonar.projectKey=PeanutButter-Unicorn_z4j
+        -Dsonar.organization=peanutbutter-unicorn
+        -Dsonar.host.url=https://sonarcloud.io
+        -Dsonar.token=${{ secrets.SONAR_TOKEN }}
     - name: Upload test report
       if: failure()
       uses: actions/upload-artifact@v4
       with:
         name: test-report
         path: build/reports/tests/test
-    - name: SonarQubeScan
-      uses: SonarSource/sonarqube-scan-action@v5
-      env:
-        SONAR_HOST_URL: "https://sonarcloud.io"
-        SONAR_ORGANIZATION: "peanutbutter-unicorn"
-        SONAR_PROJECT_KEY: "PeanutButter-Unicorn_z4j"
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
