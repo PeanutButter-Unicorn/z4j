@@ -15,12 +15,13 @@ jobs:
       Z4J_END_USER_EMAIL: ${{ secrets.ZENDESK_END_USER_EMAIL}}
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # give full history to sonar
     - name: Set up JDK
       uses: graalvm/setup-graalvm@v1
       with:
         java-version: '17'
         distribution: 'graalvm-community'
-
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
     - name: Check Zendesk env vars are set
@@ -38,17 +39,10 @@ jobs:
       with:
         name: test-report
         path: build/reports/tests/test
-  sonarqube:
-    name: SonarQube
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: SonarQubeScan
-        uses: SonarSource/sonarqube-scan-action@v5
-        env:
-          SONAR_HOST_URL: "https://sonarcloud.io"
-          SONAR_ORGANIZATION: "peanutbutter-unicorn"
-          SONAR_PROJECT_KEY: "PeanutButter-Unicorn_z4j"
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: SonarQubeScan
+      uses: SonarSource/sonarqube-scan-action@v5
+      env:
+        SONAR_HOST_URL: "https://sonarcloud.io"
+        SONAR_ORGANIZATION: "peanutbutter-unicorn"
+        SONAR_PROJECT_KEY: "PeanutButter-Unicorn_z4j"
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
