@@ -39,12 +39,13 @@ jobs:
     - name: Sonar Scan
       # Only run SonarQube on PRs to main to avoid issues with forks
       if: ${{ github.event.pull_request.base.ref == 'main' && github.event.action != 'closed' }}
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         ./gradlew sonar
         -Dsonar.projectKey=PeanutButter-Unicorn_z4j
         -Dsonar.organization=peanutbutter-unicorn
         -Dsonar.host.url=https://sonarcloud.io
-        -Dsonar.token=${{ secrets.SONAR_TOKEN }}
     - name: Upload test report
       if: failure()
       uses: actions/upload-artifact@v4
