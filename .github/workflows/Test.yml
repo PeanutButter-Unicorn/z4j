@@ -16,17 +16,17 @@ jobs:
       # GITHUB_TOKEN is required for SonarCloud to decorate PRs
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # 4.3.0
       with:
         # SonarQube needs a full history to assign issues correctly
         fetch-depth: 0
     - name: Set up JDK
-      uses: graalvm/setup-graalvm@v1
+      uses: graalvm/setup-graalvm@7a1da54cb7fdef4ea19f6ecdfa9ecf59dc5a48fe
       with:
         java-version: '17'
         distribution: 'graalvm-community'
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # 4.0.0
     - name: Check Zendesk env vars are set
       run: |
         [ -z "${Z4J_URL}" ] && echo "Z4J_URL is NOT set" || echo "Z4J_URL is set"
@@ -48,7 +48,7 @@ jobs:
         -Dsonar.host.url=https://sonarcloud.io
     - name: Upload test report
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@vea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
       with:
         name: test-report
         path: build/reports/tests/test
