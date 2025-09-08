@@ -42,9 +42,9 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        ./gradlew sonar
-        -Dsonar.projectKey=PeanutButter-Unicorn_z4j
-        -Dsonar.organization=peanutbutter-unicorn
+        ./gradlew sonar \
+        -Dsonar.projectKey=PeanutButter-Unicorn_z4j \
+        -Dsonar.organization=peanutbutter-unicorn \
         -Dsonar.host.url=https://sonarcloud.io
     - name: Upload test report
       if: failure()

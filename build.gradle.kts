@@ -23,6 +23,12 @@ repositories {
     mavenCentral()
 }
 
+sonarqube {
+    properties {
+        property("sonar.tests", "src/test/groovy")
+    }
+}
+
 dependencies {
     implementation(platform("io.micronaut.platform:micronaut-platform:4.5.3"))
     annotationProcessor("org.projectlombok:lombok")
@@ -76,15 +82,18 @@ micronaut {
         }
     }
 }
-sonar {
-    properties {
-        property("sonar.projectKey", "PeanutButter-Unicorn_z4j")
-        property("sonar.projectName", "Zendesk Java Client")
-    }
-}
 tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
         html.required.set(true)
     }
+    classDirectories.setFrom(files(classDirectories.files.map { fileTree(it) {
+        exclude("lol/pbu/Application.class")
+    } }))
+}
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+tasks.check {
+    dependsOn(tasks.jacocoTestReport)
 }

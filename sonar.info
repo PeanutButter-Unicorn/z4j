@@ -1,0 +1,350 @@
+Initialized native services in: C:\Users\jonat\.gradle\native
+Initialized jansi services in: C:\Users\jonat\.gradle\native
+Found daemon DaemonInfo{pid=17936, address=[a6d176e8-9eb9-448d-9579-2471212db831 port:53811, addresses:[/127.0.0.1]], state=Idle, lastBusy=1757299389583, context=DefaultDaemonContext[uid=c085218f-618b-4bd2-8560-cae6428a0c10,javaHome=C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Users\jonat\.gradle\daemon,pid=17936,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=windows-1252,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+At least one daemon option is different.
+Wanted: DaemonRequestContext{jvmCriteria=C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot (no JDK specified, using current Java home), daemonOpts=[-Xmx4096M, -Dfile.encoding=windows-1252, -Duser.country=US, -Duser.language=en, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=c085218f-618b-4bd2-8560-cae6428a0c10,javaHome=C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Users\jonat\.gradle\daemon,pid=17936,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=windows-1252,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 1816). The daemon log file: C:\Users\jonat\.gradle\daemon\8.14\daemon-1816.out.log
+Starting 32nd build in daemon [uptime: 2 hrs 24 mins 49.691 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 4 GiB]
+Using 12 worker leases.
+Now considering [C:\Users\jonat\src\git.pbu.lol\z4j] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'C:\Users\jonat\src\git.pbu.lol\z4j\settings.gradle.kts'.
+Projects loaded. Root project using build file 'C:\Users\jonat\src\git.pbu.lol\z4j\build.gradle.kts'.
+Included projects: [root project 'z4j']
+
+> Configure project :
+Evaluating root project 'z4j' using build file 'C:\Users\jonat\src\git.pbu.lol\z4j\build.gradle.kts'.
+Resolved plugin [id: 'it.nicolasfarabegoli.conventional-commits', version: '3.1.3']
+Resolved plugin [id: 'groovy']
+Resolved plugin [id: 'io.micronaut.application', version: '4.5.3']
+Resolved plugin [id: 'io.micronaut.aot', version: '4.5.3']
+Resolved plugin [id: 'io.micronaut.library', version: '4.5.3']
+Resolved plugin [id: 'io.micronaut.openapi', version: '4.5.3']
+Resolved plugin [id: 'jacoco']
+Resolved plugin [id: 'org.sonarqube', version: 'latest.release']
+Creating docker tasks for image main
+[native-image-plugin] ====================
+[native-image-plugin] Initializing project: z4j
+[native-image-plugin] ====================
+Creating docker tasks for image optimized
+[native-image-plugin] Not instrumenting task with native-image-agent: generateClientOpenApiApis. Reason: Task does not match user predicate
+[native-image-plugin] Not instrumenting task with native-image-agent: generateClientOpenApiModels. Reason: Task does not match user predicate
+All projects evaluated.
+[native-image-plugin] Not instrumenting task with native-image-agent: sonar. Reason: Task does not match user predicate
+Task name matched 'sonar'
+Selected primary task 'sonar' from project :
+[native-image-plugin] Not instrumenting task with native-image-agent: jacocoTestReport. Reason: Task does not match user predicate
+[native-image-plugin] Not instrumenting task with native-image-agent: compileJava. Reason: Task does not match user predicate
+[native-image-plugin] Not instrumenting task with native-image-agent: compileTestJava. Reason: Task does not match user predicate
+Tasks to be executed: [task ':sonar']
+Tasks that were excluded: []
+[native-image-plugin] Not instrumenting task with native-image-agent: clean. Reason: Task does not match user predicate
+Resolve mutations for :sonar (Thread[Execution worker,5,main]) started.
+:sonar (Thread[Execution worker,5,main]) started.
+
+> Task :sonar
+[native-image-plugin] Not instrumenting task with native-image-agent: compileGroovy. Reason: Task does not match user predicate
+[native-image-plugin] Not instrumenting task with native-image-agent: compileTestGroovy. Reason: Task does not match user predicate
+Caching disabled for task ':sonar' because:
+  Build cache is disabled
+Task ':sonar' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+org.sonarqube Gradle plugin 6.3.1.5724
+Java 17.0.16 Eclipse Adoptium (64-bit)
+Windows 11 10.0 (amd64)
+User cache: C:\Users\jonat\.sonar\cache
+Communicating with SonarQube Cloud
+JRE provisioning: os[windows], arch[amd64]
+
+Starting SonarScanner Engine...
+Java 17.0.11 Eclipse Adoptium (64-bit)
+Load global settings
+Load global settings (done) | time=549ms
+Server id: 1BD809FA-AWHW8ct9-T_TB3XqouNu
+Loading required plugins
+Load plugins index
+Load plugins index (done) | time=218ms
+Load/download plugins
+Load/download plugins (done) | time=48ms
+Load project settings for component key: 'PeanutButter-Unicorn_z4j'
+Load project settings for component key: 'PeanutButter-Unicorn_z4j' (done) | time=854ms
+Process project properties
+Execute project builders
+Execute project builders (done) | time=0ms
+Project key: PeanutButter-Unicorn_z4j
+Base dir: C:\Users\jonat\src\git.pbu.lol\z4j
+Working dir: C:\Users\jonat\src\git.pbu.lol\z4j\build\sonar
+Load project branches
+Load project branches (done) | time=335ms
+Check ALM binding of project 'PeanutButter-Unicorn_z4j'
+Detected project binding: BOUND
+Check ALM binding of project 'PeanutButter-Unicorn_z4j' (done) | time=235ms
+Load project pull requests
+Load project pull requests (done) | time=600ms
+Load branch configuration
+Load branch configuration (done) | time=3ms
+Load quality profiles
+Load quality profiles (done) | time=788ms
+Load active rules
+Load active rules (done) | time=2217ms
+Organization key: peanutbutter-unicorn
+Preprocessing files...
+3 languages detected in 11 preprocessed files (done) | time=212ms
+0 files ignored because of inclusion/exclusion patterns
+104 files ignored because of scm ignore settings
+Loading plugins for detected languages
+Load/download plugins
+Load/download plugins (done) | time=85ms
+Load metrics repository
+Load metrics repository (done) | time=216ms
+Sensor cache enabled
+Load sensor cache
+Load sensor cache (63 KB) | time=1221ms
+Load project repositories
+Load project repositories (done) | time=260ms
+Indexing files...
+Project configuration:
+  Excluded sources: **/build-wrapper-dump.json
+11 files indexed (done) | time=7ms
+Quality profile for java: Sonar way
+Quality profile for kotlin: Sonar way
+Quality profile for yaml: Sonar way
+------------- Run sensors on module Zendesk Java Client
+Sensor JavaSensor [java]
+Configured Java source version (sonar.java.source): 17, preview features enabled (sonar.java.enablePreview): false
+Server-side caching is enabled. The Java analyzer will not try to leverage data from a previous analysis.
+Using ECJ batch to parse 2 Main java source files with batch size 500 KB.
+Starting batch processing.
+The Java analyzer cannot skip unchanged files in this context. A full analysis is performed for all files.
+100% analyzed
+Batch processing: Done.
+Did not optimize analysis for any files, performed a full analysis for all 2 files.
+No "Test" source files to scan.
+No "Generated" source files to scan.
+Sensor JavaSensor [java] (done) | time=1722ms
+Sensor JaCoCo XML Report Importer [jacoco]
+Importing 1 report(s). Turn your logs in debug mode in order to see the exhaustive list.
+Sensor JaCoCo XML Report Importer [jacoco] (done) | time=60ms
+Sensor Kotlin Sensor [kotlin]
+Sensor Kotlin Sensor [kotlin] (done) | time=2ms
+Sensor Gradle Sensor [kotlin]
+2 source files to be analyzed
+2/2 source files have been analyzed
+Sensor Gradle Sensor [kotlin] (done) | time=1971ms
+Sensor KotlinSurefireSensor [kotlin]
+parsing [C:\Users\jonat\src\git.pbu.lol\z4j\build\test-results\test]
+Searching for lol/pbu/z4j/client/LocalesClientSpec
+Resource not found: lol.pbu.z4j.client.LocalesClientSpec under the directory C:\Users\jonat\src\git.pbu.lol\z4j while reading test reports. Please, make sure your "sonar.junit.reportPaths" property is configured properly
+Searching for lol/pbu/z4j/client/TicketsClientSpec
+Resource not found: lol.pbu.z4j.client.TicketsClientSpec under the directory C:\Users\jonat\src\git.pbu.lol\z4j while reading test reports. Please, make sure your "sonar.junit.reportPaths" property is configured properly
+Searching for lol/pbu/z4j/client/UserSegmentsClientSpec
+Resource not found: lol.pbu.z4j.client.UserSegmentsClientSpec under the directory C:\Users\jonat\src\git.pbu.lol\z4j while reading test reports. Please, make sure your "sonar.junit.reportPaths" property is configured properly
+Searching for lol/pbu/z4j/client/ArticlesClientSpec
+Resource not found: lol.pbu.z4j.client.ArticlesClientSpec under the directory C:\Users\jonat\src\git.pbu.lol\z4j while reading test reports. Please, make sure your "sonar.junit.reportPaths" property is configured properly
+Sensor KotlinSurefireSensor [kotlin] (done) | time=24ms
+Sensor IaC Ansible Sensor [iacenterprise]
+0 source files to be analyzed
+0/0 source files have been analyzed
+Sensor IaC Ansible Sensor [iacenterprise] (done) | time=34ms
+Sensor IaC GitHub Actions Sensor [iacenterprise]
+2 source files to be analyzed
+2/2 source files have been analyzed
+Sensor IaC GitHub Actions Sensor [iacenterprise] (done) | time=72ms
+Sensor IaC CloudFormation Sensor [iac]
+0 source files to be analyzed
+0/0 source files have been analyzed
+Sensor IaC CloudFormation Sensor [iac] (done) | time=15ms
+Sensor IaC Kubernetes Sensor [iac]
+0 source files to be parsed
+0/0 source files have been parsed
+0 source files to be analyzed
+0/0 source files have been analyzed
+0 source files to be checked
+0/0 source files have been checked
+Sensor IaC Kubernetes Sensor [iac] (done) | time=78ms
+Sensor IaC Docker Sensor [iac]
+0 source files to be analyzed
+0/0 source files have been analyzed
+Sensor IaC Docker Sensor [iac] (done) | time=90ms
+Sensor Java Config Sensor [iac]
+0 source files to be analyzed
+0/0 source files have been analyzed
+Sensor Java Config Sensor [iac] (done) | time=9ms
+Sensor JavaScript inside YAML analysis [javascript]
+No input files found for analysis
+Hit the cache for 0 out of 0
+Miss the cache for 0 out of 0
+Sensor JavaScript inside YAML analysis [javascript] (done) | time=8ms
+Sensor CSS Rules [javascript]
+No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+Sensor CSS Rules [javascript] (done) | time=0ms
+Sensor ThymeLeaf template sensor [securityjavafrontend]
+Sensor ThymeLeaf template sensor [securityjavafrontend] (done) | time=3ms
+Sensor JavaAndroidConfigurationSensor [securityjavafrontend]
+Sensor JavaAndroidConfigurationSensor [securityjavafrontend] (done) | time=0ms
+Sensor KotlinModuleSecuritySensor [securitykotlinfrontend]
+Sensor KotlinModuleSecuritySensor [securitykotlinfrontend] (done) | time=0ms
+Sensor KotlinAndroidConfigurationSensor [securitykotlinfrontend]
+Sensor KotlinAndroidConfigurationSensor [securitykotlinfrontend] (done) | time=1ms
+Sensor SurefireSensor [java]
+parsing [C:\Users\jonat\src\git.pbu.lol\z4j\build\test-results\test]
+Sensor SurefireSensor [java] (done) | time=13ms
+Sensor IaC YAML Sensor [iacenterprise]
+Sensor IaC YAML Sensor [iacenterprise] (done) | time=0ms
+Sensor Serverless configuration file sensor [security]
+0 Serverless function entries were found in the project
+0 Serverless function handlers were kept as entrypoints
+Sensor Serverless configuration file sensor [security] (done) | time=2ms
+Sensor AWS SAM template file sensor [security]
+Sensor AWS SAM template file sensor [security] (done) | time=4ms
+Sensor AWS SAM Inline template file sensor [security]
+Sensor AWS SAM Inline template file sensor [security] (done) | time=3ms
+Sensor javabugs [dbd]
+Analyzing 6/348 functions to detect bugs.
+Sensor javabugs [dbd] (done) | time=189ms
+Sensor pythonbugs [dbd]
+No IR files have been included for analysis.
+Sensor pythonbugs [dbd] (done) | time=1ms
+Sensor EnterpriseTextAndSecretsSensor [textenterprise]
+Available processors: 12
+Using 12 threads for analysis.
+Start fetching files for the text and secrets analysis
+Using Git CLI to retrieve untracked files
+Retrieving language associated files and files included via "sonar.text.inclusions" that are tracked by git
+Starting the text and secrets analysis
+6 source files to be analyzed for the text and secrets analysis
+6/6 source files have been analyzed for the text and secrets analysis
+Start fetching files for the binary file analysis
+There are no files to be analyzed for the binary file analysis
+Sensor EnterpriseTextAndSecretsSensor [textenterprise] (done) | time=952ms
+Sensor JavaSecuritySensor [security]
+29 taint analysis rules enabled.
+Analyzing 4 UCFGs to detect vulnerabilities.
+No entry points found.
+java security sensor: Begin: 2025-09-08T04:19:27.433150Z, End: 2025-09-08T04:19:29.558808800Z, Duration: 00:00:02.125
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:27.436667100Z, End: 2025-09-08T04:19:27.508816800Z, Duration: 00:00:00.072
+    Load type hierarchy: Begin: 2025-09-08T04:19:27.436667100Z, End: 2025-09-08T04:19:27.470743700Z, Duration: 00:00:00.034
+    Load UCFGs: Begin: 2025-09-08T04:19:27.470743700Z, End: 2025-09-08T04:19:27.508816800Z, Duration: 00:00:00.038
+  Check cache: Begin: 2025-09-08T04:19:27.508816800Z, End: 2025-09-08T04:19:27.508816800Z, Duration: 00:00:00.000
+    Load cache: Begin: 2025-09-08T04:19:27.508816800Z, End: 2025-09-08T04:19:27.508816800Z, Duration: 00:00:00.000
+  Create runtime call graph: Begin: 2025-09-08T04:19:27.508816800Z, End: 2025-09-08T04:19:27.514816700Z, Duration: 00:00:00.005
+    Variable Type Analysis #1: Begin: 2025-09-08T04:19:27.509821600Z, End: 2025-09-08T04:19:27.513817800Z, Duration: 00:00:00.003
+      Create runtime type propagation graph: Begin: 2025-09-08T04:19:27.510817600Z, End: 2025-09-08T04:19:27.512819400Z, Duration: 00:00:00.002
+      Run SCC (Tarjan) on 12 nodes: Begin: 2025-09-08T04:19:27.512819400Z, End: 2025-09-08T04:19:27.512819400Z, Duration: 00:00:00.000
+      Propagate runtime types to strongly connected components: Begin: 2025-09-08T04:19:27.513817800Z, End: 2025-09-08T04:19:27.513817800Z, Duration: 00:00:00.000
+    Variable Type Analysis #2: Begin: 2025-09-08T04:19:27.513817800Z, End: 2025-09-08T04:19:27.514816700Z, Duration: 00:00:00.000
+      Create runtime type propagation graph: Begin: 2025-09-08T04:19:27.513817800Z, End: 2025-09-08T04:19:27.513817800Z, Duration: 00:00:00.000
+      Run SCC (Tarjan) on 12 nodes: Begin: 2025-09-08T04:19:27.513817800Z, End: 2025-09-08T04:19:27.513817800Z, Duration: 00:00:00.000
+      Propagate runtime types to strongly connected components: Begin: 2025-09-08T04:19:27.513817800Z, End: 2025-09-08T04:19:27.514816700Z, Duration: 00:00:00.000
+  Load config: Begin: 2025-09-08T04:19:27.514816700Z, End: 2025-09-08T04:19:29.553282100Z, Duration: 00:00:02.038
+  Compute entry points: Begin: 2025-09-08T04:19:29.553282100Z, End: 2025-09-08T04:19:29.557804900Z, Duration: 00:00:00.004
+java security sensor peak memory: 644 MB
+Sensor JavaSecuritySensor [security] (done) | time=2130ms
+Sensor CSharpSecuritySensor [security]
+26 taint analysis rules enabled.
+No UCFGs have been included for analysis.
+csharp security sensor: Begin: 2025-09-08T04:19:29.560806200Z, End: 2025-09-08T04:19:29.561809300Z, Duration: 00:00:00.001
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:29.560806200Z, End: 2025-09-08T04:19:29.560806200Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2025-09-08T04:19:29.560806200Z, End: 2025-09-08T04:19:29.560806200Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2025-09-08T04:19:29.560806200Z, End: 2025-09-08T04:19:29.560806200Z, Duration: 00:00:00.000
+csharp security sensor peak memory: 631 MB
+Sensor CSharpSecuritySensor [security] (done) | time=1ms
+Sensor VbNetSecuritySensor [security]
+25 taint analysis rules enabled.
+No UCFGs have been included for analysis.
+vbnet security sensor: Begin: 2025-09-08T04:19:29.561809300Z, End: 2025-09-08T04:19:29.562805900Z, Duration: 00:00:00.000
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:29.561809300Z, End: 2025-09-08T04:19:29.561809300Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2025-09-08T04:19:29.561809300Z, End: 2025-09-08T04:19:29.561809300Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2025-09-08T04:19:29.561809300Z, End: 2025-09-08T04:19:29.561809300Z, Duration: 00:00:00.000
+vbnet security sensor peak memory: 631 MB
+Sensor VbNetSecuritySensor [security] (done) | time=1ms
+Sensor PhpSecuritySensor [security]
+18 taint analysis rules enabled.
+No UCFGs have been included for analysis.
+php security sensor: Begin: 2025-09-08T04:19:29.562805900Z, End: 2025-09-08T04:19:29.563806500Z, Duration: 00:00:00.001
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:29.562805900Z, End: 2025-09-08T04:19:29.562805900Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2025-09-08T04:19:29.562805900Z, End: 2025-09-08T04:19:29.562805900Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2025-09-08T04:19:29.562805900Z, End: 2025-09-08T04:19:29.562805900Z, Duration: 00:00:00.000
+php security sensor peak memory: 631 MB
+Sensor PhpSecuritySensor [security] (done) | time=1ms
+Sensor PythonSecuritySensor [security]
+21 taint analysis rules enabled.
+No UCFGs have been included for analysis.
+python security sensor: Begin: 2025-09-08T04:19:29.564806800Z, End: 2025-09-08T04:19:29.565315700Z, Duration: 00:00:00.000
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:29.564806800Z, End: 2025-09-08T04:19:29.564806800Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2025-09-08T04:19:29.564806800Z, End: 2025-09-08T04:19:29.564806800Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2025-09-08T04:19:29.564806800Z, End: 2025-09-08T04:19:29.564806800Z, Duration: 00:00:00.000
+python security sensor peak memory: 631 MB
+Sensor PythonSecuritySensor [security] (done) | time=2ms
+Sensor JsSecuritySensor [security]
+15 taint analysis rules enabled.
+No UCFGs have been included for analysis.
+js security sensor: Begin: 2025-09-08T04:19:29.565315700Z, End: 2025-09-08T04:19:29.566324700Z, Duration: 00:00:00.001
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:29.566324700Z, End: 2025-09-08T04:19:29.566324700Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2025-09-08T04:19:29.566324700Z, End: 2025-09-08T04:19:29.566324700Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2025-09-08T04:19:29.566324700Z, End: 2025-09-08T04:19:29.566324700Z, Duration: 00:00:00.000
+js security sensor peak memory: 631 MB
+Sensor JsSecuritySensor [security] (done) | time=2ms
+Sensor KotlinSecuritySensor [security]
+28 taint analysis rules enabled.
+No UCFGs have been included for analysis.
+kotlin security sensor: Begin: 2025-09-08T04:19:29.567327600Z, End: 2025-09-08T04:19:29.567327600Z, Duration: 00:00:00.000
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:29.567327600Z, End: 2025-09-08T04:19:29.567327600Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2025-09-08T04:19:29.567327600Z, End: 2025-09-08T04:19:29.567327600Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2025-09-08T04:19:29.567327600Z, End: 2025-09-08T04:19:29.567327600Z, Duration: 00:00:00.000
+kotlin security sensor peak memory: 631 MB
+Sensor KotlinSecuritySensor [security] (done) | time=1ms
+Sensor GoSecuritySensor [security]
+9 taint analysis rules enabled.
+No UCFGs have been included for analysis.
+go security sensor: Begin: 2025-09-08T04:19:29.568326200Z, End: 2025-09-08T04:19:29.568326200Z, Duration: 00:00:00.000
+  Load type hierarchy and UCFGs: Begin: 2025-09-08T04:19:29.568326200Z, End: 2025-09-08T04:19:29.568326200Z, Duration: 00:00:00.000
+    Load type hierarchy: Begin: 2025-09-08T04:19:29.568326200Z, End: 2025-09-08T04:19:29.568326200Z, Duration: 00:00:00.000
+    Load UCFGs: Begin: 2025-09-08T04:19:29.568326200Z, End: 2025-09-08T04:19:29.568326200Z, Duration: 00:00:00.000
+go security sensor peak memory: 631 MB
+Sensor GoSecuritySensor [security] (done) | time=0ms
+------------- Run sensors on project
+Sensor KotlinProjectSensor [kotlin]
+Sensor KotlinProjectSensor [kotlin] (done) | time=1ms
+Sensor JavaProjectSensor [java]
+Sensor JavaProjectSensor [java] (done) | time=2ms
+Sensor JavaArchitectureSensor [architecture]
+* Protobuf reading starting | memory total=880 | free=220 | used=659 (MB)
+* Reading SonarArchitecture IR data from directory "C:\Users\jonat\src\git.pbu.lol\z4j\build\sonar\architecture\java"
+* Files successfully loaded: "2" out of "2"
+* Protobuf reading complete | memory total=880 | free=204 | used=675 (MB)
+* Build architecture.graph.java.namespace_graph.default_perspective hierarchy graph complete (filtered=true) | memory total=880 | free=616 | used=263 (MB)
+* Slicing complete | memory total=880 | free=616 | used=263 (MB)
+* Cycle detection complete | memory total=880 | free=616 | used=263 (MB)
+Sensor JavaArchitectureSensor [architecture] (done) | time=221ms
+Sensor Zero Coverage Sensor
+Sensor Zero Coverage Sensor (done) | time=0ms
+Sensor Java CPD Block Indexer
+Sensor Java CPD Block Indexer (done) | time=10ms
+------------- Gather SCA dependencies on project
+Checking if SCA is enabled for organization peanutbutter-unicorn
+Dependency analysis skipped
+CPD Executor 1 file had no CPD blocks
+CPD Executor Calculating CPD for 1 file
+CPD Executor CPD calculation finished (done) | time=5ms
+Create analysis
+Create analysis (done) | time=0ms
+Analysis report generated in 130ms, dir size=328 KB
+Analysis report compressed in 28ms, zip size=68 KB
+Analysis report uploaded in 697ms
+ANALYSIS SUCCESSFUL, you can find the results at: https://sonarcloud.io/dashboard?id=PeanutButter-Unicorn_z4j
+Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+More about the report processing at https://sonarcloud.io/api/ce/task?id=AZknjOu3LKMTLWSBE7oA
+------------- Upload SCA dependency files
+Sensor cache published successfully
+Analysis total time: 20.502 s
+SonarScanner Engine completed successfully
+
+BUILD SUCCESSFUL in 26s
+1 actionable task: 1 executed
+Watched directory hierarchies: [C:\Users\jonat\src\git.pbu.lol\z4j]
