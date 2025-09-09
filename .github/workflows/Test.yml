@@ -13,13 +13,11 @@ jobs:
       Z4J_ADMIN_EMAIL: ${{ secrets.ZENDESK_ADMIN_EMAIL}}
       Z4J_AGENT_EMAIL: ${{ secrets.ZENDESK_AGENT_EMAIL}}
       Z4J_END_USER_EMAIL: ${{ secrets.ZENDESK_END_USER_EMAIL}}
-      # GITHUB_TOKEN is required for SonarCloud to decorate PRs
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GITHUB_TOKEN is required for SonarCloud to decorate PRs
     steps:
     - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # 4.3.0
       with:
-        # SonarQube needs a full history to assign issues correctly
-        fetch-depth: 0
+        fetch-depth: 0 # SonarCloud needs a full history to assign issues correctly
     - name: Set up JDK
       uses: graalvm/setup-graalvm@7a1da54cb7fdef4ea19f6ecdfa9ecf59dc5a48fe
       with:
@@ -37,7 +35,7 @@ jobs:
     - name: Build and run tests
       run: ./gradlew build
     - name: Sonar Scan
-      # Only run SonarQube on PRs to main to avoid issues with forks
+      # Only run SonarQube on PRs to main
       if: ${{ github.event.pull_request.base.ref == 'main' && github.event.action != 'closed' }}
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -52,3 +50,16 @@ jobs:
       with:
         name: test-report
         path: build/reports/tests/test
+  dependency-submission:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # 4.3.0
+      - name: Set up JDK 17
+        uses: graalvm/setup-graalvm@7a1da54cb7fdef4ea19f6ecdfa9ecf59dc5a48fe # 1.3.6
+        with:
+          java-version: '17'
+          distribution: 'graalvm-community'
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
