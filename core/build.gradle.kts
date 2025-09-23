@@ -1,8 +1,8 @@
 plugins {
     id("it.nicolasfarabegoli.conventional-commits") version "3.1.3"
-    id("io.micronaut.aot") version "4.5.3"
-    id("io.micronaut.application") version "4.5.3"
-    id("io.micronaut.library") version "4.5.3"
+    id("io.micronaut.aot")
+    id("io.micronaut.application")
+    id("io.micronaut.library")
     id("io.micronaut.openapi") version "4.5.3"
     id("jacoco")
     id("org.sonarqube") version "latest.release"

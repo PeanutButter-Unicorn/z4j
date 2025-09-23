@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 rootProject.name = "z4j"
-include("core")
+include("core", "cli")

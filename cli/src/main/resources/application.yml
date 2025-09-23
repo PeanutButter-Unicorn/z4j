@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: zencli
+    version: "@zencliVersion@"
+  http:
+    services:
+      zendesk:
+        url: ${Z4J_URL}
+        email: ${Z4J_EMAIL:define-me}
+        token: ${Z4J_TOKEN:define-me}
