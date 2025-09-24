@@ -17,6 +17,10 @@ extra["netty.version"] = "4.1.124.Final"
 
 configurations.create("lombok")
 
+configurations.getByName("implementation") {
+    exclude(group = "ch.qos.logback")
+}
+
 application {
     mainClass.set("lol.pbu.Application")
 }
@@ -40,7 +44,6 @@ dependencies {
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation("org.slf4j:jul-to-slf4j")
     implementation("io.micronaut.validation:micronaut-validation")
     "lombok"("org.projectlombok:lombok:${lombokVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
@@ -79,7 +82,7 @@ micronaut {
         optimizeClassLoading = true
         deduceEnvironment = true
         optimizeNetty = true
-        replaceLogbackXml = true
+        replaceLogbackXml = false
     }
     openapi {
         version = "6.16.0"

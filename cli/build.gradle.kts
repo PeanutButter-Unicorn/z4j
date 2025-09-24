@@ -17,6 +17,8 @@ dependencies {
     implementation("info.picocli:picocli")
     implementation("io.micronaut.picocli:micronaut-picocli")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("ch.qos.logback:logback-core")
     runtimeOnly("org.yaml:snakeyaml")
 }
 
