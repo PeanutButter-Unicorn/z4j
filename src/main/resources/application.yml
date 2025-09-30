@@ -1,6 +1,7 @@
 micronaut:
   application:
     name: zendesk4j
+    version: "@z4jVersion@"
   http:
     services:
       zendesk:

@@ -1,3 +1,7 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+import java.util.Properties
+import kotlin.jvm.java
+
 plugins {
     id("it.nicolasfarabegoli.conventional-commits") version "3.1.3"
     id("groovy")
@@ -23,7 +27,7 @@ extra["netty.version"] = "4.1.124.Final"
 configurations.create("lombok")
 
 application {
-    mainClass.set("lol.pbu.Application")
+    mainClass.set("lol.pbu.z4j.cli.Z4jCommand")
 }
 
 repositories {
@@ -42,8 +46,11 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    implementation("info.picocli:picocli")
+    implementation("info.picocli:picocli-jansi-graalvm:1.2.0")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.picocli:micronaut-picocli")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.slf4j:jul-to-slf4j")
     implementation("io.micronaut.validation:micronaut-validation")
@@ -56,14 +63,14 @@ dependencies {
 
 java {
     sourceCompatibility = JavaVersion.toVersion("17") // graalvm-ce
-    withSourcesJar()
-    withJavadocJar()
 }
 
-tasks.withType<Javadoc>().configureEach {
-    // This will generate an empty Javadoc JAR to satisfy publishing requirements
-    // without failing the build on documentation errors from generated code.
-    source = files().asFileTree
+tasks.withType<ProcessResources> {
+    val props = Properties()
+    file("gradle.properties").inputStream().use { props.load(it) }
+    filesMatching("**/application.yml") {
+        filter(mapOf("tokens" to props), ReplaceTokens::class.java)
+    }
 }
 
 
@@ -126,54 +133,12 @@ tasks.withType<Test> {
         showCauses = true
     }
 }
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-
-            pom {
-                name.set(project.name)
-                description.set("A Java client for the Zendesk API, generated from OpenAPI specs.")
-                url.set("https://github.com/pbu-lol/z4j")
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("jonathan-zollinger")
-                        name.set("Jonathan Zollinger")
-                        email.set("jonathan.zollinger@gmail.com")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:git://github.com/pbu-lol/z4j.git")
-                    developerConnection.set("scm:git:ssh://github.com/pbu-lol/z4j.git")
-                    url.set("https://github.com/pbu-lol/z4j")
-                }
-            }
+graalvmNative {
+    toolchainDetection = true
+    binaries {
+        named("main") {
+            imageName.set("z4jCli")
+            buildArgs.addAll("--initialize-at-build-time=kotlin.coroutines.intrinsics", "-Ob")
         }
     }
-    repositories {
-        maven {
-            url = layout.buildDirectory.dir("staging-deploy").get().asFile.toURI()
-        }
-    }
-}
-
-signing {
-    useGpgCmd()
-    sign(publishing.publications["maven"])
-}
-
-nmcpAggregation {
-    centralPortal {
-        username = System.getenv("SONATYPE_USERNAME")
-        password = System.getenv("SONATYPE_PASSWORD")
-        publishingType = "AUTOMATIC"
-    }
-    publishAllProjectsProbablyBreakingProjectIsolation()
 }
