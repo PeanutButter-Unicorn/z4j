@@ -1,30 +1,21 @@
 import org.apache.tools.ant.filters.ReplaceTokens
-import java.util.Properties
-import kotlin.jvm.java
+import java.util.*
 
 plugins {
     id("it.nicolasfarabegoli.conventional-commits") version "3.1.3"
     id("groovy")
-    id("java-library")
-    id("maven-publish")
-    id("signing")
     id("com.gradleup.nmcp.aggregation").version("1.1.0")
     id("io.micronaut.application") version "4.5.3"
-    id("io.micronaut.aot") version "4.5.3"
-    id("io.micronaut.library") version "4.5.3"
     id("io.micronaut.openapi") version "4.5.3"
     id("jacoco")
     id("org.sonarqube") version "latest.release"
+    id("com.gradleup.shadow") version "8.3.6"
+    id("org.graalvm.buildtools.native") version "0.10.6"
 }
 
 version = project.properties["z4jVersion"]!!
 val dataFakerVersion = project.properties["dataFakerVersion"]!!
-val lombokVersion = project.properties["lombokVersion"]!!
 group = "lol.pbu"
-
-extra["netty.version"] = "4.1.124.Final"
-
-configurations.create("lombok")
 
 application {
     mainClass.set("lol.pbu.z4j.cli.Z4jCommand")
@@ -32,7 +23,6 @@ application {
 
 repositories {
     mavenCentral()
-    gradlePluginPortal()
 }
 
 sonarqube {
@@ -42,23 +32,20 @@ sonarqube {
 }
 
 dependencies {
-    implementation(platform("io.micronaut.platform:micronaut-platform:4.5.3"))
-    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
-    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("info.picocli:picocli-codegen")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     implementation("info.picocli:picocli")
     implementation("info.picocli:picocli-jansi-graalvm:1.2.0")
-    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+    implementation("org.fusesource.jansi:jansi:2.4.2")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.picocli:micronaut-picocli")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.slf4j:jul-to-slf4j")
     implementation("io.micronaut.validation:micronaut-validation")
-    "lombok"("org.projectlombok:lombok:${lombokVersion}")
+    runtimeOnly("ch.qos.logback:logback-core")
     runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("org.yaml:snakeyaml")
-    testImplementation("net.datafaker:datafaker:$dataFakerVersion")
 }
 
 java {
@@ -80,18 +67,6 @@ micronaut {
     processing {
         incremental(true)
         annotations("lol.pbu.*")
-    }
-    aot {
-        // Please review carefully the optimizations enabled below
-        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
-        optimizeServiceLoading = false
-        convertYamlToJava = false
-        precomputeOperations = true
-        cacheEnvironment = true
-        optimizeClassLoading = true
-        deduceEnvironment = true
-        optimizeNetty = true
-        replaceLogbackXml = true
     }
     openapi {
         version = "6.16.0"
@@ -138,7 +113,6 @@ graalvmNative {
     binaries {
         named("main") {
             imageName.set("z4jCli")
-            buildArgs.addAll("--initialize-at-build-time=kotlin.coroutines.intrinsics", "-Ob")
         }
     }
 }

@@ -1,7 +1,5 @@
 <configuration>
-
-    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+ 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
@@ -9,7 +7,7 @@
         </encoder>
     </appender>
 
-    <root level="info">
+    <root level="OFF">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
