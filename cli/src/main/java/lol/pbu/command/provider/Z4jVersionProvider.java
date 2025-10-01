@@ -24,14 +24,14 @@ import picocli.CommandLine.IVersionProvider;
  * @author Jonathan Zollinger
  * @since 0.0.1
  */
-public class ZcmiVersionProvider implements IVersionProvider {
+public class Z4jVersionProvider implements IVersionProvider {
 
     @Value("${micronaut.application.version}")
-    String zcmiVersion;
+    String z4jVersion;
 
     @Override
     public String[] getVersion() {
-        return new String[]{zcmiVersion};
+        return new String[]{z4jVersion};
     }
 }
 

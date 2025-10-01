@@ -1,8 +1,6 @@
 plugins {
     id("it.nicolasfarabegoli.conventional-commits") version "3.1.3"
-    id("io.micronaut.aot")
     id("io.micronaut.application")
-    id("io.micronaut.library")
     id("io.micronaut.openapi") version "4.5.3"
     id("jacoco")
     id("org.sonarqube") version "latest.release"
@@ -17,14 +15,6 @@ extra["netty.version"] = "4.1.124.Final"
 
 configurations.create("lombok")
 
-configurations.getByName("implementation") {
-    exclude(group = "ch.qos.logback")
-}
-
-application {
-    mainClass.set("lol.pbu.Application")
-}
-
 repositories {
     mavenCentral()
     gradlePluginPortal()
@@ -37,52 +27,36 @@ sonarqube {
 }
 
 dependencies {
-    implementation(platform("io.micronaut.platform:micronaut-platform:4.5.3"))
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
-    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation("io.micronaut.validation:micronaut-validation")
     "lombok"("org.projectlombok:lombok:${lombokVersion}")
-    runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+//    implementation("org.slf4j:jul-to-slf4j")
     runtimeOnly("org.yaml:snakeyaml")
+//    runtimeOnly("ch.qos.logback:logback-core")
+    runtimeOnly("ch.qos.logback:logback-classic")
     testImplementation("net.datafaker:datafaker:$dataFakerVersion")
 }
 
 java {
     sourceCompatibility = JavaVersion.toVersion("17") // graalvm-ce
+    targetCompatibility = JavaVersion.toVersion("17")
     withSourcesJar()
     withJavadocJar()
 }
 
 tasks.withType<Javadoc>().configureEach {
-    // This will generate an empty Javadoc JAR to satisfy publishing requirements
-    // without failing the build on documentation errors from generated code.
+    // builds empty javadoc (lombok javadoc issue I don't care to resolve)
     source = files().asFileTree
 }
 
 
 micronaut {
-    runtime("netty")
     testRuntime("spock2")
     processing {
         incremental(true)
         annotations("lol.pbu.*")
-    }
-    aot {
-        // Please review carefully the optimizations enabled below
-        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
-        optimizeServiceLoading = false
-        convertYamlToJava = false
-        precomputeOperations = true
-        cacheEnvironment = true
-        optimizeClassLoading = true
-        deduceEnvironment = true
-        optimizeNetty = true
-        replaceLogbackXml = false
     }
     openapi {
         version = "6.16.0"
