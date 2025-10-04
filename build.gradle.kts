@@ -38,18 +38,15 @@ sonarqube {
 }
 
 dependencies {
-    implementation(platform("io.micronaut.platform:micronaut-platform:4.5.3"))
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation("org.slf4j:jul-to-slf4j")
     implementation("io.micronaut.validation:micronaut-validation")
     "lombok"("org.projectlombok:lombok:${lombokVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("org.yaml:snakeyaml")
     testImplementation("net.datafaker:datafaker:$dataFakerVersion")
 }
