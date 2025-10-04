@@ -5,13 +5,12 @@ plugins {
     id("maven-publish")
     id("signing")
     id("com.gradleup.nmcp.aggregation").version("1.1.0")
-    id("io.micronaut.application") version "4.5.3"
-    id("io.micronaut.aot") version "4.5.3"
     id("io.micronaut.library") version "4.5.3"
     id("io.micronaut.openapi") version "4.5.3"
     id("jacoco")
     id("org.sonarqube") version "latest.release"
 }
+
 group = "lol.pbu"
 version = project.properties["z4jVersion"]!!
 
@@ -19,12 +18,7 @@ val dataFakerVersion = project.properties["dataFakerVersion"]!!
 val lombokVersion = project.properties["lombokVersion"]!!
 extra["netty.version"] = project.properties["nettyVersion"]!!
 
-
 configurations.create("lombok")
-
-application {
-    mainClass.set("lol.pbu.Application")
-}
 
 repositories {
     mavenCentral()
@@ -61,18 +55,6 @@ micronaut {
     processing {
         incremental(true)
         annotations("lol.pbu.*")
-    }
-    aot {
-        // Please review carefully the optimizations enabled below
-        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
-        optimizeServiceLoading = false
-        convertYamlToJava = false
-        precomputeOperations = true
-        cacheEnvironment = true
-        optimizeClassLoading = true
-        deduceEnvironment = true
-        optimizeNetty = true
-        replaceLogbackXml = true
     }
     openapi {
         version = "6.16.0"
