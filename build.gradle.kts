@@ -12,13 +12,13 @@ plugins {
     id("jacoco")
     id("org.sonarqube") version "latest.release"
 }
-
+group = "lol.pbu"
 version = project.properties["z4jVersion"]!!
+
 val dataFakerVersion = project.properties["dataFakerVersion"]!!
 val lombokVersion = project.properties["lombokVersion"]!!
-group = "lol.pbu"
+extra["netty.version"] = project.properties["nettyVersion"]!!
 
-extra["netty.version"] = "4.1.124.Final"
 
 configurations.create("lombok")
 
@@ -31,22 +31,14 @@ repositories {
     gradlePluginPortal()
 }
 
-sonarqube {
-    properties {
-        property("sonar.tests", "src/test/groovy")
-    }
-}
-
 dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     implementation("io.micronaut.reactor:micronaut-reactor-http-client")
-    implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.validation:micronaut-validation")
     "lombok"("org.projectlombok:lombok:${lombokVersion}")
-    runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.yaml:snakeyaml")
     testImplementation("net.datafaker:datafaker:$dataFakerVersion")
 }
@@ -62,7 +54,6 @@ tasks.withType<Javadoc>().configureEach {
     // without failing the build on documentation errors from generated code.
     source = files().asFileTree
 }
-
 
 micronaut {
     runtime("netty")
@@ -97,6 +88,13 @@ micronaut {
         }
     }
 }
+
+sonarqube {
+    properties {
+        property("sonar.tests", "src/test/groovy")
+    }
+}
+
 tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
@@ -108,12 +106,15 @@ tasks.jacocoTestReport {
         }
     }))
 }
+
 tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
+
 tasks.check {
     dependsOn(tasks.jacocoTestReport)
 }
+
 tasks.withType<Test> {
     useJUnitPlatform()
     testLogging {
