@@ -25,7 +25,12 @@ class TicketsClientSpec extends Z4jSpec {
         tickets = ticketsAgentClient.listTickets(null).body().getTickets()
     }
 
-    def "calling listTickets() #expectedTitle succeed when used with a(n) #clientType client"() {
+    def "calling listTickets() #expectedTitle succeed when used with a(n) #clientType client"(
+            TicketsClient client,
+            String clientType,
+            Boolean shouldSucceed,
+            String expectedTitle
+    ) {
         when:
         def response = client.listTickets(null)
 
@@ -48,7 +53,12 @@ class TicketsClientSpec extends Z4jSpec {
         ticketsUserClient    | "simple user" | false         | "should not"
     }
 
-    def "calling showTicket() #expectedTitle succeed when used with a(n) #clientType client"() {
+    def "calling showTicket() #expectedTitle succeed when used with a(n) #clientType client"(
+            TicketsClient client,
+            String clientType,
+            Boolean shouldSucceed,
+            String expectedTitle
+    ) {
         when:
         def response = client.showTicket(tickets.get(0).getId())
 
@@ -69,7 +79,12 @@ class TicketsClientSpec extends Z4jSpec {
         ticketsUserClient    | "simple user" | false         | "should not"
     }
 
-    def "Trying to  create a ticket #expectedTitle succeed when used with a(n) #clientType client"() {
+    def "Trying to  create a ticket #expectedTitle succeed when used with a(n) #clientType client"(
+            TicketsClient client,
+            String clientType,
+            Boolean shouldSucceed,
+            String expectedTitle
+    ) {
         given:
         def ticketComment = new TicketComment().setBody(faker.chuckNorris().fact())
         def createTicketInput = new TicketCreateInput(ticketComment)
@@ -99,7 +114,12 @@ class TicketsClientSpec extends Z4jSpec {
         ticketsUserClient    | "simple user" | false         | "should not"
     }
 
-    def "calling countTickets() #expectedTitle succeed when used with a(n) #clientType client"() {
+    def "calling countTickets() #expectedTitle succeed when used with a(n) #clientType client"(
+            TicketsClient client,
+            String clientType,
+            Boolean shouldSucceed,
+            String expectedTitle
+    ) {
         when:
         def response = client.countTickets()
 
