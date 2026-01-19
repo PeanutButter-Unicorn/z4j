@@ -736,6 +736,7 @@ components:
         author_id:
           type: integer
           readOnly: true
+          format: int64
         created_at:
           type: string
           format: date-time
@@ -754,6 +755,7 @@ components:
               id:
                 type: integer
                 readOnly: true
+                format: int64
               type:
                 type: string
                 readOnly: true
@@ -761,15 +763,18 @@ components:
                 oneOf:
                   - type: string
                   - type: integer
+                    format: int64
           readOnly: true
         id:
           type: integer
+          format: int64
           readOnly: true
         metadata:
           type: object
           readOnly: true
         ticket_id:
           type: integer
+          format: int64
           readOnly: true
         via:
           $ref: '#/components/schemas/Via'
