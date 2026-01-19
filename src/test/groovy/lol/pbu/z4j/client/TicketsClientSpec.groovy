@@ -125,15 +125,25 @@ class TicketsClientSpec extends Z4jSpec {
 
 
         when:
-        client.updateTicket(tickets.first.getId(), ticketUpdateRequest)
+        def response = client.updateTicket(tickets.first.getId(), ticketUpdateRequest)
 
         then:
-        noExceptionThrown()
+        if (shouldSucceed) {
+            verifyAll {
+                response.status() == HttpStatus.OK
+                response.body().getTicket() != null
+            }
+            return
+        }
+        thrown(HttpClientException)
 
         where:
         client               | clientType    | shouldSucceed | expectedTitle
         ticketsAgentClient   | "Agent"       | true          | "should"
         ticketsAdminClient   | "Admin"       | true          | "should"
+        ticketBadEmailClient | "bad email"   | false         | "should not"
+        ticketBadUrlClient   | "bad url"     | false         | "should not"
+        ticketsUserClient    | "simple user" | false         | "should not"
     }
 
     def "calling countTickets() #expectedTitle succeed when used with a(n) #clientType client"(
