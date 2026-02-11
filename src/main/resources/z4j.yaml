@@ -3,10 +3,6 @@ info:
   title: Help Center API
   description: Help Center v2 REST API
   version: 2.0.0
-  tags:
-    - User Subscriptions
-    - Locales
-    - Tickets
 paths:
   /api/v2/tickets:
     get:
