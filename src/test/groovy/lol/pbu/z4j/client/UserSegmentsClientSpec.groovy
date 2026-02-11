@@ -50,7 +50,7 @@ class UserSegmentsClientSpec extends Z4jSpec {
         false        | _
     }
 
-    def "can create user segment named '#userSegment' with '#userType' user type"(String userType, String segmentName) {
+    def "can create user segment named '#segmentName' with '#userType' user type"(String userType, String segmentName) {
         when:
         HttpResponse<UserSegmentResponse> response = userSegmentsClient.createUserSegment(new CreateUserSegmentRequest(
                 new UserSegment(segmentName, userType))).block() // should be Mono<UserSegmentResponse>, not Mono<HttpResponse<UserSegmentResponse>>
