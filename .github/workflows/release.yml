@@ -14,17 +14,17 @@ jobs:
       GPG_FILE: ${{ secrets.GPG_FILE }}
       GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # 4.3.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
         with:
           fetch-depth: 0
-      - uses: gradle/actions/wrapper-validation@ed408507eac070d1f99cc633dbcf757c94c7933a
+      - uses: gradle/actions/wrapper-validation@78f7dee6337f393c0a872d0afbda4c51a20e543d
       - name: Set up JDK
-        uses: graalvm/setup-graalvm@7a1da54cb7fdef4ea19f6ecdfa9ecf59dc5a48fe
+        uses: graalvm/setup-graalvm@9d0e2dff13a8c69a81d72a49c9816836f963fe01
         with:
           java-version: '21'
           distribution: 'graalvm-community'
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # 4.0.0
+        uses: gradle/actions/setup-gradle@748248ddd2a24f49513d8f472f81c3a07d4d50e1 # 4.4.4
       - name: Publish to Maven Central
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
