@@ -26,8 +26,8 @@ class CategoryClientSpec extends Z4jSpec {
         allLocales = userCtx.getBean(LocaleClient.class).listLocales().block().locales.collect { it.locale.toLowerCase() }
     }
 
-    def "can use ListArticles for other tests using the '#locale' locale for the #userType user type"(CategoryClient categoryClient, String userType, String locale, ListCategoriesSortByParameter sortBy, ListArticlesSortOrderParameter sortOrder) {
-        when: "query articles list for the '#locale' locale"
+    def "can use ListArticles using the '#locale' locale for the #userType user type"(CategoryClient categoryClient, String userType, String locale, ListCategoriesSortByParameter sortBy, ListArticlesSortOrderParameter sortOrder) {
+        when: "query Categories list for the '#locale' locale"
         categoryClient.listCategories(locale, sortBy, sortOrder).block()
 
         then:
@@ -37,6 +37,21 @@ class CategoryClientSpec extends Z4jSpec {
         [[categoryClient, userType], locale, sortBy, sortOrder, startTime, labelNames] << [
                 [[adminCategoryClient, "admin"], [agentCategoryClient, "agent"], [userCategoryClient, "user"]],
                 allLocales,
+                [ListCategoriesSortByParameter.values(), null].flatten(),
+                [ListArticlesSortOrderParameter.values(), null].flatten()
+        ].combinations()
+    }
+
+    def "can use ListCategoriesNoLocale using for the #userType user type"(CategoryClient categoryClient, String userType, ListCategoriesSortByParameter sortBy, ListArticlesSortOrderParameter sortOrder) {
+        when:
+        categoryClient.listCategoriesNoLocale(sortBy, sortOrder).block()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        [[categoryClient, userType], sortBy, sortOrder] << [
+                [[adminCategoryClient, "admin"], [agentCategoryClient, "agent"]],
                 [ListCategoriesSortByParameter.values(), null].flatten(),
                 [ListArticlesSortOrderParameter.values(), null].flatten()
         ].combinations()
