@@ -475,7 +475,7 @@ paths:
     get:
       operationId: ListCategories
       tags:
-      - Categories
+      - Category
       summary: List Categories by Locale
       description: |-
         <p><strong>Note</strong>: <code>{/locale}</code> is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.</p>
@@ -582,7 +582,7 @@ paths:
     post:
       operationId: CreateCategory
       tags:
-      - Categories
+      - Category
       summary: Create Category by Locale
       description: |-
         <p>You must specify a category name and locale. The locale can be omitted if it's specified
@@ -613,7 +613,7 @@ paths:
     get:
       operationId: ShowCategory
       tags:
-      - Categories
+      - Category
       summary: Show Category by Locale
       description: |-
         <p><strong>Note</strong>: <code>{/locale}</code> is an optional parameter for admins and agents. End users and anonymous users must provide the parameter.</p>
@@ -649,7 +649,7 @@ paths:
     put:
       operationId: UpdateCategory
       tags:
-      - Categories
+      - Category
       summary: Update Category by Locale
       description: |-
         <p>These endpoints only update category-level metadata such as the sorting position.
@@ -668,7 +668,7 @@ paths:
     delete:
       operationId: DeleteCategory
       tags:
-      - Categories
+      - Category
       summary: Delete Category by Locale
       description: |-
         <p><strong>WARNING: Every section and all articles in the category will also be deleted.</strong></p>
@@ -679,14 +679,13 @@ paths:
       responses:
         "204":
           description: <p>No content</p>
-  /api/v2/help_center/{locale}/categories/{category_id}/source_locale:
+  /api/v2/help_center/categories/{category_id}/source_locale:
     parameters:
-    - $ref: '#/components/parameters/OptionalLocale'
     - $ref: '#/components/parameters/CategoryId'
     put:
       operationId: UpdateCategorySourceLocale
       tags:
-      - Categories
+      - Category
       summary: Update Category Source Locale by Locale
       description: |-
         <p>The endpoint updates the category <code>source_locale</code> property</p>
@@ -708,7 +707,7 @@ paths:
     get:
       operationId: ListCategoriesNoLocale
       tags:
-      - Categories
+      - Category
       summary: List Categories
       description: |-
         <h4>Allowed for</h4>
@@ -814,7 +813,7 @@ paths:
     post:
       operationId: CreateCategoryNoLocale
       tags:
-      - Categories
+      - Category
       summary: Create Category
       description: |-
         <p>You must specify a category name and locale. The locale can be omitted if it's specified
@@ -844,7 +843,7 @@ paths:
     get:
       operationId: ShowCategoryNoLocale
       tags:
-      - Categories
+      - Category
       summary: Show Category
       description: |-
         <h4>Allowed for</h4>
@@ -879,7 +878,7 @@ paths:
     put:
       operationId: UpdateCategoryNoLocale
       tags:
-      - Categories
+      - Category
       summary: Update Category
       description: |-
         <p>These endpoints only update category-level metadata such as the sorting position.
@@ -898,7 +897,7 @@ paths:
     delete:
       operationId: DeleteCategoryNoLocale
       tags:
-      - Categories
+      - Category
       summary: Delete Category
       description: |-
         <p><strong>WARNING: Every section and all articles in the category will also be deleted.</strong></p>
@@ -915,7 +914,7 @@ paths:
     put:
       operationId: UpdateCategorySourceLocaleNoLocale
       tags:
-      - Categories
+      - Category
       summary: Update Category Source Locale
       description: |-
         <p>The endpoint updates the category <code>source_locale</code> property</p>
