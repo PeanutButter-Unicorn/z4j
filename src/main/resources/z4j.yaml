@@ -567,10 +567,10 @@ paths:
         </ul>
       responses:
         "201":
-          description: <p>OK Response</p>
+          description: OK Response
           headers:
             Location:
-              description: <p>The URL of the new created category</p>
+              description: The URL of the new created category
               schema:
                 type: string
                 format: url
@@ -594,22 +594,6 @@ paths:
         <ul>
             <li>Anonymous users</li>
         </ul>
-        <h4>Sideloads</h4>
-        <p>The following sideloads are supported:</p>
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Will sideload</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>translations</td>
-                <td>the category translations, if any</td>
-            </tr>
-            </tbody>
-        </table>
         <p>Translations are embedded within the category because they're
         not shared between resources.</p>
       responses:
@@ -633,7 +617,7 @@ paths:
         </ul>
       responses:
         "200":
-          description: <p>OK Response</p>
+          description: OK Response
           content:
             application/json:
               schema:
@@ -651,7 +635,7 @@ paths:
         </ul>
       responses:
         "204":
-          description: <p>No content</p>
+          description: No content
   /api/v2/help_center/categories/{category_id}/source_locale:
     parameters:
     - $ref: '#/components/parameters/CategoryId'
@@ -668,7 +652,7 @@ paths:
         </ul>
       responses:
         "200":
-          description: <p>OK Response</p>
+          description: OK Response
           content:
             application/json:
               schema:
@@ -774,7 +758,7 @@ paths:
         </ul>
       responses:
         "200":
-          description: <p>OK Response</p>
+          description: OK Response
           content:
             application/json:
               schema:
