@@ -565,6 +565,14 @@ paths:
         <ul>
             <li>Help Center managers</li>
         </ul>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  $ref: '#/components/schemas/Category'
       responses:
         "201":
           description: OK Response
@@ -652,14 +660,11 @@ paths:
         </ul>
       responses:
         "200":
-          description: OK Response
+          description: <p>OK Response</p>
           content:
             application/json:
               schema:
-                type: string
-                description: <p>Empty response</p>
-                example: ""
-              example: ""
+                $ref: '#/components/schemas/CategoryResponse'
   /api/v2/help_center/categories:
     get:
       operationId: ListCategoriesNoLocale
@@ -1222,18 +1227,8 @@ components:
           type: string
           description: The API url of this category
       #          readOnly: true
-      example:
-        description: ""
-        html_url: https://company.zendesk.com/hc/en-us/categories/354362577
-        id: 1635
-        locale: en-us
-        name: Self Help Articles
-        source_locale: en-us
-        url: https://company.zendesk.com/api/v2/help_center/categories/354362577
       required:
-        - id
         - name
-        - locale
     CategoryResponse:
       type: object
       properties:
