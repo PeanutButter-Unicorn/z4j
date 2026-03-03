@@ -2,16 +2,7 @@ package lol.pbu.z4j.client
 
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import lol.pbu.z4j.Z4jSpec
-import lol.pbu.z4j.model.ArticlesResponse
-import lol.pbu.z4j.model.CategoriesResponse
-import lol.pbu.z4j.model.Category
-import lol.pbu.z4j.model.CategoryResponse
-import lol.pbu.z4j.model.CreateCategoryRequest
-import lol.pbu.z4j.model.ListArticlesSortByParameter
-import lol.pbu.z4j.model.ListArticlesSortOrderParameter
-import lol.pbu.z4j.model.ListCategoriesSortByParameter
-import lol.pbu.z4j.model.UserSegment
-import reactor.core.publisher.Mono
+import lol.pbu.z4j.model.*
 import spock.lang.Shared
 
 @MicronautTest
