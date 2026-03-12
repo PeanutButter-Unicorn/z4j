@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0 # SonarCloud needs a full history to assign issues correctly
       - name: Set up JDK
-        uses: graalvm/setup-graalvm@9d0e2dff13a8c69a81d72a49c9816836f963fe01
+        uses: graalvm/setup-graalvm@6e327d26e09bcf375e305cc515c0799e79e34ad0
         with:
           java-version: '21'
           distribution: 'graalvm-community'
