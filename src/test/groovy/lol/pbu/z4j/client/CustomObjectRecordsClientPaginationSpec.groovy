@@ -67,4 +67,15 @@ class CustomObjectRecordsClientPaginationSpec extends Z4jSpec {
         def retrievedIds = allRecords.collect { it.id }
         createdRecordIds.every { retrievedIds.contains(it) }
     }
+
+
+    def "can list all custom object records using default page size"() {
+        when: "retrieving all records without specifying page size"
+        def allRecords = adminObjectRecordsClient.listAllCustomObjectRecords(customObjectKey).collectList().block()
+
+        then: "all created records are returned"
+        noExceptionThrown()
+        allRecords != null
+        allRecords.size() >= 3
+    }
 }
