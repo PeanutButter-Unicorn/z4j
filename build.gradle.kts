@@ -129,6 +129,20 @@ val generateTestFixtures by tasks.registering(JavaExec::class) {
 }
 
 tasks.withType<Test> {
+    val envFile = file(".env")
+    if (envFile.exists()) {
+        envFile.readLines().forEach { line ->
+            var trimmed = line.trim()
+            if (trimmed.startsWith("export ")) {
+                trimmed = trimmed.removePrefix("export ").trim()
+            }
+            if (trimmed.isNotEmpty() && !trimmed.startsWith("#") && trimmed.contains("=")) {
+                val (key, rawValue) = trimmed.split("=", limit = 2)
+                val value = rawValue.trim().removeSurrounding("\"").removeSurrounding("'")
+                environment(key.trim(), value)
+            }
+        }
+    }
 
     useJUnitPlatform()
     testLogging {
@@ -189,7 +203,23 @@ publishing {
 }
 
 signing {
-    useGpgCmd()
+    val signingKey = System.getenv("GPG_SIGNING_KEY") ?: findProperty("signingKey") as? String
+    val signingPassword = System.getenv("GPG_PASSWORD") ?: findProperty("signingPassword") as? String
+    val signingKeyId = System.getenv("GPG_KEY_ID") ?: findProperty("signingKeyId") as? String
+
+    if (!signingKey.isNullOrBlank()) {
+        if (!signingKeyId.isNullOrBlank()) {
+            useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+        } else {
+            useInMemoryPgpKeys(signingKey, signingPassword)
+        }
+    } else {
+        useGpgCmd()
+    }
+    setRequired {
+        gradle.taskGraph.hasTask("publishAggregationToCentralPortal") ||
+        gradle.taskGraph.hasTask("publishAllPublicationsToCentralPortal")
+    }
     sign(publishing.publications["maven"])
 }
 
