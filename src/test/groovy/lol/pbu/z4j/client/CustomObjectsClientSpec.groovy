@@ -1,0 +1,130 @@
+/*
+ * Copyright 2026 Peanut Butter Unicorn, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package lol.pbu.z4j.client
+
+import io.micronaut.http.client.exceptions.HttpClientException
+import io.micronaut.http.client.exceptions.HttpClientResponseException
+import io.micronaut.test.extensions.spock.annotation.MicronautTest
+import lol.pbu.z4j.Z4jSpec
+import lol.pbu.z4j.model.CustomObject
+import lol.pbu.z4j.model.CustomObjectsCreateRequest
+import org.yaml.snakeyaml.Yaml
+import spock.lang.Shared
+import spock.lang.Unroll
+
+import static io.micronaut.http.HttpStatus.FORBIDDEN
+
+@MicronautTest
+class CustomObjectsClientSpec extends Z4jSpec {
+
+    @Shared CustomObjectsClient adminCustomObjectsClient, agentCustomObjectsClient, userCustomObjectsClient, badTokenCustomObjectsClient, badUrlCustomObjectsClient
+    @Shared String existingObjectKey
+
+    def setupSpec() {
+        adminCustomObjectsClient = adminCtx.getBean(CustomObjectsClient.class)
+        agentCustomObjectsClient = agentCtx.getBean(CustomObjectsClient.class)
+        userCustomObjectsClient = userCtx.getBean(CustomObjectsClient.class)
+        badTokenCustomObjectsClient = badTokenCtx.getBean(CustomObjectsClient.class)
+        badUrlCustomObjectsClient = badUrlCtx.getBean(CustomObjectsClient.class)
+
+        // Create test custom object using fixture
+        def fixtures = new Yaml().load(new File("src/test/resources/fixtures/custom_object_fixtures.yaml").text) as Map
+        def objData = fixtures.customObjects[0] as Map
+        existingObjectKey = (objData.key as String) + "_" + UUID.randomUUID().toString().substring(0, 8)
+        def customObject = new CustomObject(existingObjectKey, objData.title as String, objData.titlePluralized as String)
+
+        adminCustomObjectsClient.createCustomObject(new CustomObjectsCreateRequest(customObject)).block()
+        sleep(2000)
+    }
+
+    def cleanupSpec() {
+        if (existingObjectKey != null) {
+            try {
+                adminCustomObjectsClient.deleteCustomObject(existingObjectKey).block()
+            } catch (Exception ignored) {}
+        }
+    }
+
+    @Unroll
+    def "can list custom objects as an #userType"(
+            CustomObjectsClient client, String userType) {
+        when: "requesting custom objects list"
+        def response = client.listCustomObjects().block()
+
+        then: "response deserializes successfully without exception"
+        noExceptionThrown()
+        response != null
+        response.customObjects != null
+
+        where:
+        [client, userType] << [
+                [adminCustomObjectsClient, "admin"],
+                [agentCustomObjectsClient, "agent"]
+        ]
+    }
+
+    def "can check custom objects limit as an admin"() {
+        when: "requesting custom objects limit"
+        def response = adminCustomObjectsClient.customObjectsLimit().block()
+
+        then: "response deserializes successfully without exception"
+        noExceptionThrown()
+        response != null
+    }
+
+    @Unroll
+    def "can show custom object by key as an #userType"(
+            CustomObjectsClient client, String userType) {
+        when: "requesting custom object by key"
+        def response = client.showCustomObject(existingObjectKey).block()
+
+        then: "response deserializes successfully without exception"
+        noExceptionThrown()
+        response != null
+        response.customObject != null
+        response.customObject.key == existingObjectKey
+
+        where:
+        [client, userType] << [
+                [adminCustomObjectsClient, "admin"],
+                [agentCustomObjectsClient, "agent"]
+        ]
+    }
+
+    def "end user cannot list custom objects"() {
+        when: "requesting custom objects as an end user"
+        userCustomObjectsClient.listCustomObjects().block()
+
+        then: "a 403 Forbidden exception is thrown as documented"
+        HttpClientResponseException e = thrown()
+        e.status == FORBIDDEN
+    }
+
+    @Unroll
+    def "calling custom objects client with #description throws HttpClientException"(
+            String description, CustomObjectsClient client) {
+        when: "requesting custom objects with invalid client configuration"
+        client.listCustomObjects().block()
+
+        then: "an http client exception is thrown"
+        thrown(HttpClientException)
+
+        where:
+        description       | client
+        "invalid token"   | badTokenCustomObjectsClient
+        "unreachable url" | badUrlCustomObjectsClient
+    }
+}

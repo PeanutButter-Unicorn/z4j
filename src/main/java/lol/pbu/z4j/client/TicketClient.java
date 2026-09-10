@@ -105,6 +105,28 @@ public interface TicketClient {
     );
 
     /**
+     * <h1>{@summary Show Ticket Field}</h1>
+     * <p>Returns the ticket field with the specified id.</p>
+     * <h4>Allowed For</h4> <ul> <li>Agents</li> </ul>
+     *
+     * @param ticketFieldId The ID of the ticket field (required)
+     * @return Success response (status code 200)
+     */
+    @Get("/api/v2/ticket_fields/{ticket_field_id}")
+    Mono<@Valid TicketFieldResponse> showTicketField(@PathVariable("ticket_field_id") @NotNull Long ticketFieldId);
+
+    /**
+     * <h1>{@summary Delete Ticket Field}</h1>
+     * <p>Deletes the ticket field with the specified id.</p>
+     * <h4>Allowed For</h4> <ul> <li>Admins</li> </ul>
+     *
+     * @param ticketFieldId The ID of the ticket field (required)
+     * @return No content response (status code 204)
+     */
+    @Delete("/api/v2/ticket_fields/{ticket_field_id}")
+    Mono<Void> deleteTicketField(@PathVariable("ticket_field_id") @NotNull Long ticketFieldId);
+
+    /**
      * <h1>{@summary List Tickets}</h1>
      *
      * @param externalId Lists tickets by external id. External ids don't have to be unique for each ticket. As a result, the request may return multiple tickets with the same external id. (optional)
