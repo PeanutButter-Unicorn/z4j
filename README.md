@@ -1,4 +1,4 @@
-<img src="src/main/docs/z4j.svg" width="200" alt="z4j logo"> [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PeanutButter-Unicorn_z4j&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PeanutButter-Unicorn_z4j) 
+<img src="src/main/docs/z4j.svg" width="200" alt="z4j logo"> 
 
 The ultra-lightweight, cloud-native Java client for the Zendesk API
 
@@ -33,6 +33,8 @@ A zippy Zendesk client built for heavy lifting, z4j pairs Micronaut’s lightnin
 - [zcmi] is a cli project built with z4j.
 
 ## Contributing
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PeanutButter-Unicorn_z4j&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PeanutButter-Unicorn_z4j)
 
 Please read our [Code of Conduct](CODE_OF_CONDUCT.md) and [Contributing Guide](CONTRIBUTING.md) for details on our
 development process, style guides, and testing strategy.
