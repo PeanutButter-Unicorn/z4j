@@ -22,11 +22,11 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Setter
 @Getter
 @Serdeable
-public class CreateResourceResult extends JobStatus {
+public class CreateResourceResult {
     private Integer id;
     private Integer index;
 }

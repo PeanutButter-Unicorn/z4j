@@ -154,4 +154,19 @@ public interface TicketClient {
      */
     @Put("/api/v2/tickets/{ticket_id}")
     Mono<@Valid TicketUpdateResponse> updateTicket(@PathVariable("ticket_id") @NotNull Long ticketId, @Body @Nullable @Valid TicketUpdateRequest ticketUpdateRequest);
+
+    /**
+     * <h1>{@summary Update Many Tickets}</h1>
+     * <p>Updates multiple tickets identified by comma-separated IDs.</p>
+     * <h4>Allowed For</h4> <ul> <li>Agents</li> </ul>
+     *
+     * @param ids Comma-separated list of ticket IDs (required)
+     * @param ticketUpdateRequest Ticket update parameters (required)
+     * @return Job status response (status code 200)
+     */
+    @Put("/api/v2/tickets/update_many")
+    Mono<@Valid JobStatusResponse> updateManyTickets(
+            @QueryValue("ids") @NotNull String ids,
+            @Body @NotNull @Valid TicketUpdateRequest ticketUpdateRequest
+    );
 }
