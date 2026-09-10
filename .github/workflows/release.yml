@@ -14,18 +14,24 @@
 name: Release
 
 on:
+  push:
+    tags:
+      - 'v*'
+      - '[0-9]+.[0-9]+.[0-9]+*'
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (optional; defaults to git tag or gradle.properties)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
 
 jobs:
   release:
     name: Publish to Maven Central
     runs-on: ubuntu-latest
-    env:
-      SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-      GPG_FILE: ${{ secrets.GPG_FILE }}
-      GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
         with:
@@ -39,11 +45,26 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e # 6.1.0
+
       - name: Publish to Maven Central
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-          GPG_FILE: ${{ secrets.GPG_FILE }}
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-        run: ./gradlew publishToMavenCentral --info
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+        run: |
+          VERSION_ARG=""
+          if [ -n "${{ inputs.version }}" ]; then
+            VERSION_ARG="-Pz4jVersion=${{ inputs.version }}"
+          elif [ "${{ github.ref_type }}" = "tag" ]; then
+            TAG_VERSION="${GITHUB_REF_NAME#v}"
+            VERSION_ARG="-Pz4jVersion=${TAG_VERSION}"
+          fi
+          ./gradlew publishAggregationToCentralPortal --info --no-daemon $VERSION_ARG
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
