@@ -96,6 +96,33 @@ class TicketClientSpec extends Z4jSpec {
         [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
     }
 
+    def "calling listAuditsForTicket() succeeds when used with a(n) #clientType client"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        when:
+        TicketAuditsResponse response = client.listAuditsForTicket(tickets.get(0).getId()).block()
+
+        then:
+        noExceptionThrown()
+        response != null
+        response.audits != null
+        !response.audits.isEmpty()
+        response.audits.first().ticketId == tickets.get(0).getId()
+        response.audits.first().events != null
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { it.shouldSucceed }
+    }
+
+    def "calling listAuditsForTicket() fails when used with a(n) #clientType client"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        when:
+        client.listAuditsForTicket(tickets.get(0).getId()).block()
+
+        then:
+        thrown(HttpClientException)
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
+    }
+
     def "Trying to create a ticket succeeds when used with a(n) #clientType client"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
         given:
         TicketItem sampleData = ticketFixtures.getTicketData().first()

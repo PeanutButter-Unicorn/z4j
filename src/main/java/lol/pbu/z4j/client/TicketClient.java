@@ -169,4 +169,18 @@ public interface TicketClient {
             @QueryValue("ids") @NotNull String ids,
             @Body @NotNull @Valid TicketUpdateRequest ticketUpdateRequest
     );
+
+    /**
+     * <h1>{@summary List Audits for a Ticket}</h1>
+     * <p>Lists the audits for a specified ticket, showing all changes, comments, notifications,
+     * and trigger/rule executions (via {@code via.source.from.title} and {@code via.source.rel: "trigger"}).</p>
+     * <h4>Allowed For</h4> <ul> <li>Agents</li> </ul>
+     *
+     * @param ticketId The ID of the ticket (required)
+     * @return Audits response containing ticket audit history (status code 200)
+     */
+    @Get("/api/v2/tickets/{ticket_id}/audits")
+    Mono<@Valid TicketAuditsResponse> listAuditsForTicket(
+            @PathVariable("ticket_id") @NotNull Long ticketId
+    );
 }
