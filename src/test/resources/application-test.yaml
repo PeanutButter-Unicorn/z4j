@@ -12,3 +12,9 @@ micronaut:
 logger:
   levels:
     io.micronaut.http.client: TRACE
+
+z4j:
+  rate-limit:
+    auto-wait-enabled: true
+    wait-duration-seconds: 5
+    approach-threshold: 50
