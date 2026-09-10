@@ -114,7 +114,7 @@ class RateLimitSpec extends Z4jSpec {
                 .globalRemaining(690)
                 .globalResetSeconds(25)
                 .build()
-        tracker.record(snapshot)
+        tracker.recordSnapshot(snapshot)
 
         then: "the listener received the snapshot"
         captured != null
@@ -149,5 +149,106 @@ class RateLimitSpec extends Z4jSpec {
 
         cleanup:
         tracker.removeListener(listener)
+    }
+
+    def "RateLimitTracker handles edge cases and null inputs cleanly"() {
+        given: "a new isolated tracker"
+        def localTracker = new RateLimitTracker()
+
+        expect: "initial state is empty"
+        localTracker.getLatestSnapshot() == null
+        localTracker.getGlobalRemaining() == null
+        localTracker.getAllEndpointLimits().isEmpty()
+        !localTracker.getEndpointLimit("search-index").isPresent()
+        !localTracker.getEndpointLimit(null).isPresent()
+
+        when: "recording null"
+        localTracker.recordSnapshot(null)
+
+        then: "state remains null"
+        localTracker.getLatestSnapshot() == null
+
+        when: "recording a snapshot with an endpoint limit"
+        def limit = EndpointRateLimit.builder().name("search-index").remaining(10L).build()
+        def snapshot = RateLimitSnapshot.builder()
+                .requestMethod("GET")
+                .requestPath("/api/v2/tickets")
+                .globalRemaining(20)
+                .endpointLimits(["search-index": limit])
+                .build()
+        localTracker.recordSnapshot(snapshot)
+
+        then:
+        localTracker.getLatestSnapshot() == snapshot
+        localTracker.getGlobalRemaining() == 20
+        localTracker.getAllEndpointLimits().containsKey("search-index")
+        localTracker.getEndpointLimit("search-index").isPresent()
+        localTracker.getEndpointLimit("zendesk-ratelimit-search-index").isPresent()
+        localTracker.isApproachingLimit(50)
+
+        when: "a listener throws an exception"
+        RateLimitListener badListener = { s -> throw new RuntimeException("boom") }
+        localTracker.addListener(badListener)
+        localTracker.recordSnapshot(snapshot)
+
+        then: "no exception escapes"
+        noExceptionThrown()
+
+        when: "removing listener"
+        localTracker.removeListener(badListener)
+        localTracker.removeListener(null)
+
+        then:
+        noExceptionThrown()
+    }
+
+    def "RateLimitTracker constructor with injected list initializes listeners"() {
+        given:
+        RateLimitSnapshot captured = null
+        RateLimitListener l = { s -> captured = s }
+        def trackerWithList = new RateLimitTracker([l])
+        def trackerWithNull = new RateLimitTracker(null)
+
+        when:
+        def snapshot = RateLimitSnapshot.builder().globalRemaining(100).build()
+        trackerWithList.recordSnapshot(snapshot)
+        trackerWithNull.recordSnapshot(snapshot)
+
+        then:
+        captured == snapshot
+        trackerWithNull.getLatestSnapshot() == snapshot
+    }
+
+    def "EndpointRateLimit handles edge cases in parsing"() {
+        expect:
+        EndpointRateLimit.parse(null, "total=100") == null
+        EndpointRateLimit.parse("test", null).name == "test"
+        EndpointRateLimit.parse("test", "").name == "test"
+        EndpointRateLimit.parse("test", "total=not_a_number; remaining=abc; foo=bar").total == null
+        EndpointRateLimit.parse("zendesk-ratelimit-foo", "key_without_value; =; total=50").total == 50L
+    }
+
+    def "RateLimitFilter handles null response and 429 status"() {
+        given:
+        def localTracker = new RateLimitTracker()
+        def filter = new lol.pbu.z4j.client.RateLimitFilter(localTracker)
+
+        when: "handling null response"
+        filter.handleResponse(null, null)
+
+        then:
+        localTracker.getLatestSnapshot() == null
+
+        when: "handling 429 response"
+        def req = io.micronaut.http.HttpRequest.GET("/api/v2/search")
+        def resp = io.micronaut.http.HttpResponse.status(io.micronaut.http.HttpStatus.TOO_MANY_REQUESTS)
+                .header("Retry-After", "30")
+                .header("X-Rate-Limit-Remaining", "0")
+        filter.handleResponse(req, resp)
+
+        then:
+        localTracker.getLatestSnapshot() != null
+        localTracker.getLatestSnapshot().isRateLimited()
+        localTracker.getLatestSnapshot().retryAfterSeconds == 30
     }
 }

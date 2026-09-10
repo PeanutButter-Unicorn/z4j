@@ -81,7 +81,7 @@ public class RateLimitTracker {
      *
      * @param snapshot Snapshot from an HTTP response
      */
-    public void record(RateLimitSnapshot snapshot) {
+    public void recordSnapshot(RateLimitSnapshot snapshot) {
         if (snapshot == null) {
             return;
         }

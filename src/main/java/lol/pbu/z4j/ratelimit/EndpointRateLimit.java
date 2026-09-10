@@ -56,6 +56,9 @@ public class EndpointRateLimit implements Serializable {
      * @return Parsed {@link EndpointRateLimit}
      */
     public static EndpointRateLimit parse(String headerName, String headerValue) {
+        if (headerName == null) {
+            return null;
+        }
         String cleanName = headerName.toLowerCase();
         if (cleanName.startsWith(PREFIX)) {
             cleanName = cleanName.substring(PREFIX.length());
@@ -77,9 +80,9 @@ public class EndpointRateLimit implements Serializable {
                             case "total" -> builder.total(Long.parseLong(val));
                             case "remaining" -> builder.remaining(Long.parseLong(val));
                             case "resets" -> builder.resets(Integer.parseInt(val));
-                            default -> { }
+                            default -> { /* ignore other parameters */ }
                         }
-                    } catch (NumberFormatException ignored) {
+                    } catch (NumberFormatException _) {
                         // ignore malformed numeric values
                     }
                 }

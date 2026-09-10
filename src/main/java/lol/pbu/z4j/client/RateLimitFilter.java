@@ -113,7 +113,7 @@ public class RateLimitFilter implements HttpClientFilter {
                     request.getMethodName(), request.getPath(), globalRemaining, globalResetSeconds, endpointLimits.keySet());
         }
 
-        tracker.record(snapshot);
+        tracker.recordSnapshot(snapshot);
     }
 
     private Integer parseIntegerHeader(HttpHeaders headers, String... candidateNames) {
@@ -122,7 +122,7 @@ public class RateLimitFilter implements HttpClientFilter {
             if (value != null && !value.isBlank()) {
                 try {
                     return Integer.parseInt(value.trim());
-                } catch (NumberFormatException ignored) {
+                } catch (NumberFormatException _) {
                     // try next candidate
                 }
             }
