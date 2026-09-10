@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,6 +41,10 @@ import lombok.experimental.Accessors;
         AuditEventsInner.JSON_PROPERTY_ID,
         AuditEventsInner.JSON_PROPERTY_TYPE,
         AuditEventsInner.JSON_PROPERTY_VALUE,
+        AuditEventsInner.JSON_PROPERTY_PREVIOUS_VALUE,
+        AuditEventsInner.JSON_PROPERTY_VIA,
+        AuditEventsInner.JSON_PROPERTY_SUBJECT,
+        AuditEventsInner.JSON_PROPERTY_RECIPIENTS,
 })
 @Serdeable
 public class AuditEventsInner {
@@ -51,6 +54,10 @@ public class AuditEventsInner {
     public static final String JSON_PROPERTY_ID = "id";
     public static final String JSON_PROPERTY_TYPE = "type";
     public static final String JSON_PROPERTY_VALUE = "value";
+    public static final String JSON_PROPERTY_PREVIOUS_VALUE = "previous_value";
+    public static final String JSON_PROPERTY_VIA = "via";
+    public static final String JSON_PROPERTY_SUBJECT = "subject";
+    public static final String JSON_PROPERTY_RECIPIENTS = "recipients";
 
     @Nullable
     @JsonProperty(JSON_PROPERTY_BODY)
@@ -73,9 +80,28 @@ public class AuditEventsInner {
     private String type;
 
     @Nullable
-    @Valid
     @JsonProperty(JSON_PROPERTY_VALUE)
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
-    private AuditEventsInnerValue value;
+    private Object value;
+
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_PREVIOUS_VALUE)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private Object previousValue;
+
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_VIA)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private Via via;
+
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_SUBJECT)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private String subject;
+
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_RECIPIENTS)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private java.util.List<Long> recipients;
 
 }
