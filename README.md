@@ -1,4 +1,4 @@
-<img src="src/main/docs/z4j.svg" width="200" alt="z4j logo"> 
+<img src="src/main/docs/z4j.svg" width="200" alt="z4j logo"> [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PeanutButter-Unicorn_z4j&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PeanutButter-Unicorn_z4j) 
 
 The ultra-lightweight, cloud-native Java client for the Zendesk API
 
