@@ -25,6 +25,11 @@ import io.micronaut.http.filter.HttpClientFilter;
 import lol.pbu.z4j.ratelimit.EndpointRateLimit;
 import lol.pbu.z4j.ratelimit.RateLimitSnapshot;
 import lol.pbu.z4j.ratelimit.RateLimitTracker;
+
+import lol.pbu.z4j.ratelimit.RateLimitConfiguration;
+import java.time.Duration;
+import reactor.core.publisher.Mono;
+
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,14 +60,26 @@ public class RateLimitFilter implements HttpClientFilter {
     private static final String HEADER_RETRY_AFTER = "Retry-After";
 
     private final RateLimitTracker tracker;
+    private final RateLimitConfiguration config;
 
-    public RateLimitFilter(RateLimitTracker tracker) {
+    public RateLimitFilter(RateLimitTracker tracker, RateLimitConfiguration config) {
         this.tracker = tracker;
+        this.config = config;
     }
 
     @Override
     public Publisher<? extends HttpResponse<?>> doFilter(MutableHttpRequest<?> request, ClientFilterChain chain) {
-        return Flux.from(chain.proceed(request))
+        Publisher<? extends HttpResponse<?>> resultPublisher;
+        if (config.isAutoWaitEnabled() && tracker.isApproachingLimit(config.getApproachThreshold())) {
+            log.warn("Rate limit approaching threshold (<= {}). Auto-wait enabled. Pausing for {} seconds before sending request to {}", 
+                    config.getApproachThreshold(), config.getWaitDurationSeconds(), request.getPath());
+            resultPublisher = Mono.delay(Duration.ofSeconds(config.getWaitDurationSeconds()))
+                    .flatMapMany(v -> chain.proceed(request));
+        } else {
+            resultPublisher = chain.proceed(request);
+        }
+
+        return Flux.from(resultPublisher)
                 .doOnNext(response -> handleResponse(request, response))
                 .doOnError(HttpClientResponseException.class, ex -> handleResponse(request, ex.getResponse()));
     }
