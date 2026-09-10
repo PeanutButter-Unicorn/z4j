@@ -19,6 +19,8 @@ import io.micronaut.core.annotation.Introspected;
 import io.micronaut.serde.annotation.Serdeable;
 import java.util.List;
 
+import io.micronaut.core.annotation.Nullable;
+
 /**
  * TicketCustomField
  *
@@ -32,7 +34,8 @@ public sealed interface TicketCustomField
             TicketCustomField.Numeric,
             TicketCustomField.Decimal,
             TicketCustomField.Checkbox,
-            TicketCustomField.TagList {
+            TicketCustomField.TagList,
+            TicketCustomField.Raw {
 
     Long id();
     Object value();
@@ -42,4 +45,5 @@ public sealed interface TicketCustomField
     @Serdeable record Decimal(Long id, Float value) implements TicketCustomField {}
     @Serdeable record Checkbox(Long id, Boolean value) implements TicketCustomField {}
     @Serdeable record TagList(Long id, List<String> value) implements TicketCustomField {}
+    @Serdeable record Raw(Long id, @Nullable Object value) implements TicketCustomField {}
 }
