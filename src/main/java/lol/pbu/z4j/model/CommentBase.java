@@ -57,7 +57,8 @@ public class CommentBase {
     /**
      * The locale in which this comment was made
      */
-    @NotNull
+    @Nullable
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
     @JsonProperty(JSON_PROPERTY_LOCALE)
     private LocaleAbbreviation localeAbbreviation;
 

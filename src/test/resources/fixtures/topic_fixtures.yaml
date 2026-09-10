@@ -1,0 +1,9 @@
+topics:
+- name: Test Topic Alpha
+  description: A test topic for automated testing.
+  updatedName: Test Topic Alpha Updated
+  updatedDescription: An updated description for automated testing.
+- name: Test Topic Beta
+  description: Another test topic for automated testing.
+  updatedName: Test Topic Beta Updated
+  updatedDescription: Another updated description for automated testing.

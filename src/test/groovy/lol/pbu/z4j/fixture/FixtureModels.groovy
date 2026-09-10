@@ -74,3 +74,33 @@ class UserSegmentFixtures {
 class ArticleFixtures {
     List<SortOptionItem> articleQueries = []
 }
+
+@CompileStatic
+@Canonical
+class TopicItem {
+    String name
+    String description
+    String updatedName
+    String updatedDescription
+}
+
+@CompileStatic
+@Canonical
+class TopicFixtures {
+    List<TopicItem> topics = []
+}
+
+@CompileStatic
+@Canonical
+class PostItem {
+    String title
+    String details
+    String updatedTitle
+    String updatedDetails
+}
+
+@CompileStatic
+@Canonical
+class PostFixtures {
+    List<PostItem> posts = []
+}

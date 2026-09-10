@@ -25,7 +25,7 @@ class PostSpec extends Z4jSpec {
         given:
         def post = new Post(faker.lorem().sentence())
         post.contentTagIds == null
-        def contentTagId = faker.number().randomNumber()
+        def contentTagId = String.valueOf(faker.number().randomNumber())
 
         when:
         post.addContentTagIdsItem(contentTagId)
@@ -38,10 +38,10 @@ class PostSpec extends Z4jSpec {
     @Unroll
     def "add content tag ids item to existing list"() {
         given:
-        def existingContentTagId = faker.number().randomNumber()
+        def existingContentTagId = String.valueOf(faker.number().randomNumber())
         def post = new Post(faker.lorem().sentence())
         post.contentTagIds = [existingContentTagId]
-        def newContentTagId = faker.number().randomNumber()
+        def newContentTagId = String.valueOf(faker.number().randomNumber())
 
         when:
         post.addContentTagIdsItem(newContentTagId)
