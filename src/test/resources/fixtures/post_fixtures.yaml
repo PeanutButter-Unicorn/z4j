@@ -1,0 +1,9 @@
+posts:
+- title: Test Post One
+  details: This is the first test post body content.
+  updatedTitle: Test Post One Updated
+  updatedDetails: This is the updated first test post body content.
+- title: Test Post Two
+  details: This is the second test post body content.
+  updatedTitle: Test Post Two Updated
+  updatedDetails: This is the updated second test post body content.
