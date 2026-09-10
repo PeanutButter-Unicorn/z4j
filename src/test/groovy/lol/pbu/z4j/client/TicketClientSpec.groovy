@@ -266,4 +266,27 @@ class TicketClientSpec extends Z4jSpec {
         }
         throw new IllegalStateException("Ticket field fixture setup did not become visible in time. Please rerun or pre-seed your sandbox.")
     }
+
+    def "can show and delete a ticket field as admin"() {
+        given: "a created custom ticket field"
+        String entropy = UUID.randomUUID().toString().replace("-", "").substring(0, 8)
+        TicketField field = new TicketField("z4j-field-${entropy}", TicketFieldTypeEnum.TEXT.getValue())
+        TicketFieldResponse created = ticketsAdminClient.createTicketField(new TicketFieldCreateRequest(field)).block()
+        Long fieldId = created.getTicketField().getId()
+
+        when: "fetching the ticket field by id"
+        TicketFieldResponse shown = ticketsAdminClient.showTicketField(fieldId).block()
+
+        then: "the ticket field matches"
+        noExceptionThrown()
+        shown != null
+        shown.getTicketField() != null
+        shown.getTicketField().getId() == fieldId
+
+        when: "deleting the ticket field"
+        ticketsAdminClient.deleteTicketField(fieldId).block()
+
+        then: "deletion succeeds without exception"
+        noExceptionThrown()
+    }
 }

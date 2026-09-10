@@ -15,19 +15,36 @@
  */
 package lol.pbu.z4j.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.*;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+/**
+ * CustomObjectResponse
+ *
+ * @since 0.2.2
+ */
 @Accessors(chain = true)
-@EqualsAndHashCode
-@ToString
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@JsonPropertyOrder(CustomObjectResponse.JSON_PROPERTY_CUSTOM_OBJECT)
 @Serdeable
-public class TicketFieldCreateRequest {
-    @JsonProperty("ticket_field")
-    private TicketField ticketField;
+public class CustomObjectResponse {
+
+    public static final String JSON_PROPERTY_CUSTOM_OBJECT = "custom_object";
+
+    @Nullable
+    @Valid
+    @JsonProperty(JSON_PROPERTY_CUSTOM_OBJECT)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private CustomObject customObject;
+
 }

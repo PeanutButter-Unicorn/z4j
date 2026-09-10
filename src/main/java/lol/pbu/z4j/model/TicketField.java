@@ -32,6 +32,8 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.NoArgsConstructor;
+
 /**
  * TicketFieldObject
  *
@@ -43,6 +45,7 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
+@NoArgsConstructor
 @JsonPropertyOrder({
         TicketField.JSON_PROPERTY_TITLE,
         TicketField.JSON_PROPERTY_TYPE,
