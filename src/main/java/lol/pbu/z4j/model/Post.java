@@ -125,7 +125,7 @@ public class Post {
     @Nullable
     @JsonProperty(JSON_PROPERTY_CONTENT_TAG_IDS)
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
-    private List<String> contentTagIds;
+    private List<@NotNull Long> contentTagIds;
 
     /**
      * When the post was created. Writable on create by Help Center managers -- see <a href=\"#create-post\">Create Post</a>
@@ -256,7 +256,7 @@ public class Post {
      *
      * @return The same instance of Post for chaining.
      */
-    public Post addContentTagIdsItem(String contentTagIdsItem) {
+    public Post addContentTagIdsItem(Long contentTagIdsItem) {
         if (contentTagIds == null) {
             contentTagIds = new ArrayList<>();
         }
