@@ -89,6 +89,27 @@ public interface CustomObjectRecordsClient {
     }
 
     /**
+     * <h1>{@summary List All Custom Object Records (Cursor Pagination)}</h1>
+     * Iteratively fetches all pages of custom object records using cursor pagination.
+     *
+     * @param customObjectKey Key of custom object (required)
+     * @return Flux of all custom object records
+     */
+    default reactor.core.publisher.Flux<lol.pbu.z4j.model.CustomObjectRecord> listAllCustomObjectRecords(String customObjectKey) {
+        return listCustomObjectRecords(customObjectKey, null, null, null, null, null, null)
+                .expand(response -> {
+                    if (response.getMeta() != null && Boolean.TRUE.equals(response.getMeta().get("has_more"))) {
+                        String afterCursor = (String) response.getMeta().get("after_cursor");
+                        if (afterCursor != null) {
+                            return listCustomObjectRecords(customObjectKey, null, null, null, null, afterCursor, null);
+                        }
+                    }
+                    return Mono.empty();
+                })
+                .flatMapIterable(CustomObjectRecordsResponse::getCustomObjectRecords);
+    }
+
+    /**
      * <h1>{@summary Search Custom Object Records}</h1>
      *
      * @param customObjectKey Key of custom object (required)
