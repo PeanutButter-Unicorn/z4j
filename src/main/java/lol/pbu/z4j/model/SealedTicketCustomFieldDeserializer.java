@@ -51,7 +51,9 @@ public class SealedTicketCustomFieldDeserializer implements Deserializer<TicketC
             }
         }
 
-        if (value == null) return null;
+        if (value == null) {
+            return new TicketCustomField.Raw(id, null);
+        }
 
         if (value instanceof List<?> l) {
             @SuppressWarnings("unchecked") List<String> castedList = (List<String>) l;
@@ -62,7 +64,7 @@ public class SealedTicketCustomFieldDeserializer implements Deserializer<TicketC
             case String s -> new TicketCustomField.Text(id, s);
             case Boolean b -> new TicketCustomField.Checkbox(id, b);
             case Number n -> handleNumericType(id, n);
-            default -> null;
+            default -> new TicketCustomField.Raw(id, value);
         };
     }
 
