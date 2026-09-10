@@ -1,20 +1,83 @@
-/*
- * Copyright 2026 Peanut Butter Unicorn, LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package lol.pbu.z4j.client
 
-class ViewClientSpec {
-}
+import io.micronaut.test.extensions.spock.annotation.MicronautTest
+import lol.pbu.z4j.Z4jSpec
+import spock.lang.Shared
 
+@MicronautTest
+class ViewClientSpec extends Z4jSpec {
+
+    @Shared
+    ViewClient adminViewClient
+
+    @Shared
+    Long firstActiveViewId
+
+    def setupSpec() {
+        adminViewClient = adminCtx.getBean(ViewClient.class)
+        def views = adminViewClient.listActiveViews().block().getViews()
+        if (views != null && !views.isEmpty()) {
+            firstActiveViewId = views.get(0).getId()
+        }
+    }
+
+    def "can list views"() {
+        when:
+        def response = adminViewClient.listViews().block()
+
+        then:
+        noExceptionThrown()
+        response != null
+        response.getViews() != null
+    }
+
+    def "can list active views"() {
+        when:
+        def response = adminViewClient.listActiveViews().block()
+
+        then:
+        noExceptionThrown()
+        response != null
+        response.getViews() != null
+    }
+
+    def "can show a view"() {
+        setup:
+        if (firstActiveViewId == null) return
+
+        when:
+        def response = adminViewClient.showView(firstActiveViewId).block()
+
+        then:
+        noExceptionThrown()
+        response != null
+        response.getView().getId() == firstActiveViewId
+    }
+
+    def "can execute a view"() {
+        setup:
+        if (firstActiveViewId == null) return
+
+        when:
+        def response = adminViewClient.executeView(firstActiveViewId).block()
+
+        then:
+        noExceptionThrown()
+        response != null
+        response.getRows() != null
+    }
+
+    def "can count a view"() {
+        setup:
+        if (firstActiveViewId == null) return
+
+        when:
+        def response = adminViewClient.countView(firstActiveViewId).block()
+
+        then:
+        noExceptionThrown()
+        response != null
+        response.getViewCount() != null
+        response.getViewCount().getViewId() == firstActiveViewId
+    }
+}
