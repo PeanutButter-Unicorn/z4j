@@ -56,7 +56,7 @@ class CustomObjectRecordsClientPaginationSpec extends Z4jSpec {
 
     def "can list all custom object records using cursor pagination recursively"() {
         when: "retrieving all records"
-        def allRecords = adminObjectRecordsClient.listAllCustomObjectRecords(customObjectKey).collectList().block()
+        def allRecords = adminObjectRecordsClient.listAllCustomObjectRecords(customObjectKey, 1L).collectList().block()
 
         then: "all created records are returned"
         noExceptionThrown()

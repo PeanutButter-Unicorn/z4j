@@ -96,12 +96,16 @@ public interface CustomObjectRecordsClient {
      * @return Flux of all custom object records
      */
     default reactor.core.publisher.Flux<lol.pbu.z4j.model.CustomObjectRecord> listAllCustomObjectRecords(String customObjectKey) {
-        return listCustomObjectRecords(customObjectKey, null, null, null, null, null, null)
+        return listAllCustomObjectRecords(customObjectKey, null);
+    }
+
+    default reactor.core.publisher.Flux<lol.pbu.z4j.model.CustomObjectRecord> listAllCustomObjectRecords(String customObjectKey, Long pageSize) {
+        return listCustomObjectRecords(customObjectKey, null, null, null, null, null, pageSize)
                 .expand(response -> {
                     if (response.getMeta() != null && Boolean.TRUE.equals(response.getMeta().get("has_more"))) {
                         String afterCursor = (String) response.getMeta().get("after_cursor");
                         if (afterCursor != null) {
-                            return listCustomObjectRecords(customObjectKey, null, null, null, null, afterCursor, null);
+                            return listCustomObjectRecords(customObjectKey, null, null, null, null, afterCursor, pageSize);
                         }
                     }
                     return Mono.empty();
