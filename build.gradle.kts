@@ -223,6 +223,15 @@ signing {
     sign(publishing.publications["maven"])
 }
 
+tasks.withType<Sign>().configureEach {
+    onlyIf {
+        val signingKey = System.getenv("GPG_SIGNING_KEY") ?: (findProperty("signingKey") as? String)
+        (!signingKey.isNullOrBlank()) ||
+            gradle.taskGraph.hasTask("publishAggregationToCentralPortal") ||
+            gradle.taskGraph.hasTask("publishAllPublicationsToCentralPortal")
+    }
+}
+
 nmcpAggregation {
     centralPortal {
         username = System.getenv("SONATYPE_USERNAME")
