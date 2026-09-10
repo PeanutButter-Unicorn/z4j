@@ -289,4 +289,57 @@ class TicketClientSpec extends Z4jSpec {
         then: "deletion succeeds without exception"
         noExceptionThrown()
     }
+
+    def "fetching a ticket queries all custom fields preserving unset fields as Raw without null elements"() {
+        given: "a custom ticket field created in the sandbox"
+        String entropy = UUID.randomUUID().toString().replace("-", "").substring(0, 8)
+        String customVal = "z4j-val-${entropy}"
+        TicketField field = new TicketField("z4j-cf-${entropy}", TicketFieldTypeEnum.TEXT.getValue())
+        TicketFieldResponse createdField = ticketsAdminClient.createTicketField(new TicketFieldCreateRequest(field)).block()
+        Long fieldId = createdField.getTicketField().getId()
+
+        and: "a ticket created with this custom field populated"
+        TicketComment comment = new TicketComment().setBody("Testing custom fields ${entropy}")
+        TicketCreateInput ticketInput = new TicketCreateInput(comment)
+                .setRawSubject("Ticket with custom field ${entropy}")
+        ticketInput.addCustomFieldsItem(new TicketCustomField.Text(fieldId, customVal))
+        TicketResponse createdTicket = ticketsAdminClient.createTicket(new TicketCreateRequest(ticketInput)).block()
+        Long ticketId = createdTicket.getTicket().getId()
+
+        when: "fetching the ticket via showTicket"
+        TicketResponse fetched = ticketsAgentClient.showTicket(ticketId).block()
+
+        then: "the ticket is returned and custom fields are present"
+        noExceptionThrown()
+        fetched != null
+        fetched.getTicket() != null
+        List<TicketCustomField> customFields = fetched.getTicket().getCustomFields()
+        customFields != null
+        !customFields.isEmpty()
+
+        and: "the custom fields list contains NO null elements"
+        !customFields.any { it == null }
+
+        and: "all custom field entries have valid IDs"
+        customFields.every { it.id() != null }
+
+        and: "the populated custom field is deserialized as a Text record with expected value"
+        TicketCustomField populatedField = customFields.find { it.id() == fieldId }
+        populatedField != null
+        populatedField instanceof TicketCustomField.Text
+        ((TicketCustomField.Text) populatedField).value() == customVal
+
+        and: "unpopulated custom fields with null values are preserved as Raw records"
+        List<TicketCustomField> nullValuedFields = customFields.findAll { it.value() == null }
+        !nullValuedFields.isEmpty()
+        nullValuedFields.every { it instanceof TicketCustomField.Raw }
+
+        cleanup: "delete the test custom field from the sandbox"
+        try {
+            if (fieldId != null) {
+                ticketsAdminClient.deleteTicketField(fieldId).block()
+            }
+        } catch (Exception ignored) {
+        }
+    }
 }
