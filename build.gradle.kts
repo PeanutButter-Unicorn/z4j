@@ -203,7 +203,7 @@ publishing {
 }
 
 signing {
-    val signingKey = System.getenv("GPG_SIGNING_KEY") ?: findProperty("signingKey") as? String
+    val signingKey = System.getenv("GPG_SIGNING_KEY") ?: System.getenv("GPG_FILE") ?: findProperty("signingKey") as? String
     val signingPassword = System.getenv("GPG_PASSWORD") ?: findProperty("signingPassword") as? String
     val signingKeyId = System.getenv("GPG_KEY_ID") ?: findProperty("signingKeyId") as? String
 
@@ -225,7 +225,7 @@ signing {
 
 tasks.withType<Sign>().configureEach {
     onlyIf {
-        val signingKey = System.getenv("GPG_SIGNING_KEY") ?: (findProperty("signingKey") as? String)
+        val signingKey = System.getenv("GPG_SIGNING_KEY") ?: System.getenv("GPG_FILE") ?: (findProperty("signingKey") as? String)
         (!signingKey.isNullOrBlank()) ||
             gradle.taskGraph.hasTask("publishAggregationToCentralPortal") ||
             gradle.taskGraph.hasTask("publishAllPublicationsToCentralPortal")
