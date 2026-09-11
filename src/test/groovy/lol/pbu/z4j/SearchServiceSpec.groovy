@@ -75,4 +75,20 @@ class SearchServiceSpec extends Z4jSpec {
         "status:open type:group" | _
         "type:ticket type:user"  | _
     }
+
+
+    def "getTickets with default page size works"() {
+        given:
+        def client = Mock(lol.pbu.z4j.client.SearchClient)
+        def service = new SearchService()
+        service.searchClient = client
+        def response = new lol.pbu.z4j.model.ExportResponse<lol.pbu.z4j.model.Ticket>()
+        response.setResults([])
+        response.setMeta(new lol.pbu.z4j.model.Meta(hasMore: false))
+        
+        client.exportTicket(_, _, _) >> reactor.core.publisher.Mono.just(response)
+
+        expect:
+        service.getTickets("status:open").collectList().block().isEmpty()
+    }
 }
