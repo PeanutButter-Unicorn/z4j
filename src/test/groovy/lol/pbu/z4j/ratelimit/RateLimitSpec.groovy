@@ -231,7 +231,7 @@ class RateLimitSpec extends Z4jSpec {
     def "RateLimitFilter handles null response and 429 status"() {
         given:
         def localTracker = new RateLimitTracker()
-        def filter = new lol.pbu.z4j.client.RateLimitFilter(localTracker)
+        def filter = new lol.pbu.z4j.client.RateLimitFilter(localTracker, new lol.pbu.z4j.ratelimit.RateLimitConfiguration())
 
         when: "handling null response"
         filter.handleResponse(null, null)
