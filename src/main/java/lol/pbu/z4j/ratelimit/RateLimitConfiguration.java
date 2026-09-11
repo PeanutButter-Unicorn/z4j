@@ -21,5 +21,5 @@ public class RateLimitConfiguration {
     /**
      * The remaining request count threshold to trigger the auto-wait.
      */
-    private int approachThreshold = 50;
+    private int approachThreshold = 1;
 }

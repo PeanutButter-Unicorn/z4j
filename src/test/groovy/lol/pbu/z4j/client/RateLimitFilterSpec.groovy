@@ -26,7 +26,7 @@ class RateLimitFilterSpec extends Specification {
         }
         def config = new RateLimitConfiguration()
         config.setAutoWaitEnabled(true)
-        config.setApproachThreshold(50)
+        config.setApproachThreshold(1)
         config.setWaitDurationSeconds(5) // use 5 seconds for tests
         
         def filter = new RateLimitFilter(tracker, config)
@@ -71,7 +71,7 @@ class RateLimitFilterSpec extends Specification {
         }
         def config = new RateLimitConfiguration()
         config.setAutoWaitEnabled(false)
-        config.setApproachThreshold(50)
+        config.setApproachThreshold(1)
         config.setWaitDurationSeconds(5)
         
         def filter = new RateLimitFilter(tracker, config)
